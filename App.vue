@@ -4,7 +4,6 @@ export default {
     type: 1
   },
   onLaunch: function () {
-    uni.hideTabBar()
     this.commonUtils.checkUpdateVersion()
     this.$store.dispatch('initFontFamily')
   },
@@ -22,9 +21,9 @@ export default {
 @import '/wxcomponents/vant/common/index.wxss';
 @import '@/assets/css/common.scss';
 page {
-  background: url('@/assets/images/lang.png') no-repeat center pxTorpx(200);
-  background-size: pxTorpx(375) pxTorpx(265);
-  background-color: $uni-theme-background-color;
+  background: url('@/assets/images/common.png') no-repeat;
+  background-size: 100%;
+  background-color: $theme-bg-color;
 }
 .van-checkbox__icon--checked {
   background-color: $uni-theme-color !important;

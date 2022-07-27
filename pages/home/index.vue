@@ -1,15 +1,8 @@
 <template>
   <view class="content" :style="{ 'padding-top': navBarHeight }">
-    <HomeNavBar class="nav__wrapper" :type="1"></HomeNavBar>
+    <HomeNavBar class="nav__wrapper" title="浪漫模玩"></HomeNavBar>
     <view class="nav__background">
       <view class="home__main__content">
-        <view class="home__main__slogan">
-          <image class="slogan" :src="require('@/assets/images/slogan.png')"></image>
-          <view class="notice">
-            <image :src="require('@/assets/images/notice.png')" class="icon__notice"></image>
-            <text class="text font-loaded" @click="handleOperation($event, 1)">最新公告</text>
-          </view>
-        </view>
         <view class="home__main__search">
           <image class="search__icon" :src="require('@/assets/images/search-grey.png')"></image>
           <input
@@ -26,7 +19,6 @@
     <view class="home__main__list">
       <HomeScrollView ref="scrollProps"></HomeScrollView>
     </view>
-    <MyTabs></MyTabs>
     <view class="refresh" @click="refresh()"></view>
   </view>
 </template>
@@ -36,14 +28,11 @@ import { api } from '@/api'
 import HomeNavBar from '@/components/HomeNavBar'
 import CustomSwiper from '@/components/CustomSwiper'
 import HomeScrollView from '@/components/HomeScrollView'
-import MyTabs from '@/components/MyTabs'
-
 export default {
   components: {
     HomeNavBar,
     CustomSwiper,
-    HomeScrollView,
-    MyTabs
+    HomeScrollView
   },
   data() {
     return {
@@ -114,17 +103,15 @@ export default {
 }
 .content {
   min-height: auto;
-  padding-bottom: pxTorpx(100);
+  padding-bottom: pxTorpx(10);
   .refresh {
     position: fixed;
     right: 0;
     top: 70%;
     width: pxTorpx(40);
     height: pxTorpx(40);
-    border-radius: 50%;
     background: url('@/assets/images/refresh1.png') no-repeat center;
-    background-size: pxTorpx(30) pxTorpx(30);
-    background-color: $sub-nav-theme-color;
+    background-size: 100%;
   }
 }
 .home__main {
@@ -163,7 +150,7 @@ export default {
   }
   &__search {
     height: pxTorpx(34);
-    margin-top: pxTorpx(15);
+    margin-bottom: pxTorpx(10);
     background-color: $white;
     border: 1px solid #f2f2f2;
     border-radius: 9px;
@@ -183,9 +170,9 @@ export default {
     }
   }
   &__list {
-    min-height: pxTorpx(400);
+    min-height: pxTorpx(320);
     border-radius: pxTorpx(26);
-    margin-top: pxTorpx(35);
+    margin-top: pxTorpx(0);
     margin-bottom: pxTorpx(20);
   }
 }

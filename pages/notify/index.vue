@@ -1,6 +1,5 @@
 <template>
   <view class="content">
-    <!-- <HomeNavBar :title="navTitle" isDefault></HomeNavBar> -->
     <view class="notify__wrapper">
       <SubTabs ref="subTabsProps" :dataSource="tabList" @tabClick="handleTab"></SubTabs>
       <view v-if="returnData.length > 0" class="notify__content">
@@ -21,20 +20,15 @@
         </view>
       </view>
     </view>
-    <!-- <MyTabs></MyTabs> -->
   </view>
 </template>
 
 <script>
 import { api } from '@/api'
 import SubTabs from '@/components/SubTabs'
-// import HomeNavBar from '@/components/HomeNavBar'
-// import MyTabs from '@/components/MyTabs'
 export default {
   components: {
     SubTabs
-    // MyTabs
-    // HomeNavBar
   },
   data() {
     return {

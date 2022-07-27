@@ -175,24 +175,24 @@
     "color": "#fff",
     "selectedColor": "#f8dc4c",
     "borderStyle": "white",
-    "backgroundColor": "#404040",
+    "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/home/index"
-        // "iconPath": "static/images/tabs/home.png",
-        // "selectedIconPath": "static/images/tabs/home-a.png",
+        "pagePath": "pages/home/index",
+        "iconPath": "static/images/tabs/home.png",
+        "selectedIconPath": "static/images/tabs/home-a.png"
         // "text": "首页"
       },
       {
-        "pagePath": "pages/personal/myAwardBag"
-        // "iconPath": "static/images/tabs/notify.png",
-        // "selectedIconPath": "static/images/tabs/notify-a.png",
+        "pagePath": "pages/personal/myAwardBag",
+        "iconPath": "static/images/tabs/mybag.png",
+        "selectedIconPath": "static/images/tabs/mybag-a.png"
         // "text": "预告"
       },
       {
-        "pagePath": "pages/personal/index"
-        // "iconPath": "static/images/tabs/person.png",
-        // "selectedIconPath": "static/images/tabs/person-a.png",
+        "pagePath": "pages/personal/index",
+        "iconPath": "static/images/tabs/ucenter.png",
+        "selectedIconPath": "static/images/tabs/ucenter-a.png"
         // "text": "个人中心"
       }
     ]

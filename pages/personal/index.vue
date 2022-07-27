@@ -73,16 +73,13 @@
         </view>
       </view>
     </view>
-    <MyTabs></MyTabs>
   </view>
 </template>
 <script>
 import { api } from '@/api'
-import MyTabs from '@/components/MyTabs'
 import HomeNavBar from '@/components/HomeNavBar'
 export default {
   components: {
-    MyTabs,
     HomeNavBar
   },
   data() {

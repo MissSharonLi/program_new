@@ -5,7 +5,7 @@
         <image
           :key="item.path"
           class="img"
-          :src="item.url"
+          :src="tabProps.activeTab === index ? item.url_a : item.url"
           @click="handleSwitch(item, index)"
         ></image>
       </template>
@@ -14,27 +14,40 @@
 </template>
 <script>
 export default {
+  props: {
+    tabProps: {
+      type: Object,
+      default: () => ({
+        activeTab: null
+      })
+    }
+  },
   data() {
     return {
+      activeIndex: null,
       tabbarList: [
         {
           url: require('@/assets/images/tabs/tab1.png'),
+          url_a: require('@/assets/images/tabs/tab1-a.png'),
           path: '/pages/home/index'
         },
         {
           url: require('@/assets/images/tabs/tab2.png'),
+          url_a: require('@/assets/images/tabs/tab2-a.png'),
           path: '/pages/personal/myAwardBag'
         },
         {
           url: require('@/assets/images/tabs/tab3.png'),
+          url_a: require('@/assets/images/tabs/tab3-a.png'),
           path: '/pages/personal/index'
         }
       ]
     }
   },
-
   methods: {
     handleSwitch(item, index) {
+      // eslint-disable-next-line vue/no-mutating-props
+      this.tabProps.activeIndex = index
       uni.switchTab({ url: item.path })
     }
   }
@@ -51,12 +64,12 @@ export default {
   }
   &__content {
     padding: pxTorpx(10) pxTorpx(15) pxTorpx(15);
-    background-color: $nav-theme-color;
+    background-color: $white;
     @include flex(center, space-between);
     .img {
-      width: pxTorpx(80);
-      height: pxTorpx(80);
-      margin-top: -70rpx;
+      width: pxTorpx(60);
+      height: pxTorpx(60);
+      // margin-top: -70rpx;
     }
   }
 }

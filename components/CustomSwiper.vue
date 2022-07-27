@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .swiper__content {
-  height: pxTorpx(150);
+  height: pxTorpx(140);
   .swiper {
     margin-top: pxTorpx(5);
   }

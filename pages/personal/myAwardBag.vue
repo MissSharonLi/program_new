@@ -35,17 +35,14 @@
     </view>
     <SelectAddress ref="addressProps" type="batch"></SelectAddress>
     <VanDialog id="van-dialog"></VanDialog>
-    <MyTabs></MyTabs>
   </view>
 </template>
 <script>
 import { api } from '@/api'
-import MyTabs from '@/components/MyTabs'
 import SelectAddress from '@/components/SelectAddress'
 export default {
   name: 'MyAwardBag',
   components: {
-    MyTabs,
     SelectAddress
   },
   data() {

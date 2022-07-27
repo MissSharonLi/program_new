@@ -4,8 +4,7 @@
     :class="{ default: isDefault }"
     :style="{ width: '100%', height: navBarHeight }"
   >
-    <image v-if="type === 1" class="nav__image" :src="require('@/assets/images/title.png')"></image>
-    <text v-else class="nav__title">{{ title }}</text>
+    <text class="nav__title">{{ title }}</text>
   </view>
 </template>
 <script>
@@ -36,7 +35,7 @@ export default {
 .custom__nav__content {
   width: 100%;
   height: 100%;
-  background-color: $nav-theme-color;
+  background-color: $theme-title-color;
   display: flex;
   align-items: bottom;
   display: flex;
@@ -51,7 +50,7 @@ export default {
       font-family: 'PingFangSC';
       font-weight: 700;
       font-size: pxTorpx(18);
-      color: $uni-text-color;
+      color: $white;
     }
   }
 }

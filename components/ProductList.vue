@@ -11,11 +11,14 @@
         :class="{ sold__out: item.stock_num === 0 }"
         :src="item.goods_image"
       ></image>
-      <text class="label">{{ item.tag_title }}:{{ item.stock_num }}/{{ item.goods_num }}</text>
-      <text class="number">{{ item.stock_num }}/{{ item.goods_num }}</text>
-      <view class="title">{{ item.goods_name }}</view>
-      <view class="sub__title">
-        {{ item.goods_price }}{{ item.is_score === 0 ? '元' : '积分' }}/张
+      <view class="list__item__content">
+        <text class="number">{{ item.stock_num }}/{{ item.goods_num }}</text>
+        <view class="title">{{ item.goods_name }}</view>
+        <view class="sub_label">
+          {{ item.is_score === 0 ? '￥' : '' }}
+          <text class="sub__title">{{ item.goods_price }}</text>
+          {{ item.is_score === 0 ? '' : '积分' }}/张
+        </view>
       </view>
     </view>
     <view v-if="dataSource.length === 0" class="empty">暂无数据哦~</view>
@@ -48,10 +51,12 @@ export default {
     min-height: pxTorpx(40);
     margin-bottom: pxTorpx(10);
     position: relative;
+    background-color: $white;
+    border-bottom-left-radius: pxTorpx(10);
+    border-bottom-right-radius: pxTorpx(10);
     &__image {
-      width: pxTorpx(160);
-      height: pxTorpx(165);
-      border-radius: pxTorpx(26);
+      width: 100%;
+      height: pxTorpx(130);
       position: relative;
       &.sold__out {
         &::after {
@@ -72,15 +77,17 @@ export default {
         &::before {
           content: '';
           position: absolute;
-          width: pxTorpx(160);
+          width: 100%;
           height: pxTorpx(165);
-          border-radius: pxTorpx(26);
           display: block;
           left: 0;
           top: 0;
           background-color: rgba(0, 0, 0, 0.6);
         }
       }
+    }
+    &__content {
+      padding: pxTorpx(5) pxTorpx(5) pxTorpx(10);
     }
     .label {
       position: absolute;
@@ -96,29 +103,32 @@ export default {
     }
     .number {
       position: absolute;
-      top: pxTorpx(8);
-      right: pxTorpx(15);
+      top: 0;
+      right: 0;
       font-family: $FZYuan;
       font-size: pxTorpx(12);
-      color: #000;
+      color: $white;
       letter-spacing: 1px;
-      padding: pxTorpx(2);
-      background-color: $white;
-      border-radius: pxTorpx(20);
+      padding: pxTorpx(4);
+      background-color: rgba(0, 0, 0, 0.6);
     }
     .title {
       font-family: $FZYuan;
       font-weight: 700;
+      color: #231815;
       font-size: pxTorpx(14);
-      color: $white;
       letter-spacing: 1px;
-      margin-top: pxTorpx(5);
     }
     .sub__title {
       font-family: $FZYuan;
       font-weight: 700;
-      font-size: 16px;
+      font-size: pxTorpx(16);
       color: $tips-color;
+      margin-top: pxTorpx(5);
+      padding: 0 pxTorpx(5) 0 0;
+    }
+    .sub_label {
+      font-size: pxTorpx(14);
       margin-top: pxTorpx(5);
     }
   }
