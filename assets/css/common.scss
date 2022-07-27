@@ -1,0 +1,56 @@
+@function pxTorpx($px) {
+  //$px为需要转换的字号
+  @return $px * 2rpx;
+}
+.content {
+  min-height: 100vh;
+  .nav__wrapper {
+    width: 100%;
+  }
+  .nav__image {
+    width: 244rpx;
+    height: 68rpx;
+    padding-bottom: 10rpx;
+    padding-left: 30rpx;
+  }
+  .nav__title {
+    margin: 0 auto;
+    font-family: PingFangSC;
+    font-weight: 700;
+    font-size: 18px;
+    color: $uni-text-color-inverse;
+    padding-bottom: 10rpx;
+  }
+  .nav__background {
+    width: 100%;
+    background-color: $nav-theme-color;
+    border-bottom-left-radius: 40%;
+    border-bottom-right-radius: 40%;
+    height: pxTorpx(200);
+  }
+}
+button{
+  &::after{
+    border: none;
+  }
+}
+* {
+  font-family: '-apple-system, "SF UI Text", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Zen Hei", sans-serif';
+}
+.lint {
+  font-family: $STHupo;
+  font-weight: 700;
+  font-size: 35rpx;
+  background: linear-gradient(
+    calc(0.5turn - 45deg),
+    #f6c25f,
+    #f1f431,
+    #ffffff,
+    #f1f431,
+    #f1dd7e,
+    #f6c25f
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}

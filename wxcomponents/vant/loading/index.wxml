@@ -1,0 +1,18 @@
+<view class="van-loading custom-class">
+  <view style="width: {{ size }}; height: {{ size }}; display:inline-block; line-height:{{ size }};vertical-align:top">
+    <view
+      class="van-loading__spinner van-loading__spinner--{{ type }}"
+      style="color: {{ color }};"
+    >
+      <view
+        wx:if="{{ type === 'spinner' }}"
+        wx:for="item in 12"
+        wx:key="index"
+        class="van-loading__dot"
+      />
+    </view>
+  </view>
+  <view class="van-loading__text" style="font-size:12px; color: {{ color }}; display: inline-block;line-height:{{size}};height: {{ size }}; vertical-align:top;margin-left:5px">
+    <slot/>
+  </view>
+</view>

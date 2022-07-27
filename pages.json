@@ -1,0 +1,206 @@
+{
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/notify/index",
+      "style": {
+        // "navigationStyle": "custom",
+        "navigationBarTitleText": "新品预告",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/personal/index",
+      "style": {
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/product/lottery",
+      "style": {
+        "navigationBarTitleText": "抽奖记录",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/personal/collection",
+      "style": {
+        "navigationBarTitleText": "我的收藏",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/personal/buyRecords",
+      "style": {
+        "navigationBarTitleText": "购买记录",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/personal/addressManagement",
+      "style": {
+        "navigationBarTitleText": "收货地址",
+        "usingComponents": {
+          "van-dialog": "/wxcomponents/vant/dialog/index"
+        }
+      }
+    },
+    {
+      "path": "pages/personal/setAddress",
+      "style": {
+        "navigationBarTitleText": "新增地址",
+        "usingComponents": {
+          "van-area": "/wxcomponents/vant/area/index",
+          "van-popup": "/wxcomponents/vant/popup/index"
+        }
+      }
+    },
+    {
+      "path": "pages/personal/deliveryInfo",
+      "style": {
+        "navigationBarTitleText": "物流详情"
+      }
+    },
+    {
+      "path": "pages/personal/aboutUs",
+      "style": {
+        "navigationBarTitleText": "关于我们"
+      }
+    },
+    {
+      "path": "pages/personal/goldRanking",
+      "style": {
+        "navigationBarTitleText": "氪金排行",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/personal/bindPhone",
+      "style": {
+        "navigationBarTitleText": "绑定手机号"
+      }
+    },
+    {
+      "path": "pages/personal/bindSuccess",
+      "style": {
+        "navigationBarTitleText": "绑定手机号"
+      }
+    },
+    {
+      "path": "pages/personal/recharge",
+      "style": {
+        "navigationBarTitleText": "充值"
+      }
+    },
+    {
+      "path": "pages/personal/rechargeRecords",
+      "style": {
+        "navigationBarTitleText": "充值记录",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/personal/myAwardBag",
+      "style": {
+        "navigationBarTitleText": "我的赏袋",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light", //背景颜色为黑色，可选参数white
+        "usingComponents": {
+          "van-dialog": "/wxcomponents/vant/dialog/index",
+          "van-area": "/wxcomponents/vant/area/index",
+          "van-popup": "/wxcomponents/vant/popup/index"
+        }
+      }
+    },
+    {
+      "path": "pages/personal/orderManagement",
+      "style": {
+        "navigationBarTitleText": "订单管理",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light", //背景颜色为黑色，可选参数white
+        "usingComponents": {
+          "van-area": "/wxcomponents/vant/area/index",
+          "van-popup": "/wxcomponents/vant/popup/index",
+          "van-dialog": "/wxcomponents/vant/dialog/index"
+        }
+      }
+    },
+    {
+      "path": "pages/personal/orderDetail",
+      "style": {
+        "navigationBarTitleText": "订单详情"
+      }
+    },
+    {
+      "path": "pages/product/index",
+      "style": {
+        "navigationBarTitleText": "商品搜索",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light" //背景颜色为黑色，可选参数white
+      }
+    },
+    {
+      "path": "pages/product/detailV2",
+      "style": {
+        "navigationBarTitleText": "商品详情",
+        "usingComponents": {
+          "van-dialog": "/wxcomponents/vant/dialog/index"
+        }
+      }
+    },
+    {
+      "path": "pages/product/search",
+      "style": {
+        "navigationBarTitleText": "搜索"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#f8dc4c",
+    "borderStyle": "white",
+    "backgroundColor": "#404040",
+    "list": [
+      {
+        "pagePath": "pages/home/index"
+        // "iconPath": "static/images/tabs/home.png",
+        // "selectedIconPath": "static/images/tabs/home-a.png",
+        // "text": "首页"
+      },
+      {
+        "pagePath": "pages/personal/myAwardBag"
+        // "iconPath": "static/images/tabs/notify.png",
+        // "selectedIconPath": "static/images/tabs/notify-a.png",
+        // "text": "预告"
+      },
+      {
+        "pagePath": "pages/personal/index"
+        // "iconPath": "static/images/tabs/person.png",
+        // "selectedIconPath": "static/images/tabs/person-a.png",
+        // "text": "个人中心"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#404040",
+    "backgroundColor": "#08131e"
+  }
+}
