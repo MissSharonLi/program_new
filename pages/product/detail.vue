@@ -332,14 +332,14 @@ export default {
       text-align: center;
       z-index: 9;
       .title {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: #f8dc4c;
         width: 100%;
       }
       .subtitle {
-        font-family: $ZKKuaiLeTi;
+        font-family: $Yuanti;
         font-weight: 400;
         font-size: pxTorpx(20);
         color: $white;
@@ -352,7 +352,7 @@ export default {
       }
       .pages {
         @include flex(center, space-between);
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: $white;
@@ -439,7 +439,7 @@ export default {
         position: absolute;
         top: 0;
         left: pxTorpx(3);
-        font-family: $FZYuan;
+        font-family: $Yuanti;
         font-weight: 700;
         font-size: pxTorpx(12);
         color: $white;
@@ -449,14 +449,14 @@ export default {
         letter-spacing: 1px;
       }
       .title {
-        font-family: $FZYuan;
+        font-family: $Yuanti;
         font-weight: 700;
         font-size: pxTorpx(12);
         color: rgb(0, 0, 0);
         margin-top: pxTorpx(4);
       }
       .sub__title {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(10);
         color: rgba(168, 168, 168, 1);

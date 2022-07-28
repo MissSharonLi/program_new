@@ -107,7 +107,7 @@ export default {
     background-color: $theme-light-color;
     padding: 0 pxTorpx(20);
     @include flex(center, space-between);
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(16);
     color: $white;
@@ -182,7 +182,7 @@ export default {
     margin-top: pxTorpx(10);
     background-color: $sub-nav-theme-color;
     font-size: pxTorpx(14);
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     color: $white;
     &__title {
       font-weight: 700;
@@ -231,7 +231,7 @@ export default {
     border-radius: pxTorpx(5);
   }
   &__time {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(13);
     color: $white;
@@ -251,7 +251,7 @@ export default {
       margin-right: pxTorpx(20);
     }
     .title {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 700;
       font-size: pxTorpx(14);
       color: $white;
@@ -271,7 +271,7 @@ export default {
     width: calc(100% - 200rpx);
   }
   &__footer {
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;

@@ -49,7 +49,7 @@ export default {
     height: pxTorpx(55);
   }
   &__item {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;

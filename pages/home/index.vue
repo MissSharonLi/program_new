@@ -99,7 +99,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .font-loaded {
-  font-family: $ZKKuaiLeTi;
+  font-family: $Yuanti;
 }
 .content {
   min-height: auto;
@@ -141,7 +141,7 @@ export default {
       margin-top: pxTorpx(-2);
     }
     .text {
-      font-family: $ZKKuaiLeTi;
+      font-family: $Yuanti;
       font-weight: 400;
       font-size: pxTorpx(12);
       text-align: center;

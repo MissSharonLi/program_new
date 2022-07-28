@@ -29,6 +29,14 @@ const globalModule = {
       {
         family: 'STHupo',
         source: 'url("https://www.langmanwu2021.cn/assets/apifonts/STHupo_64.woff2")'
+      },
+      {
+        family: 'Yuanti',
+        source: 'url("https://a.yiyunrj.com/assets/apifonts/Yuanti.ttf")'
+      },
+      {
+        family: 'PingFang',
+        source: 'url("https://a.yiyunrj.com/assets/apifonts/PingFang.ttf")'
       }
     ]
   },

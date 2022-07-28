@@ -96,7 +96,7 @@ export default {
       margin-top: pxTorpx(10);
     }
     .nickname {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(14);
       color: $white;
@@ -104,7 +104,7 @@ export default {
     }
     .rate {
       .text {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         color: $white;
         font-size: pxTorpx(12);
         margin-left: pxTorpx(15);
@@ -153,7 +153,7 @@ export default {
         position: relative;
       }
       .text {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(12);
         color: $white;
@@ -162,7 +162,7 @@ export default {
         text-align: center;
       }
       .ranking__content {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: $white;
@@ -174,7 +174,7 @@ export default {
       }
     }
     .right {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(14);
       color: $white;

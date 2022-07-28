@@ -214,7 +214,7 @@ export default {
       &__detail {
         .left {
           &__text {
-            font-family: 'PingFangSC';
+            font-family: $PingFang;
             font-weight: 400;
             font-size: rpxTorpx(16);
             color: $white;
@@ -253,7 +253,7 @@ export default {
       }
     }
     .right {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(12);
       color: $white;
@@ -285,7 +285,7 @@ export default {
     @include flex(center, space-between);
     padding: 0 pxTorpx(30);
     .text {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       color: rgb(227, 197, 158);
       margin-top: -15rpx;
@@ -323,7 +323,7 @@ export default {
         }
       }
       &__text {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: rgb(16, 16, 16);
@@ -347,7 +347,7 @@ export default {
     @include flex(center, '', wrap);
   }
   &__title {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(16);
     color: rgb(0, 0, 0);
@@ -368,7 +368,7 @@ export default {
     display: block;
     width: 100%;
     text-align: center;
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(12);
     color: rgb(16, 16, 16);

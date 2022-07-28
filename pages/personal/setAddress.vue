@@ -125,7 +125,7 @@ export default {
     @include flex(center, '');
     padding: pxTorpx(20) pxTorpx(15);
     border-bottom: 1px solid #10101014;
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;
@@ -162,7 +162,7 @@ export default {
     padding: pxTorpx(20);
     @include flex(center, space-between);
     .title__content {
-      font-family: $SourceHanSansSC;
+      font-family: $Yuanti;
       font-weight: 400;
       font-size: pxTorpx(14);
       color: $white;

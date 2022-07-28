@@ -133,7 +133,7 @@ export default {
     padding-right: 0;
     @include flex(center, space-between);
     .label {
-      font-family: $SourceHanSansSC;
+      font-family: $Yuanti;
       font-weight: 400;
       font-size: pxTorpx(14);
       color: $white;
@@ -178,7 +178,7 @@ export default {
     background-color: $sub-nav-theme-color;
   }
   &__title {
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;
@@ -205,7 +205,7 @@ export default {
     text-align: center;
     margin-bottom: pxTorpx(10);
     border-radius: pxTorpx(4);
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 700;
     color: $white;
     font-size: pxTorpx(16);
@@ -222,7 +222,7 @@ export default {
   }
   &__custom {
     margin-top: pxTorpx(10);
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(12);
     .em {
@@ -255,7 +255,7 @@ export default {
   &__tips {
     background-color: $sub-nav-theme-color;
     // border-top: pxTorpx(10) solid #f8f8f8;
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;

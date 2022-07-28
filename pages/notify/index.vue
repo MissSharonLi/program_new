@@ -106,7 +106,7 @@ export default {
     height: pxTorpx(55);
   }
   &__item {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: rgb(16, 16, 16);
@@ -165,7 +165,7 @@ export default {
       &__text,
       &__title,
       &__price {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(12);
         color: $white;

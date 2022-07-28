@@ -46,7 +46,7 @@ export default {
     background-color: $theme-light-color;
     padding: 0 pxTorpx(20);
     @include flex(center, space-between);
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(16);
     color: $white;
@@ -100,7 +100,7 @@ export default {
       }
     }
     .context {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(14);
       color: rgb(16, 16, 16);
@@ -110,7 +110,7 @@ export default {
       margin-bottom: pxTorpx(10);
     }
     .time {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(12);
       color: rgba(168, 168, 168, 1);

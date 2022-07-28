@@ -93,7 +93,7 @@ export default {
       position: absolute;
       top: pxTorpx(8);
       left: pxTorpx(10);
-      font-family: $FZYuan;
+      font-family: $Yuanti;
       font-size: pxTorpx(12);
       color: #ff0000;
       letter-spacing: 1px;
@@ -105,7 +105,7 @@ export default {
       position: absolute;
       top: 0;
       right: 0;
-      font-family: $FZYuan;
+      font-family: $Yuanti;
       font-size: pxTorpx(12);
       color: $white;
       letter-spacing: 1px;
@@ -113,14 +113,14 @@ export default {
       background-color: rgba(0, 0, 0, 0.6);
     }
     .title {
-      font-family: $FZYuan;
+      font-family: $Yuanti;
       font-weight: 700;
       color: #231815;
       font-size: pxTorpx(14);
       letter-spacing: 1px;
     }
     .sub__title {
-      font-family: $FZYuan;
+      font-family: $Yuanti;
       font-weight: 700;
       font-size: pxTorpx(16);
       color: $tips-color;
@@ -130,6 +130,7 @@ export default {
     .sub_label {
       font-size: pxTorpx(14);
       margin-top: pxTorpx(5);
+      font-family: $Yuanti;
     }
   }
   .empty {

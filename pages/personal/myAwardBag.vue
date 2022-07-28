@@ -162,14 +162,14 @@ export default {
       text-align: center;
       z-index: 9;
       .title {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: $theme-light-color;
         width: 100%;
       }
       .subtitle {
-        font-family: $ZKKuaiLeTi;
+        font-family: $Yuanti;
         font-weight: 400;
         font-size: pxTorpx(18);
         color: $white;
@@ -213,14 +213,14 @@ export default {
         padding: 0 pxTorpx(10);
       }
       .title {
-        font-family: PingFangSC;
+        font-family: $Yuanti;
         font-weight: 700;
         font-size: pxTorpx(14);
         color: $white;
         margin-bottom: pxTorpx(10);
       }
       .price {
-        font-family: PingFangSC;
+        font-family: $Yuanti;
         font-weight: 400;
         font-size: pxTorpx(12);
         color: rgba(168, 168, 168, 1);
@@ -249,7 +249,7 @@ export default {
           }
         }
         &__text {
-          font-family: PingFangSC;
+          font-family: $Yuanti;
           font-weight: 400;
           font-size: pxTorpx(12);
           color: $theme-light-color;

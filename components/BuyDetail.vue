@@ -114,10 +114,10 @@ export default {
     background: url('@/assets/images/bt.png') no-repeat center;
     background-size: 100% 100%;
     margin: pxTorpx(25) auto;
-    font-family: $STHupo;
+    font-family: $Yuanti;
   }
   &__way {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 700;
     font-size: 16px;
     color: rgba(251, 176, 59, 1);
@@ -142,7 +142,7 @@ export default {
     }
   }
   &__tips {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-size: pxTorpx(12);
     color: $white;
     text-align: justify;

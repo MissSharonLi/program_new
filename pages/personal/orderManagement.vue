@@ -246,7 +246,7 @@ export default {
     }
   }
   &__time {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(13);
     color: $white;
@@ -267,7 +267,7 @@ export default {
       margin-right: pxTorpx(20);
     }
     .title {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 700;
       font-size: pxTorpx(14);
       color: $white;
@@ -287,7 +287,7 @@ export default {
     width: calc(100% - 200rpx);
   }
   &__footer {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(12);
     color: $white;
@@ -303,7 +303,7 @@ export default {
     }
   }
   &__buttons {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(13);
     color: $theme-light-color;

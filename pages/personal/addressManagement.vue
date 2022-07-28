@@ -130,7 +130,7 @@ export default {
     }
   }
   &__title {
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 700;
     font-size: 14px;
     color: $white;
@@ -142,7 +142,7 @@ export default {
     }
   }
   &__detail {
-    font-family: $SourceHanSansSC;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;

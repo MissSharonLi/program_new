@@ -44,14 +44,14 @@ export default {
   top: 0;
   left: 0;
   z-index: 99999;
-  &.default {
-    background-color: $white;
-    .nav__title {
-      font-family: 'PingFangSC';
-      font-weight: 700;
-      font-size: pxTorpx(18);
-      color: $white;
-    }
+  .nav__title {
+    font-family: $PingFang;
+    font-weight: 700;
+    font-size: pxTorpx(18);
+    color: $white;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
   }
 }
 </style>

@@ -1,85 +1,47 @@
 <template>
-  <view class="product__detail__content">
+  <view class="product__detail__content" :style="{ 'padding-top': navBarHeight }">
+    <HomeNavBar class="nav__wrapper" title="一番赏红龙 擂台赛 航海王"></HomeNavBar>
     <view class="product__detail__top">
-      <CustomSwiper :isBanner="true" :dataSource="imgDataSource" :isUnique="true"></CustomSwiper>
-      <view class="rank__content">
-        <view class="like">
-          <view class="love" :class="{ active: is_collect }" @click="handleToCollect"></view>
+      <view class="product__detail__swiper">
+        <CustomSwiper :isBanner="true" :dataSource="imgDataSource" :isUnique="true"></CustomSwiper>
+      </view>
+      <view class="product__detail__rank">
+        <view class="rank__top">
           <button class="share" data-name="shareBtn" open-type="share"></button>
+          <image class="img" :src="require('@/assets/images/gameinfo.png')"></image>
         </view>
-        <view class="rank">
-          <view class="button" @click="handleToRewards">
-            <text class="lint">我</text>
-            <text class="lint">的</text>
-            <text class="lint">赏</text>
-            <text class="lint">袋</text>
+        <view class="rank__bottom">
+          <view class="love" :class="{ active: is_collect }" @click="handleToCollect"></view>
+          <image class="img" :src="require('@/assets/images/presale.png')"></image>
+        </view>
+      </view>
+    </view>
+    <view class="product__detail__bottom">
+      <view class="bottom__title__content">
+        剩余：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
+      </view>
+      <view class="bottom__tab__content">
+        <text
+          v-for="(item, index) in tabList"
+          :key="index"
+          class="tab__item"
+          :class="{ active: tabIndex === index }"
+        >
+          {{ item.label }}
+        </text>
+      </view>
+      <view class="product__detail__list">
+        <view v-for="(item, index) in dataSource" :key="index" class="list__item">
+          <image
+            class="list__item__image"
+            :class="{ sold__out: item.stock_num === 0 }"
+            :src="item.item_image"
+          ></image>
+          <view class="title">
+            <text class="name">{{ item.tag_title }}</text>
+            <text class="num">{{ item.stock_num }}/{{ item.item_num }}</text>
           </view>
-          <view class="button" @click="handleLottery">
-            <text class="lint">抽</text>
-            <text class="lint">奖</text>
-            <text class="lint">记</text>
-            <text class="lint">录</text>
-          </view>
         </view>
-      </view>
-    </view>
-    <view class="product__detail__buttons">
-      <view class="button" @click="$refs.buyTipsProps.show = true">
-        <text class="lint">活</text>
-        <text class="lint">动</text>
-        <text class="lint">说</text>
-        <text class="lint">明</text>
-      </view>
-      <view class="button" @click="query()">
-        <text class="lint">刷</text>
-        <text class="lint">新</text>
-      </view>
-    </view>
-    <view class="product__detail__rate">
-      <view class="product__detail__rate__content">
-        <view class="title">
-          <text class="lint">锁</text>
-          <text class="lint">箱</text>
-          <text class="lint">机</text>
-          <text class="lint">会</text>
-          <text class="lint">剩</text>
-          <text class="lint">余</text>
-          <text class="lint">{{ returnObj.lock_times || 0 }}</text>
-          <text class="lint">次</text>
-        </view>
-        <view class="subtitle">
-          <text class="left">
-            <text class="lint" style="font-size: 50rpx">{{ returnObj.goods_price || '' }}</text>
-            <text class="lint" style="font-size: 30rpx">
-              {{ returnObj.is_score === 0 ? '元' : '点数' }}/
-            </text>
-            <text class="lint" style="font-size: 30rpx">张</text>
-            <text class="lint" style="font-size: 30rpx">明</text>
-            <text class="lint" style="font-size: 30rpx">信</text>
-            <text class="lint" style="font-size: 30rpx">片</text>
-          </text>
-          <text class="right lint">
-            <text class="lint" style="font-size: 30rpx">剩</text>
-            <text class="lint" style="font-size: 30rpx">余：</text>
-            <text class="lint">{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}</text>
-          </text>
-        </view>
-      </view>
-    </view>
-    <view class="product__detail__list">
-      <view v-for="(item, index) in dataSource" :key="index" class="list__item">
-        <image
-          class="list__item__image"
-          :class="{ sold__out: item.stock_num === 0 }"
-          :src="item.item_image"
-        ></image>
-        <view class="title">
-          <text class="name">{{ item.tag_title }}</text>
-          <text class="num">{{ item.stock_num }}/{{ item.item_num }}</text>
-        </view>
-        <view class="sub__title">{{ item.item_name }}</view>
-        <view class="sub__title">{{ item.tip }}</view>
-        <view class="sub__title">{{ item.parcent_title }}</view>
       </view>
     </view>
     <view class="product__detail__footer">
@@ -105,12 +67,6 @@
           @click="handleToBuy(10)"
         ></image>
       </view>
-      <!-- <view class="product__detail__footer__buttons">
-        <view class="button" @click="handleOperation(null, '锁箱')">
-          <text class="lint">锁</text>
-          <text class="lint">箱</text>
-        </view>
-      </view> -->
     </view>
     <BuyDetail ref="buyProps" :params="buyParams" @success="handleSuccess"></BuyDetail>
     <BuySuccess ref="rankProps" :dataSource="rankProps.dataSource"></BuySuccess>
@@ -124,6 +80,7 @@ import BuySuccess from '@/components/BuySuccess'
 import BuyDetail from '@/components/BuyDetail'
 import BuyTips from '@/components/BuyTips'
 import CustomSwiper from '@/components/CustomSwiper'
+import HomeNavBar from '@/components/HomeNavBar'
 import Dialog from '@/wxcomponents/vant/dialog/dialog'
 export default {
   name: 'DetailV2',
@@ -131,6 +88,7 @@ export default {
     BuyTips,
     BuyDetail,
     BuySuccess,
+    HomeNavBar,
     CustomSwiper
   },
   data() {
@@ -139,6 +97,11 @@ export default {
       isLock: false,
       is_collect: false,
       imgDataSource: [],
+      tabIndex: 0,
+      tabList: [
+        { label: '商品', value: 0 },
+        { label: '抽奖记录', value: 1 }
+      ],
       rankProps: {
         show: false,
         dataSource: []
@@ -248,74 +211,97 @@ export default {
 </script>
 <style lang="scss">
 @import '@/wxcomponents/vant/dialog/index.wxss';
-page {
-  background-position-y: 25%;
-}
+// page {
+//   background-position-y: 25%;
+// }
 </style>
 
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .product__detail {
+  &__swiper {
+    width: pxTorpx(134);
+    margin: 0 auto;
+  }
   &__content {
     min-height: 100vh;
     padding-bottom: pxTorpx(60);
   }
   &__top {
     position: relative;
-    .rank__content {
+    padding-top: pxTorpx(8);
+    width: calc(100% - 20px);
+    margin: pxTorpx(15) auto;
+    background-color: $theme-title-bg-color;
+    border-radius: pxTorpx(20);
+  }
+  &__rank {
+    .img {
+      width: pxTorpx(48);
+      height: pxTorpx(48);
+      margin-right: pxTorpx(20);
+    }
+    .rank__top {
+      width: calc(100% - 40rpx);
       position: absolute;
-      width: 100%;
-      left: 0;
-      top: pxTorpx(40);
+      top: pxTorpx(10);
+      left: pxTorpx(20);
       @include flex(center, space-between);
-      .love {
-        width: pxTorpx(40);
-        height: pxTorpx(40);
-        display: block;
-        background: url('@/assets/images/love.png') no-repeat center;
-        background-size: pxTorpx(40) pxTorpx(40);
-        margin-left: pxTorpx(15);
-        margin-bottom: pxTorpx(10);
-        &.active {
-          background: url('@/assets/images/loved.png') no-repeat center;
-          background-size: pxTorpx(40) pxTorpx(40);
-          margin-left: pxTorpx(15);
-        }
-      }
       .share {
-        width: pxTorpx(40);
-        height: pxTorpx(40);
+        width: pxTorpx(24);
+        height: pxTorpx(28);
         display: block;
         background: url('@/assets/images/share.png') no-repeat center;
-        background-size: pxTorpx(40) pxTorpx(40);
-        margin-left: pxTorpx(15);
+        background-size: pxTorpx(24) pxTorpx(28);
+        margin-left: 0;
       }
-      .button {
-        background-color: $sub-nav-theme-color;
-        line-height: pxTorpx(30);
-        border-radius: 15px 0px 0px 15px;
-        font-size: pxTorpx(14);
-        color: $theme-light-color;
-        font-weight: bold;
-        width: pxTorpx(100);
-        text-align: center;
-        margin-bottom: pxTorpx(10);
-        // &::before {
-        //   content: '';
-        //   display: block;
-        //   width: pxTorpx(16);
-        //   height: pxTorpx(16);
-        //   background: url('@/assets/images/bag.png') no-repeat;
-        //   background-size: 100% 100%;
-        //   margin-left: pxTorpx(10);
-        //   margin-right: pxTorpx(10);
-        // }
-        // &:last-child {
-        //   &::before {
-        //     background: url('@/assets/images/rank.png') no-repeat;
-        //     background-size: 100% 100%;
-        //   }
-        // }
+    }
+    .rank__bottom {
+      width: calc(100% - 40rpx);
+      position: absolute;
+      bottom: pxTorpx(10);
+      left: pxTorpx(20);
+      @include flex(center, space-between);
+      .love {
+        width: pxTorpx(24);
+        height: pxTorpx(24);
+        display: block;
+        background: url('@/assets/images/love.png') no-repeat center;
+        background-size: pxTorpx(24) pxTorpx(24);
+        margin-left: pxTorpx(5);
+        &.active {
+          background: url('@/assets/images/loved.png') no-repeat center;
+          background-size: pxTorpx(24) pxTorpx(24);
+          margin-left: pxTorpx(5);
+        }
+      }
+    }
+  }
+  &__bottom {
+    background-color: $theme-title-bg-color;
+    border-radius: pxTorpx(20);
+    width: calc(100% - 20px);
+    margin: pxTorpx(15) auto;
+    .bottom__title__content {
+      font-family: $Yuanti;
+      color: $white;
+      font-size: pxTorpx(20);
+      text-align: center;
+      padding: pxTorpx(20) 0 pxTorpx(10);
+    }
+    .bottom__tab__content {
+      @include flex(center, space-around);
+      font-family: $Yuanti;
+      color: $white;
+      font-size: pxTorpx(16);
+      margin-bottom: pxTorpx(15);
+      .tab__item {
+        display: block;
+        line-height: 2;
+        padding: 0 pxTorpx(10);
+        &.active {
+          border-bottom: 1px solid red;
+        }
       }
     }
   }
@@ -370,14 +356,14 @@ page {
       text-align: center;
       z-index: 9;
       .title {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: $theme-light-color;
         width: 100%;
       }
       .subtitle {
-        font-family: $ZKKuaiLeTi;
+        font-family: $Yuanti;
         font-weight: 400;
         font-size: pxTorpx(18);
         color: $theme-light-color;
@@ -390,20 +376,22 @@ page {
     @include flex(top, flex-start, wrap);
     padding: pxTorpx(5) pxTorpx(10);
     .list__item {
-      width: calc(25% - 20rpx);
+      width: calc(33% - 16rpx);
       min-height: pxTorpx(40);
       margin-bottom: pxTorpx(10);
       position: relative;
-      &:not(:nth-child(4n)) {
+      background-color: $white;
+      border-bottom-left-radius: pxTorpx(5);
+      border-bottom-right-radius: pxTorpx(5);
+      padding-bottom: pxTorpx(10);
+      &:not(:nth-child(3n)) {
         margin-right: 25rpx;
       }
       &__image {
-        width: pxTorpx(80);
+        width: 100%;
         height: pxTorpx(80);
-        border-radius: pxTorpx(5);
         position: relative;
         &.sold__out {
-          border-radius: pxTorpx(5);
           &::after {
             content: '售罄';
             display: block;
@@ -434,7 +422,7 @@ page {
         position: absolute;
         top: 0;
         left: pxTorpx(3);
-        font-family: $FZYuan;
+        font-family: $Yuanti;
         font-weight: 700;
         font-size: pxTorpx(12);
         color: $white;
@@ -444,22 +432,23 @@ page {
         letter-spacing: 1px;
       }
       .title {
-        font-family: $FZYuan;
+        font-family: $Yuanti;
         margin-top: pxTorpx(4);
+        padding: 0 pxTorpx(5);
         @include flex(center, space-between);
         .name {
           font-weight: 700;
           font-size: pxTorpx(14);
-          color: #ff0000;
+          color: #231815;
         }
         .num {
           font-weight: 400;
-          color: #a8a8a8;
+          color: #231815;
           font-size: pxTorpx(10);
         }
       }
       .sub__title {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 400;
         font-size: pxTorpx(10);
         color: rgba(168, 168, 168, 1);

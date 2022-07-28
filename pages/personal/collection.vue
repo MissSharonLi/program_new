@@ -86,7 +86,7 @@ export default {
     margin-bottom: pxTorpx(10);
   }
   &__time {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(13);
     color: $white;
@@ -135,7 +135,7 @@ export default {
       }
     }
     .title {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 700;
       font-size: pxTorpx(14);
       color: $white;

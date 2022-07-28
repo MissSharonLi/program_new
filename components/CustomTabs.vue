@@ -55,7 +55,7 @@ export default {
 }
 .list__tab__content {
   line-height: pxTorpx(50);
-  font-family: $STHupo;
+  font-family: $Yuanti;
   font-weight: 400;
   font-size: pxTorpx(16);
   color: #f6c25f;
@@ -70,7 +70,7 @@ export default {
   .active {
     color: $theme-active-color;
     font-size: pxTorpx(18);
-    font-family: $STHupo;
+    font-family: $Yuanti;
   }
 }
 </style>

@@ -100,7 +100,7 @@ export default {
       margin-bottom: pxTorpx(5);
       .search__text {
         text-align: right;
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 700;
         font-size: pxTorpx(14);
         color: $white;
@@ -136,7 +136,7 @@ export default {
     }
     &__title {
       text-align: right;
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 700;
       font-size: pxTorpx(14);
       color: $white;

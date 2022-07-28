@@ -65,7 +65,7 @@ export default {
       margin-top: pxTorpx(15);
     }
     .left {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 700;
       font-size: pxTorpx(20);
       color: $theme-light-color;
@@ -77,7 +77,7 @@ export default {
       }
     }
     .right {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(14);
       color: rgba(248, 220, 76, 1);

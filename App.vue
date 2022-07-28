@@ -21,7 +21,7 @@ export default {
 @import '/wxcomponents/vant/common/index.wxss';
 @import '@/assets/css/common.scss';
 page {
-  background: url('@/assets/images/common.png') no-repeat;
+  background: url('@/assets/images/common.png') no-repeat top;
   background-size: 100%;
   background-color: $theme-bg-color;
 }

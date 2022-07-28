@@ -65,11 +65,12 @@ export default {
       margin-top: 0;
     }
     .swiper-item {
-      height: pxTorpx(150);
+      height: pxTorpx(134);
       text-align: center;
       .swiper-image {
-        width: pxTorpx(375);
-        height: pxTorpx(150);
+        width: pxTorpx(110) !important;
+        height: pxTorpx(114) !important;
+        border: pxTorpx(10) solid $white;
         border-radius: 0;
       }
     }

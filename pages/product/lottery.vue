@@ -101,7 +101,7 @@ export default {
       @include flex(center, '');
       margin-right: pxTorpx(5);
       .rank__num {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 700;
         font-size: pxTorpx(14);
         color: #1b1464;
@@ -123,7 +123,7 @@ export default {
         }
       }
       .text {
-        font-family: 'PingFangSC';
+        font-family: $PingFang;
         font-weight: 700;
         font-size: pxTorpx(14);
         color: #1b1464;

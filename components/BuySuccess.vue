@@ -59,7 +59,7 @@ export default {
     border-radius: pxTorpx(5);
   }
   &__title {
-    font-family: 'PingFangSC';
+    font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(14);
     color: $white;
@@ -83,7 +83,7 @@ export default {
     margin-bottom: pxTorpx(5);
     border-radius: pxTorpx(5);
     .nickname {
-      font-family: 'PingFangSC';
+      font-family: $PingFang;
       font-weight: 400;
       font-size: pxTorpx(12);
       color: rgba(16, 16, 16, 1);
