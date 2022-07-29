@@ -1,9 +1,13 @@
 <template>
   <view class="product__detail__content" :style="{ 'padding-top': navBarHeight }">
-    <HomeNavBar class="nav__wrapper" title="一番赏红龙 擂台赛 航海王"></HomeNavBar>
+    <HomeNavBar class="nav__wrapper" :title="returnObj.goods_name"></HomeNavBar>
     <view class="product__detail__top">
       <view class="product__detail__swiper">
-        <CustomSwiper :isBanner="true" :dataSource="imgDataSource" :isUnique="true"></CustomSwiper>
+        <image v-if="tabIndex === 0" class="img" :src="returnObj.goods_image"></image>
+        <view v-if="tabIndex === 1" class="lottery">
+          <image class="lottery_img" :src="returnObj.goods_image"></image>
+          <view class="lottery_title">{{ returnObj.goods_name }}</view>
+        </view>
       </view>
       <view class="product__detail__rank">
         <view class="rank__top">
@@ -26,6 +30,7 @@
           :key="index"
           class="tab__item"
           :class="{ active: tabIndex === index }"
+          @click="handleTab(index)"
         >
           {{ item.label }}
         </text>
@@ -42,6 +47,9 @@
             <text class="num">{{ item.stock_num }}/{{ item.item_num }}</text>
           </view>
         </view>
+      </view>
+      <view class="lottery__list">
+        <Lottery :id="params" ref="lotteryProps"></Lottery>
       </view>
     </view>
     <view class="product__detail__footer">
@@ -79,9 +87,9 @@ import { api } from '@/api'
 import BuySuccess from '@/components/BuySuccess'
 import BuyDetail from '@/components/BuyDetail'
 import BuyTips from '@/components/BuyTips'
-import CustomSwiper from '@/components/CustomSwiper'
 import HomeNavBar from '@/components/HomeNavBar'
 import Dialog from '@/wxcomponents/vant/dialog/dialog'
+import Lottery from './lottery'
 export default {
   name: 'DetailV2',
   components: {
@@ -89,14 +97,13 @@ export default {
     BuyDetail,
     BuySuccess,
     HomeNavBar,
-    CustomSwiper
+    Lottery
   },
   data() {
     return {
       current: 0,
       isLock: false,
       is_collect: false,
-      imgDataSource: [],
       tabIndex: 0,
       tabList: [
         { label: '商品', value: 0 },
@@ -118,6 +125,7 @@ export default {
   },
   onLoad(options) {
     this.params.id = options.id
+    this.$refs.lotteryProps.query(options.id)
     this.query()
   },
   onShareAppMessage() {
@@ -133,8 +141,11 @@ export default {
         this.returnObj = data || {}
         this.is_collect = data.is_collect
         this.dataSource = data.item_list || []
-        this.imgDataSource = data.goods_image.split(',')
       }
+    },
+    // 切换商品Tab
+    handleTab(index) {
+      this.tabIndex = index
     },
     async handleLottery() {
       uni.navigateTo({ url: '/pages/product/lottery?id=' + this.params.id })
@@ -220,8 +231,35 @@ export default {
 @import '@/assets/css/index.scss';
 .product__detail {
   &__swiper {
-    width: pxTorpx(134);
+    width: pxTorpx(135);
     margin: 0 auto;
+    min-height: pxTorpx(170);
+    padding: pxTorpx(15) 0;
+    @include flex(center, space-around);
+    .img {
+      width: pxTorpx(125);
+      height: pxTorpx(150);
+      border: pxTorpx(10) solid $white;
+      margin: 0 auto;
+      display: block;
+    }
+    .lottery {
+      width: pxTorpx(135);
+      min-height: pxTorpx(150);
+      background-color: $white;
+      margin: 0 auto;
+      border-bottom-left-radius: pxTorpx(10);
+      border-bottom-right-radius: pxTorpx(10);
+      &_img {
+        width: 100%;
+        height: pxTorpx(120);
+      }
+      &_title {
+        font-family: $Yuanti;
+        font-size: pxTorpx(12);
+        padding: pxTorpx(5) pxTorpx(10);
+      }
+    }
   }
   &__content {
     min-height: 100vh;
@@ -229,7 +267,6 @@ export default {
   }
   &__top {
     position: relative;
-    padding-top: pxTorpx(8);
     width: calc(100% - 20px);
     margin: pxTorpx(15) auto;
     background-color: $theme-title-bg-color;

@@ -49,13 +49,15 @@ export default {
     this.getData()
   },
   methods: {
-    async query() {
+    async query(id) {
+      this.params.id = id
       const { code, data } = await api.getBuyOrderwinlog({ ...this.params, token: this.token })
       if (code === 1) {
         this.list = data || data
       }
     },
-    async getData() {
+    async getData(id) {
+      this.params.id = id
       const { code, data } = await api.getBuyorderLogList({ ...this.params, token: this.token })
       if (code === 1 && data) {
         if (data.data.length > 0) {
