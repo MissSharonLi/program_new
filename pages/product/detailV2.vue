@@ -88,7 +88,8 @@
     <BuyDetail ref="buyProps" :params="buyParams" @success="handleSuccess"></BuyDetail>
     <BuySuccess ref="rankProps" :dataSource="rankProps.dataSource"></BuySuccess>
     <VanDialog id="van-dialog"></VanDialog>
-    <BuyTips ref="buyTipsProps" :notice="notice"></BuyTips>
+    <BuyTips ref="buyTipsProps" :notice="returnObj.pre_sale_content"></BuyTips>
+    <DeliveryTips ref="tipsProps" :notice="returnObj.introduce_content"></DeliveryTips>
   </view>
 </template>
 <script>
@@ -96,6 +97,7 @@ import { api } from '@/api'
 import BuySuccess from '@/components/BuySuccess'
 import BuyDetail from '@/components/BuyDetail'
 import BuyTips from '@/components/BuyTips'
+import DeliveryTips from '@/components/DeliveryTips'
 import HomeNavBar from '@/components/HomeNavBar'
 import Lottery from './lottery'
 export default {
@@ -105,11 +107,11 @@ export default {
     BuyDetail,
     BuySuccess,
     HomeNavBar,
-    Lottery
+    Lottery,
+    DeliveryTips
   },
   data() {
     return {
-      notice: '',
       current: 0,
       page: 1,
       isLock: false,
@@ -223,8 +225,7 @@ export default {
     },
     // 购买说明
     handleShowTips(type) {
-      this.notice = type === 1 ? this.returnObj.introduce_content : this.returnObj.pre_sale_content
-      this.$refs.buyTipsProps.show = true
+      type === 1 ? (this.$refs.tipsProps.show = true) : (this.$refs.buyTipsProps.show = true)
     }
   }
 }
