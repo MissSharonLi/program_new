@@ -69,6 +69,10 @@ export default {
     this.params.page++
     this.getData()
   },
+  async onPullDownRefresh() {
+    await this.getData(true)
+    uni.stopPullDownRefresh()
+  },
   onLoad(options) {
     this.tabIndex = Number(options.type)
     this.getData(true)
