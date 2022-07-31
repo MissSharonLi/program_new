@@ -113,3 +113,15 @@ export const handleToTakegoods = (params) => POST('rewardbag/takegoods', params,
 
 // 抽奖中奖记录
 export const getBuyOrderwinlog = (params) => POST('goods/buyorderwinlog', params, null, true)
+
+// 协议/政策/发货须知/会员中心图片
+export const getSiteconfig = (params) => POST('index/siteconfig', params, null, true)
+
+// 消费记录列表
+export const getScorelog = (params) => POST('users/score/scorelog', params, null, true)
+
+// 浪值列表
+export const getMoneylogv2 = (params) => POST('users/money/moneylogv2', params, null, true)
+
+// 批量加入保险柜
+export const handleJoinsafe = (params) => POST('rewardbag/joinsafe', params, null, true)

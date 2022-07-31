@@ -2,10 +2,10 @@
   <VanPopup
     :show="show"
     round
-    custom-style="border-radius:10px;width:90%;background-color:#000"
+    :custom-style="`border-radius:10px;width:90%;background-color:#fff`"
     @close.native="handleClose"
   >
-    <view class="tips">
+    <view class="tips" :class="{ custom: type === 1 }">
       <rich-text :nodes="notice"></rich-text>
     </view>
   </VanPopup>
@@ -20,6 +20,18 @@ export default {
     notice: {
       type: String,
       default: () => ''
+    },
+    color: {
+      type: String,
+      default: () => '#fff'
+    },
+    backgroundColor: {
+      type: String,
+      default: () => '#fbb03b'
+    },
+    type: {
+      type: Number,
+      default: () => 0
     }
   },
   data() {
@@ -44,6 +56,11 @@ export default {
   line-height: 1.8;
   color: $white;
   font-family: $Yuanti;
+  background-color: #f8dc4c;
+  &.custom {
+    color: #000;
+    background-color: #fff;
+  }
   &__footer {
     width: pxTorpx(80);
     height: pxTorpx(30);

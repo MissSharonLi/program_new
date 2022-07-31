@@ -1,5 +1,6 @@
 <template>
-  <view class="my__award__bag">
+  <view class="my__award__bag" :style="{ 'padding-top': navBarHeight }">
+    <HomeNavBar class="nav__wrapper" title="我的赏袋"></HomeNavBar>
     <view class="my__award__bag__content">
       <view class="subtitle">
         <text
@@ -13,53 +14,67 @@
         </text>
       </view>
     </view>
+    <view class="my__award__bag__tips">
+      <image class="img" :src="require('@/assets/images/bag1.png')" @click="handleTips"></image>
+      <view class="select__all" :class="{ select: select }" @click="handleSelectAll">全选</view>
+    </view>
     <view class="my__award__bag__list">
       <view v-for="(item, index) in returnData" :key="index" class="my__award__bag__item">
         <image :src="item.item_image" class="img" @click="handleSelect(index)" />
-        <text class="select__icon" :class="{ selected: item.selected }"></text>
+        <text
+          class="select__icon"
+          :class="{ selected: item.selected }"
+          @click="handleSelect(index)"
+        ></text>
         <view class="text__content">
           <view class="title">{{ item.item_name }}</view>
-          <view class="price">参考价格：{{ item.back_price }}</view>
-          <view class="select__content">
-            <text class="price">×{{ item.num }}</text>
-            <text class="select__text">{{ item.status_text }}</text>
-          </view>
         </view>
       </view>
     </view>
     <view class="my__award__bag__footer">
-      <view class="button" @click="handleCancelAll">全不选</view>
-      <view class="button" @click="handleSelectAll">全选</view>
-      <view v-if="params.status === 1" class="button" @click="handleOperation">回购</view>
-      <view v-if="params.status === 1" class="button" @click="handleOperation(1)">提货</view>
+      <view v-if="params.status === 0" class="button" @click="handleOperation">赏品寄售</view>
+      <view v-if="params.status === 0" class="button" @click="handleOperation(1)">打包发货</view>
+      <view v-if="params.status === 0" class="button" @click="handleOperation(2)">移入保险柜</view>
     </view>
     <SelectAddress ref="addressProps" type="batch"></SelectAddress>
     <VanDialog id="van-dialog"></VanDialog>
+    <DeliveryTips
+      ref="deliveryProps"
+      :type="0"
+      :notice="siteConfig.shipping_instructions"
+    ></DeliveryTips>
   </view>
 </template>
 <script>
 import { api } from '@/api'
+import HomeNavBar from '@/components/HomeNavBar'
 import SelectAddress from '@/components/SelectAddress'
+import DeliveryTips from '@/components/DeliveryTips'
 export default {
   name: 'MyAwardBag',
   components: {
-    SelectAddress
+    HomeNavBar,
+    SelectAddress,
+    DeliveryTips
   },
   data() {
     return {
+      select: false,
       params: {
         page: 1,
-        status: 1
+        status: 0
       },
       returnData: [],
       subDatas: [
-        { label: '未申请', value: 1 },
+        { label: '全部', value: 0 },
         { label: '已发货', value: 4 },
-        { label: '全部', value: 0 }
+        { label: '已寄售', value: 1 },
+        { label: '保险柜', value: 6 }
       ]
     }
   },
   onLoad() {
+    this.runApiToGetSiteconfig()
     this.getData()
   },
   onReachBottom() {
@@ -78,6 +93,14 @@ export default {
       this.params.page = 1
       this.getData()
     },
+    // 获取说明
+    async runApiToGetSiteconfig() {
+      const { code, data } = await api.getSiteconfig({ token: this.token })
+      if (code === 1 && data) {
+        this.$store.commit('setSiteConfig', JSON.stringify(data))
+        uni.setStorageSync('storage_siteConfig', JSON.stringify(data))
+      }
+    },
     async getData() {
       const { code, data } = await api.getRewardBagList({ ...this.params, token: this.token })
       if (code === 1 && data) {
@@ -92,17 +115,18 @@ export default {
     },
     // 全选
     handleSelectAll() {
-      this.returnData.forEach((i) => (i.selected = true))
+      this.select = !this.select
+      this.returnData.forEach((i) => (i.selected = this.select))
       this.$forceUpdate()
     },
-    // 全不选
-    handleCancelAll() {
-      this.returnData.forEach((i) => (i.selected = false))
-      this.$forceUpdate()
+    // 发货须知
+    handleTips() {
+      this.$refs.deliveryProps.show = true
     },
     // 单选
     handleSelect(index) {
       this.returnData[index].selected = !this.returnData[index].selected
+      this.select = this.returnData.every((i) => i.selected)
       this.$forceUpdate()
     },
     // 操作
@@ -117,6 +141,19 @@ export default {
         case 1:
           this.$refs.addressProps.order_id = selectIds
           this.$refs.addressProps.network().runApiToGetAddressList()
+          break
+        case 2:
+          // 移入保险柜
+          {
+            const { code } = await api.handleJoinsafe({
+              order_ids: selectIds,
+              token: this.token
+            })
+            if (code === 1) {
+              this.$toast('操作成功!')
+              this.refresh()
+            }
+          }
           break
         default: {
           // 批量回购
@@ -141,28 +178,50 @@ export default {
     margin: pxTorpx(7);
     position: relative;
     padding-bottom: pxTorpx(110);
-    &::after {
-      content: '';
-      position: absolute;
-      top: pxTorpx(5);
-      left: -10rpx;
-      height: pxTorpx(88);
-      width: calc(100% + 20rpx);
-      background-color: rgba(64, 64, 64, 0.5);
-      border-radius: pxTorpx(5);
-      z-index: 0;
+    &__tips {
+      @include flex(center, space-between);
+      padding: pxTorpx(10) pxTorpx(20);
+      .img {
+        width: pxTorpx(50);
+        height: pxTorpx(50);
+      }
+      .select__all {
+        color: $white;
+        font-size: pxTorpx(14);
+        @include flex(center);
+        &::before {
+          content: '';
+          width: pxTorpx(20);
+          height: pxTorpx(20);
+          display: inline-block;
+          background-color: #fff;
+          border-radius: 50%;
+          margin-right: pxTorpx(5);
+        }
+        &.select {
+          &::before {
+            content: '';
+            width: pxTorpx(20);
+            height: pxTorpx(20);
+            display: inline-block;
+            background: url('@/assets/images/select.png') no-repeat;
+            background-size: 100% 100%;
+            margin-right: pxTorpx(5);
+          }
+        }
+      }
     }
     &__content {
       @include flex(center, center, wrap);
       position: relative;
       padding: 0 pxTorpx(10);
-      background-color: $sub-nav-theme-color;
+      background-color: #4d4d4d;
       height: pxTorpx(88);
       border-radius: pxTorpx(5);
       text-align: center;
       z-index: 9;
       .title {
-        font-family: $PingFang;
+        font-family: $Yuanti;
         font-weight: 400;
         font-size: pxTorpx(14);
         color: $theme-light-color;
@@ -174,14 +233,14 @@ export default {
         font-size: pxTorpx(18);
         color: $white;
         width: 100%;
-        @include flex(center, flex-start);
+        @include flex(center, space-between);
         .item {
           display: block;
           &:not(&:last-child) {
             margin-right: pxTorpx(10);
           }
           &.active {
-            color: $theme-light-color;
+            color: #c30d23;
             font-size: pxTorpx(20);
           }
         }
@@ -193,10 +252,11 @@ export default {
       padding-bottom: pxTorpx(30);
     }
     &__item {
-      width: calc(33% - 7rpx);
-      background-color: $sub-nav-theme-color;
-      border-radius: pxTorpx(10);
-      padding-bottom: pxTorpx(10);
+      width: calc(33% - 26rpx);
+      background-color: $white;
+      border-bottom-left-radius: pxTorpx(10);
+      border-bottom-right-radius: pxTorpx(10);
+      padding: pxTorpx(5);
       margin-bottom: pxTorpx(7);
       position: relative;
       &:nth-child(3n-1) {
@@ -207,21 +267,18 @@ export default {
         width: 100%;
         height: pxTorpx(118);
         border-radius: pxTorpx(10);
-        margin-bottom: pxTorpx(10);
+        margin-bottom: pxTorpx(5);
       }
       .text__content {
-        padding: 0 pxTorpx(10);
+        padding: 0 pxTorpx(5);
       }
       .title {
         font-family: $Yuanti;
-        font-weight: 700;
         font-size: pxTorpx(14);
-        color: $white;
-        margin-bottom: pxTorpx(10);
+        color: #333;
       }
       .price {
         font-family: $Yuanti;
-        font-weight: 400;
         font-size: pxTorpx(12);
         color: rgba(168, 168, 168, 1);
         margin-bottom: pxTorpx(10);
@@ -243,6 +300,7 @@ export default {
           position: absolute;
           right: pxTorpx(10);
           top: pxTorpx(10);
+          background-color: $white;
           &.selected {
             background: url('@/assets/images/selected.png') no-repeat center;
             background-size: 100% 100%;
@@ -250,7 +308,6 @@ export default {
         }
         &__text {
           font-family: $Yuanti;
-          font-weight: 400;
           font-size: pxTorpx(12);
           color: $theme-light-color;
         }
@@ -263,15 +320,15 @@ export default {
       width: 100%;
       @include flex(center, space-around);
       .button {
-        width: pxTorpx(80);
-        line-height: pxTorpx(30);
-        height: pxTorpx(30);
-        background-color: $sub-nav-theme-color;
-        color: $theme-light-color;
-        border-radius: 4px;
-        font-size: 14px;
+        min-width: pxTorpx(100);
+        height: pxTorpx(40);
+        line-height: pxTorpx(40);
+        box-shadow: #8c6239 5px -5px 0px 0px;
+        color: $white;
+        font-size: pxTorpx(14);
         text-align: center;
-        font-weight: bold;
+        background: #fbb03b;
+        font-family: $Yuanti;
       }
     }
   }

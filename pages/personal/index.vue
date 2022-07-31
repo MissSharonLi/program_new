@@ -14,52 +14,25 @@
                     userInfo.mobile ? commonUtils.getTel(userInfo.mobile) : userInfo.nickname || ''
                   }}
                 </text>
-                <view class="left__button">
-                  <text class="left__button__left">余</text>
-                  <text class="left__button__left">余额{{ userInfo.money || 0 }}</text>
-                </view>
               </view>
-            </view>
-            <view v-if="!userInfo.mobile" class="right" @click="handleOperation(null, 0)">
-              未绑定
             </view>
           </view>
           <view class="personal__top__rank">
-            <text class="text" @click="handleOperation(null, 1)">
-              氪金：{{ userInfo.buy_total_num || 0 }}
-            </text>
-            <text class="text">积分：{{ userInfo.score || 0 }}</text>
+            <view class="text" @click="handleDoRecharge()">
+              <text class="block">我的浪值</text>
+              <text class="block">{{ userInfo.money || 0 }}</text>
+              <text class="block">充值</text>
+            </view>
+            <view class="text">
+              <text class="block">我的积分</text>
+              <text class="block">{{ userInfo.score || 0 }}</text>
+              <text class="block">兑换</text>
+            </view>
           </view>
         </view>
       </view>
-      <view class="personal__main__content">
-        <view class="personal__main__list">
-          <view class="main__list__item" @click="handleToPath(0)">
-            <image class="img" :src="require('@/assets/images/order.png')"></image>
-          </view>
-          <text class="main__list__text">全部订单</text>
-        </view>
-        <view class="personal__main__list">
-          <view class="main__list__item" @click="handleToPath(1)">
-            <image class="img" :src="require('@/assets/images/deal.png')"></image>
-          </view>
-          <text class="main__list__text">待处理</text>
-        </view>
-        <view class="personal__main__list">
-          <view class="main__list__item" @click="handleToPath(4)">
-            <image class="img" :src="require('@/assets/images/car.png')"></image>
-          </view>
-          <text class="main__list__text">已发货</text>
-        </view>
-        <view class="personal__main__list">
-          <view class="main__list__item" @click="handleToPath(5)">
-            <image class="img" :src="require('@/assets/images/compelete.png')"></image>
-          </view>
-          <text class="main__list__text">已完成</text>
-        </view>
-      </view>
+      <image class="personal__images__content" :src="siteConfig.user_center_top_img"></image>
       <view class="personal__menu__content">
-        <view class="personal__menu__title">我的菜单</view>
         <view class="personal__menu__list">
           <view
             v-for="(item, index) in menuData"
@@ -68,32 +41,54 @@
             @click="handleOperation(item)"
           >
             <image class="img" :src="require('@/assets/images/' + item.url)"></image>
-            <text class="personal__menu__text">{{ item.title }}</text>
           </view>
         </view>
       </view>
+      <view class="personal__list__content">
+        <view class="personal__list">
+          <view class="button" @click="handleOperation(null, 2)">用户服务協议</view>
+          <view class="button" @click="handleOperation(null, 2)">用户服务協议</view>
+        </view>
+      </view>
     </view>
+    <DeliveryTips
+      ref="tipsProps"
+      backgroundColor="#fff"
+      color="#000"
+      :type="1"
+      :notice="siteConfig.user_service_agreement"
+    ></DeliveryTips>
+    <RechargeDetail ref="rechargeProps" @success="runApiToGetUserInfo"></RechargeDetail>
   </view>
 </template>
 <script>
 import { api } from '@/api'
+import DeliveryTips from '@/components/DeliveryTips'
 import HomeNavBar from '@/components/HomeNavBar'
+import RechargeDetail from '@/components/RechargeDetail'
 export default {
   components: {
-    HomeNavBar
+    DeliveryTips,
+    HomeNavBar,
+    RechargeDetail
   },
   data() {
     return {
       menuData: [
         {
-          url: 'like.png',
-          title: '我的收藏',
-          path: '/pages/personal/collection'
+          url: 'buy.png',
+          title: '积分流水',
+          path: '/pages/personal/consumptionHistory?type=1'
         },
         {
-          url: 'buy.png',
-          title: '购买记录',
-          path: '/pages/personal/buyRecords'
+          url: 'amount.png',
+          title: '余额流水',
+          path: '/pages/personal/consumptionHistory?type=0'
+        },
+        {
+          url: 'gold.png',
+          title: '冲浪排行',
+          path: '/pages/personal/goldRanking'
         },
         {
           url: 'location.png',
@@ -101,43 +96,34 @@ export default {
           path: '/pages/personal/addressManagement'
         },
         {
-          url: 'amount.png',
-          title: '余额',
-          path: '/pages/personal/recharge'
+          url: 'like.png',
+          title: '我的收藏',
+          path: '/pages/personal/collection'
         },
         {
           url: 'about.png',
-          title: '关于我们',
+          title: '联系客服',
           path: '/pages/personal/aboutUs'
-        },
-        {
-          url: 'gold.png',
-          title: '氪金排行',
-          path: '/pages/personal/goldRanking'
-        },
-        {
-          url: 'mobile.png',
-          title: '绑定手机',
-          path: '/pages/personal/bindPhone'
-        },
-        {
-          url: 'reward.png',
-          title: '中奖记录',
-          path: '/pages/personal/orderManagement?status=1'
         }
       ]
     }
   },
   async onPullDownRefresh() {
-    await this.$nextTick()
-    await this.network().runApiToGetUserInfo()
+    await this.runApiToGetUserInfo()
+    await this.runApiToGetSiteconfig()
     uni.stopPullDownRefresh()
   },
   onLoad() {
-    this.network().runApiToGetAreaList()
-    this.network().runApiToGetUserInfo()
+    this.runApiToGetAreaList()
+    this.runApiToGetUserInfo()
+    this.runApiToGetSiteconfig()
   },
   methods: {
+    // 充值
+    handleDoRecharge() {
+      this.$refs.rechargeProps.show = true
+      this.$refs.rechargeProps.runApiToGetConfigList()
+    },
     handleOperation(record, type) {
       switch (type) {
         case 0:
@@ -145,6 +131,9 @@ export default {
           break
         case 1:
           uni.navigateTo({ url: '/pages/personal/goldRanking' })
+          break
+        case 2:
+          this.$refs.tipsProps.show = true
           break
         default: {
           const { path } = record
@@ -158,20 +147,24 @@ export default {
     handleToPath(type) {
       uni.navigateTo({ url: '/pages/personal/orderManagement?status=' + type })
     },
-    network() {
-      return {
-        runApiToGetUserInfo: async () => {
-          const { code, data } = await api.getUseriInfo({ token: this.token })
-          if (code === 1 && data) {
-            this.$store.commit('setUserInfo', JSON.stringify(data))
-            uni.setStorageSync('storage_userInfo', JSON.stringify(data))
-          }
-        },
-        runApiToGetAreaList: async () => {
-          const { code, data } = await api.getAreaList({ token: this.token })
-          if (code === 1) this.$store.commit('setAreaList', JSON.stringify(data))
-        }
+    async runApiToGetUserInfo() {
+      const { code, data } = await api.getUseriInfo({ token: this.token })
+      if (code === 1 && data) {
+        this.$store.commit('setUserInfo', JSON.stringify(data))
+        uni.setStorageSync('storage_userInfo', JSON.stringify(data))
       }
+    },
+    // 获取图片
+    async runApiToGetSiteconfig() {
+      const { code, data } = await api.getSiteconfig({ token: this.token })
+      if (code === 1 && data) {
+        this.$store.commit('setSiteConfig', JSON.stringify(data))
+        uni.setStorageSync('storage_siteConfig', JSON.stringify(data))
+      }
+    },
+    async runApiToGetAreaList() {
+      const { code, data } = await api.getAreaList({ token: this.token })
+      if (code === 1) this.$store.commit('setAreaList', JSON.stringify(data))
     }
   }
 }
@@ -180,10 +173,9 @@ export default {
 @import '@/assets/css/index.scss';
 .personal__top {
   &__background {
-    background-color: $sub-nav-theme-color;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    height: pxTorpx(140);
+    background-color: #4d4d4d;
+    border-radius: pxTorpx(20);
+    min-height: pxTorpx(140);
     position: relative;
   }
   &__content {
@@ -270,108 +262,91 @@ export default {
     }
   }
   &__rank {
-    height: pxTorpx(53);
-    line-height: pxTorpx(53);
-    background-color: #101010;
-    font-size: pxTorpx(14);
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border-top-left-radius: pxTorpx(20);
-    border-top-right-radius: pxTorpx(20);
-    position: absolute;
-    bottom: 0;
-    left: pxTorpx(30);
-    width: calc(100% - 200rpx);
     @include flex(center, space-between);
     padding: 0 pxTorpx(30);
     .text {
-      font-family: $PingFang;
+      font-family: $Yuanti;
       font-weight: 400;
-      color: rgb(227, 197, 158);
-      margin-top: -15rpx;
+      color: $white;
+      .block {
+        display: block;
+        text-align: center;
+        line-height: 1.5;
+        font-size: pxTorpx(12);
+        &:nth-child(2) {
+          font-size: pxTorpx(22);
+        }
+        &:last-child {
+          width: pxTorpx(50);
+          border: 2px solid #fff;
+          background-color: #c1272d;
+          border-radius: pxTorpx(25);
+        }
+      }
     }
   }
 }
-.personal__main {
-  &__content {
-    background-color: #808080;
-    box-shadow: #0000001f 0px 2px 6px 0px;
-    color: $white;
-    border-radius: pxTorpx(8) pxTorpx(12) pxTorpx(12);
-    font-size: pxTorpx(14);
-    @include flex(center, space-between);
-    padding: 0 pxTorpx(40);
-    padding-top: pxTorpx(115);
-    margin-top: -200rpx;
-    padding-bottom: pxTorpx(15);
-  }
-  &__list {
-    .main__list {
-      &__item {
-        width: pxTorpx(48);
-        height: pxTorpx(48);
-        border: 1px solid #08131e;
-        box-shadow: #10101038 0px 2px 6px 0px;
-        border-radius: pxTorpx(35);
-        font-size: pxTorpx(14);
-        text-align: center;
-        @include flex(center);
-        margin-bottom: pxTorpx(10);
-        .img {
-          width: pxTorpx(28);
-          height: pxTorpx(28);
-        }
-      }
-      &__text {
-        font-family: $PingFang;
-        font-weight: 400;
-        font-size: pxTorpx(14);
-        color: rgb(16, 16, 16);
-        display: block;
-        text-align: center;
-      }
-    }
-  }
+.personal__content {
+  padding-bottom: pxTorpx(20);
+}
+.personal__images__content {
+  width: 100%;
+  height: pxTorpx(135);
+  border-radius: pxTorpx(20);
+  margin: pxTorpx(10) 0 0;
 }
 .personal__menu {
   &__content {
-    border-color: 1px solid rgba(255, 0, 0, 0);
-    box-shadow: #cacccc33 0px 2px 6px 0px;
-    border-radius: pxTorpx(10);
     margin: pxTorpx(10);
-    background-color: #808080;
     padding-bottom: pxTorpx(35);
+    margin-top: pxTorpx(40);
   }
   &__list {
     font-size: pxTorpx(14);
     @include flex(center, '', wrap);
   }
-  &__title {
-    font-family: $PingFang;
-    font-weight: 400;
-    font-size: pxTorpx(16);
-    color: rgb(0, 0, 0);
-    line-height: pxTorpx(60);
-    padding-left: pxTorpx(15);
-  }
   &__item {
-    width: 25%;
-    @include flex(center, center, wrap);
+    width: 33%;
+    @include flex(center, space-between, wrap);
     margin-bottom: pxTorpx(25);
+    color: $white;
     .img {
-      width: pxTorpx(30);
-      height: pxTorpx(30);
-      margin-bottom: pxTorpx(10);
+      width: pxTorpx(60);
+      height: pxTorpx(60);
+      margin: 0 auto pxTorpx(10);
     }
   }
   &__text {
     display: block;
     width: 100%;
     text-align: center;
-    font-family: $PingFang;
+    font-family: $Yuanti;
     font-weight: 400;
-    font-size: pxTorpx(12);
-    color: rgb(16, 16, 16);
+    font-size: pxTorpx(15);
+    color: $white;
+  }
+}
+.personal__list__content {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  .personal__list {
+    @include flex(center, space-between);
+    margin: pxTorpx(5) 0 pxTorpx(20);
+    padding: 0 pxTorpx(30);
+    .button {
+      width: pxTorpx(120);
+      height: pxTorpx(40);
+      line-height: pxTorpx(40);
+      box-shadow: #808080 5px 5px 0px 0px;
+      color: $white;
+      border-radius: pxTorpx(4);
+      font-size: pxTorpx(14);
+      text-align: center;
+      background: #f7931e;
+      font-family: $Yuanti;
+    }
   }
 }
 </style>

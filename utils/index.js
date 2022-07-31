@@ -35,6 +35,14 @@ const commonUtils = {
       uni.setStorageSync('storage_userInfo', JSON.stringify(data))
     }
   },
+  // 获取图片
+  async runApiToGetSiteConfig(token) {
+    const { code, data } = await api.getSiteconfig({ token })
+    if (code === 1 && data) {
+      store.commit('setSiteConfig', JSON.stringify(data))
+      uni.setStorageSync('storage_siteConfig', JSON.stringify(data))
+    }
+  },
   async runApiToGetAreaList(token) {
     const { code, data } = await api.getAreaList({ token: token })
     if (code === 1) store.commit('setAreaList', JSON.stringify(data))
@@ -43,9 +51,11 @@ const commonUtils = {
     return new Promise((resolve, reject) => {
       const token = uni.getStorageSync('storage_token')
       const userInfo = uni.getStorageSync('storage_userInfo')
+      const siteConfig = uni.getStorageSync('storage_siteConfig')
       if (token) {
         store.commit('setToken', token)
         store.commit('setUserInfo', userInfo)
+        store.commit('setSiteConfig', siteConfig)
         resolve(true)
       } else {
         uni.getUserProfile({

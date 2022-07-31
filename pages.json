@@ -118,6 +118,7 @@
     {
       "path": "pages/personal/myAwardBag",
       "style": {
+        "navigationStyle": "custom",
         "navigationBarTitleText": "我的赏袋",
         "enablePullDownRefresh": true, //允许下拉刷新
         "backgroundTextStyle": "light", //背景颜色为黑色，可选参数white
@@ -160,6 +161,8 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "商品详情",
+        "enablePullDownRefresh": true, //允许下拉刷新
+        "backgroundTextStyle": "light", //背景颜色为黑色，可选参数white
         "usingComponents": {
           "van-dialog": "/wxcomponents/vant/dialog/index"
         }
@@ -169,6 +172,14 @@
       "path": "pages/product/search",
       "style": {
         "navigationBarTitleText": "搜索"
+      }
+    },
+    {
+      "path": "pages/personal/consumptionHistory",
+      "style": {
+        "navigationBarTitleText": "消费记录",
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": true //允许下拉刷新
       }
     }
   ],

@@ -17,7 +17,7 @@
         <view class="sub_label">
           {{ item.is_score === 0 ? '￥' : '' }}
           <text class="sub__title">{{ item.goods_price }}</text>
-          {{ item.is_score === 0 ? '' : '积分' }}/张
+          {{ item.is_score === 0 ? '' : '积分' }}/{{ item.sub_title }}
         </view>
       </view>
     </view>
@@ -69,8 +69,8 @@ export default {
           border-radius: pxTorpx(10);
           text-align: center;
           position: absolute;
-          top: pxTorpx(70);
-          left: pxTorpx(60);
+          top: pxTorpx(50);
+          left: pxTorpx(55);
           color: $theme-light-color;
           font-size: pxTorpx(16);
         }
@@ -78,7 +78,7 @@ export default {
           content: '';
           position: absolute;
           width: 100%;
-          height: pxTorpx(165);
+          height: pxTorpx(130);
           display: block;
           left: 0;
           top: 0;

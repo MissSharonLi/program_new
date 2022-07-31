@@ -26,7 +26,13 @@ page {
   background-color: $theme-bg-color;
 }
 .van-checkbox__icon--checked {
-  background-color: $uni-theme-color !important;
-  border-color: $uni-theme-color !important;
+  background-color: #f15a24 !important;
+  border-color: #f15a24 !important;
+}
+.van-checkbox__icon {
+  border: 2px solid #f15a24 !important;
+}
+.van-checkbox__label {
+  color: #fff !important;
 }
 </style>

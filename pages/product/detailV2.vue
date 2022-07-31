@@ -1,6 +1,6 @@
 <template>
   <view class="product__detail__content" :style="{ 'padding-top': navBarHeight }">
-    <HomeNavBar class="nav__wrapper" :title="returnObj.goods_name"></HomeNavBar>
+    <HomeNavBar class="nav__wrapper" :isBack="true" :title="returnObj.goods_name"></HomeNavBar>
     <view class="product__detail__top">
       <view class="product__detail__swiper">
         <image v-if="tabIndex === 0" class="img" :src="returnObj.goods_image"></image>
@@ -12,11 +12,19 @@
       <view class="product__detail__rank">
         <view class="rank__top">
           <button class="share" data-name="shareBtn" open-type="share"></button>
-          <image class="img" :src="require('@/assets/images/gameinfo.png')"></image>
+          <image
+            class="img"
+            :src="require('@/assets/images/gameinfo.png')"
+            @click="handleShowTips(1)"
+          ></image>
         </view>
         <view class="rank__bottom">
           <view class="love" :class="{ active: is_collect }" @click="handleToCollect"></view>
-          <image class="img" :src="require('@/assets/images/presale.png')"></image>
+          <image
+            class="img"
+            :src="require('@/assets/images/presale.png')"
+            @click="handleShowTips"
+          ></image>
         </view>
       </view>
     </view>
@@ -35,7 +43,7 @@
           {{ item.label }}
         </text>
       </view>
-      <view class="product__detail__list">
+      <view v-if="tabIndex === 0" class="product__detail__list">
         <view v-for="(item, index) in dataSource" :key="index" class="list__item">
           <image
             class="list__item__image"
@@ -48,7 +56,7 @@
           </view>
         </view>
       </view>
-      <view class="lottery__list">
+      <view v-if="tabIndex === 1" class="lottery__list">
         <Lottery :id="params" ref="lotteryProps"></Lottery>
       </view>
     </view>
@@ -76,10 +84,11 @@
         ></image>
       </view>
     </view>
+    <view class="refresh" @click="handleRefresh"></view>
     <BuyDetail ref="buyProps" :params="buyParams" @success="handleSuccess"></BuyDetail>
     <BuySuccess ref="rankProps" :dataSource="rankProps.dataSource"></BuySuccess>
     <VanDialog id="van-dialog"></VanDialog>
-    <BuyTips ref="buyTipsProps" :notice="returnObj.notice"></BuyTips>
+    <BuyTips ref="buyTipsProps" :notice="notice"></BuyTips>
   </view>
 </template>
 <script>
@@ -88,7 +97,6 @@ import BuySuccess from '@/components/BuySuccess'
 import BuyDetail from '@/components/BuyDetail'
 import BuyTips from '@/components/BuyTips'
 import HomeNavBar from '@/components/HomeNavBar'
-import Dialog from '@/wxcomponents/vant/dialog/dialog'
 import Lottery from './lottery'
 export default {
   name: 'DetailV2',
@@ -101,7 +109,9 @@ export default {
   },
   data() {
     return {
+      notice: '',
       current: 0,
+      page: 1,
       isLock: false,
       is_collect: false,
       tabIndex: 0,
@@ -125,8 +135,10 @@ export default {
   },
   onLoad(options) {
     this.params.id = options.id
-    this.$refs.lotteryProps.query(options.id)
     this.query()
+  },
+  onReachBottom() {
+    this.tabIndex === 1 && this.$nextTick(() => this.$refs.lotteryProps.getData())
   },
   onShareAppMessage() {
     return {
@@ -135,6 +147,13 @@ export default {
     }
   },
   methods: {
+    handleRefresh() {
+      this.query()
+      if (this.tabIndex === 1) {
+        this.$refs.lotteryProps.query(this.params.id)
+        this.$refs.lotteryProps.getData(true)
+      }
+    },
     async query() {
       const { code, data } = await api.getProductDetail(this.params)
       if (code === 1 && data) {
@@ -146,10 +165,15 @@ export default {
     // 切换商品Tab
     handleTab(index) {
       this.tabIndex = index
+      if (index === 1) {
+        this.commonUtils.login().then(async (res) => {
+          await this.$nextTick()
+          this.$refs.lotteryProps.query(this.params.id)
+          this.$refs.lotteryProps.getData(true)
+        })
+      }
     },
-    async handleLottery() {
-      uni.navigateTo({ url: '/pages/product/lottery?id=' + this.params.id })
-    },
+    // 获取用户信息
     async runApiToGetUserInfo() {
       const { code, data } = await api.getUseriInfo({ token: this.token })
       if (code === 1 && data) {
@@ -157,6 +181,7 @@ export default {
         uni.setStorageSync('storage_userInfo', JSON.stringify(data))
       }
     },
+    // 购买成功
     async handleSuccess(log_sn) {
       this.query()
       this.runApiToGetUserInfo()
@@ -165,13 +190,9 @@ export default {
         token: this.token,
         log_sn
       })
-      if (code === 1) {
-        this.rankProps.dataSource = data
-      }
+      if (code === 1) this.rankProps.dataSource = data
     },
-    handleToRewards() {
-      uni.navigateTo({ url: '/pages/personal/myAwardBag' })
-    },
+    // 点击购买
     handleToBuy(num) {
       this.commonUtils.login().then(async (res) => {
         this.buyParams = {
@@ -184,7 +205,9 @@ export default {
           goods_name: this.returnObj.goods_name,
           goods_price: this.returnObj.goods_price,
           stock_num: this.returnObj.stock_num,
-          goods_num: this.returnObj.goods_num
+          goods_num: this.returnObj.goods_num,
+          goods_image: this.returnObj.goods_image,
+          sub_title: this.returnObj.sub_title
         }
         this.$refs.buyProps.show = true
       })
@@ -198,24 +221,10 @@ export default {
         this.is_collect ? this.$toast('已成功收藏') : this.$toast('已取消收藏')
       }
     },
-    handleOperation(title = '提示', message) {
-      if (!this.returnObj.lock_times) return this.$toast('锁箱机会剩余0次,不可锁箱')
-      Dialog.alert({
-        title: title,
-        message: `确认${message}?`,
-        showCancelButton: true,
-        theme: 'round-button'
-      })
-        .then(async () => {
-          if (message === '锁箱') {
-            const { code } = await api.handleLockBox({ ...this.params, token: this.token })
-            if (code === 1) {
-              this.$toast('操作成功')
-              this.query()
-            }
-          }
-        })
-        .catch(() => {})
+    // 购买说明
+    handleShowTips(type) {
+      this.notice = type === 1 ? this.returnObj.introduce_content : this.returnObj.pre_sale_content
+      this.$refs.buyTipsProps.show = true
     }
   }
 }
@@ -231,39 +240,48 @@ export default {
 @import '@/assets/css/index.scss';
 .product__detail {
   &__swiper {
-    width: pxTorpx(135);
+    width: pxTorpx(170);
     margin: 0 auto;
-    min-height: pxTorpx(170);
+    min-height: pxTorpx(190);
     padding: pxTorpx(15) 0;
     @include flex(center, space-around);
     .img {
-      width: pxTorpx(125);
+      width: pxTorpx(150);
       height: pxTorpx(150);
       border: pxTorpx(10) solid $white;
       margin: 0 auto;
       display: block;
     }
     .lottery {
-      width: pxTorpx(135);
-      min-height: pxTorpx(150);
+      width: pxTorpx(170);
+      min-height: pxTorpx(170);
       background-color: $white;
       margin: 0 auto;
       border-bottom-left-radius: pxTorpx(10);
       border-bottom-right-radius: pxTorpx(10);
       &_img {
         width: 100%;
-        height: pxTorpx(120);
+        height: pxTorpx(150);
       }
       &_title {
         font-family: $Yuanti;
         font-size: pxTorpx(12);
-        padding: pxTorpx(5) pxTorpx(10);
+        padding: pxTorpx(2) pxTorpx(5) pxTorpx(10);
       }
     }
   }
   &__content {
     min-height: 100vh;
     padding-bottom: pxTorpx(60);
+    .refresh {
+      position: fixed;
+      right: 0;
+      top: 40%;
+      width: pxTorpx(40);
+      height: pxTorpx(40);
+      background: url('@/assets/images/air.png') no-repeat center;
+      background-size: 100%;
+    }
   }
   &__top {
     position: relative;
@@ -439,7 +457,7 @@ export default {
             text-align: center;
             position: absolute;
             top: pxTorpx(30);
-            left: pxTorpx(20);
+            left: calc(50% - 45rpx);
             color: $theme-light-color;
             font-size: pxTorpx(12);
             line-height: pxTorpx(20);
@@ -447,7 +465,7 @@ export default {
           &::before {
             content: '';
             position: absolute;
-            width: pxTorpx(80);
+            width: 100%;
             height: pxTorpx(80);
             left: 0;
             top: 0;

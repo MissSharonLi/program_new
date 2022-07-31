@@ -9,16 +9,24 @@ const mixins = {
     userInfo() {
       return this.$store.state.userInfo || uni.getStorageSync('storage_userInfo')
     },
+    siteConfig() {
+      return this.$store.state.siteConfig || uni.getStorageSync('storage_siteConfig')
+    },
     areaList() {
       return this.$store.state.areaList || {}
     }
   },
   async onPullDownRefresh() {
-    await this.$nextTick()
-    this.returnData = []
-    this.params.page = 1
-    await this.getData()
-    uni.stopPullDownRefresh()
+    try {
+      await this.$nextTick()
+      this.returnData = []
+      this.params.page = 1
+      await this.getData()
+      uni.stopPullDownRefresh()
+    } catch {
+    } finally {
+      uni.stopPullDownRefresh()
+    }
   }
 }
 export default mixins

@@ -4,6 +4,7 @@ const globalModule = {
     token: '',
     userInfo: {},
     areaList: {},
+    siteConfig: {},
     navBarHeight: '',
     familyArray: [
       {
@@ -32,7 +33,7 @@ const globalModule = {
       },
       {
         family: 'Yuanti',
-        source: 'url("https://a.yiyunrj.com/assets/apifonts/Yuanti.ttf")'
+        source: 'url("https://a.yiyunrj.com/assets/apifonts/AozoraMincho-bold-2.ttf")'
       },
       {
         family: 'PingFang',
@@ -81,6 +82,9 @@ const globalModule = {
     },
     setAreaList(state, data) {
       state.areaList = JSON.parse(data || '{}')
+    },
+    setSiteConfig(state, data) {
+      state.siteConfig = JSON.parse(data || '{}')
     }
   },
   actions: {
