@@ -20,16 +20,19 @@
       <HomeScrollView ref="scrollProps"></HomeScrollView>
     </view>
     <view class="refresh" @click="refresh()"></view>
+    <MyTabs :activeTab="0"></MyTabs>
   </view>
 </template>
 
 <script>
 import { api } from '@/api'
+import MyTabs from '@/components/MyTabs'
 import HomeNavBar from '@/components/HomeNavBar'
 import CustomSwiper from '@/components/CustomSwiper'
 import HomeScrollView from '@/components/HomeScrollView'
 export default {
   components: {
+    MyTabs,
     HomeNavBar,
     CustomSwiper,
     HomeScrollView

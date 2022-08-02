@@ -4,6 +4,7 @@ export default {
     type: 1
   },
   onLaunch: function () {
+    uni.hideTabBar()
     this.commonUtils.checkUpdateVersion()
     this.$store.dispatch('initFontFamily')
   },

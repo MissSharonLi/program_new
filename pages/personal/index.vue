@@ -58,16 +58,19 @@
       :type="1"
       :notice="siteConfig.user_service_agreement"
     ></DeliveryTips>
-    <RechargeDetail ref="rechargeProps" @success="runApiToGetUserInfo"></RechargeDetail>
+    <RechargeDetail ref="rechargeProps" @success="handleRefresh"></RechargeDetail>
+    <MyTabs :activeTab="2"></MyTabs>
   </view>
 </template>
 <script>
 import { api } from '@/api'
+import MyTabs from '@/components/MyTabs'
 import DeliveryTips from '@/components/DeliveryTips'
 import HomeNavBar from '@/components/HomeNavBar'
 import RechargeDetail from '@/components/RechargeDetail'
 export default {
   components: {
+    MyTabs,
     DeliveryTips,
     HomeNavBar,
     RechargeDetail
@@ -119,6 +122,11 @@ export default {
     this.runApiToGetSiteconfig()
   },
   methods: {
+    // 重置刷新
+    handleRefresh() {
+      this.runApiToGetUserInfo()
+      this.runApiToGetSiteconfig()
+    },
     // 充值
     handleDoRecharge() {
       this.$refs.rechargeProps.show = true
@@ -287,7 +295,7 @@ export default {
   }
 }
 .personal__content {
-  padding-bottom: pxTorpx(20);
+  padding-bottom: pxTorpx(80);
 }
 .personal__images__content {
   width: 100%;
@@ -330,7 +338,7 @@ export default {
   position: fixed;
   width: 100%;
   left: 0;
-  bottom: 0;
+  bottom: pxTorpx(66);
   .personal__list {
     @include flex(center, space-between);
     margin: pxTorpx(5) 0 pxTorpx(20);

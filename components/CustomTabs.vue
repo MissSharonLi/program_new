@@ -1,18 +1,13 @@
 <template>
-  <view class="list__tab__overflow">
-    <view class="list__tab__wrapper">
-      <view class="list__tab__content">
-        <text
-          v-for="(item, index) in dataSource"
-          :key="index"
-          class="tab__item"
-          :class="{ active: tabIndex === index }"
-          @click="handleTab(item, index)"
-        >
-          {{ item.title }}
-        </text>
-      </view>
-    </view>
+  <view class="list__tab__content">
+    <text
+      v-for="(item, index) in dataSource"
+      :key="index"
+      :class="{ active: tabIndex === index }"
+      @click="handleTab(item, index)"
+    >
+      {{ item.title }}
+    </text>
   </view>
 </template>
 <script>
@@ -41,36 +36,31 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
-.list__tab__overflow {
-  max-height: pxTorpx(40);
-  overflow: hidden;
-}
-.list__tab__wrapper {
-  max-width: 98%;
-  scrollbar-width: none; /* firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-  overflow-x: scroll;
-  margin: 0 auto;
-  -webkit-overflow-scrolling: touch;
-}
 .list__tab__content {
   line-height: pxTorpx(50);
-  font-family: $Yuanti;
+  @include flex(center, space-around);
+  font-family: $STHupo;
   font-weight: 400;
   font-size: pxTorpx(16);
   color: #f6c25f;
   font-style: normal;
   letter-spacing: 1px;
-  white-space: nowrap;
-  .tab__item {
-    min-width: 25%;
-    text-align: center;
-    display: inline-block;
-  }
   .active {
-    color: $theme-active-color;
+    color: #f6a60f;
     font-size: pxTorpx(18);
-    font-family: $Yuanti;
+    font-family: $STHupo;
+    position: relative;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: pxTorpx(13);
+      height: pxTorpx(13);
+      background: url('@/assets/images/sub.png') no-repeat;
+      background-size: 100% 100%;
+      bottom: 0;
+      left: calc(50% - 15rpx);
+    }
   }
 }
 </style>

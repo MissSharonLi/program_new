@@ -13,7 +13,7 @@
       </text>
     </view>
     <view class="consumption__main">
-      <view v-if="tabIndex === 0" class="consumption__list">
+      <view class="consumption__list">
         <view v-for="(item, index) in returnData" :key="index" class="consumption__item">
           <view class="text">操作: {{ item.memo }}</view>
           <view class="text">
@@ -31,16 +31,6 @@
               <view class="title">{{ item1.name }}</view>
             </view>
           </view>
-        </view>
-      </view>
-      <view v-if="tabIndex === 1" class="consumption__list">
-        <view v-for="(item, index) in returnData" :key="index" class="consumption__item">
-          <view class="text">操作: {{ item.memo }}</view>
-          <view class="text">
-            <text class="span">变更前: {{ item.before }}</text>
-            <text class="span">变更后: {{ item.after }}</text>
-          </view>
-          <view class="em">变更时间 - {{ item.createtime }}</view>
         </view>
       </view>
     </view>

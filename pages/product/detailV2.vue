@@ -57,7 +57,7 @@
         </view>
       </view>
       <view v-if="tabIndex === 1" class="lottery__list">
-        <Lottery :id="params" ref="lotteryProps"></Lottery>
+        <Lottery ref="lotteryProps"></Lottery>
       </view>
     </view>
     <view class="product__detail__footer">
@@ -268,6 +268,10 @@ export default {
         font-family: $Yuanti;
         font-size: pxTorpx(12);
         padding: pxTorpx(2) pxTorpx(5) pxTorpx(10);
+        max-width: 99%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -277,10 +281,10 @@ export default {
     .refresh {
       position: fixed;
       right: 0;
-      top: 40%;
+      top: 70%;
       width: pxTorpx(40);
       height: pxTorpx(40);
-      background: url('@/assets/images/air.png') no-repeat center;
+      background: url('@/assets/images/refresh1.png') no-repeat center;
       background-size: 100%;
     }
   }

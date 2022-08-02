@@ -5,7 +5,7 @@
         <image
           :key="item.path"
           class="img"
-          :src="tabProps.activeTab === index ? item.url_a : item.url"
+          :src="activeTab === index ? item.url_a : item.url"
           @click="handleSwitch(item, index)"
         ></image>
       </template>
@@ -15,11 +15,9 @@
 <script>
 export default {
   props: {
-    tabProps: {
-      type: Object,
-      default: () => ({
-        activeTab: null
-      })
+    activeTab: {
+      type: Number,
+      default: () => null
     }
   },
   data() {
@@ -47,7 +45,7 @@ export default {
   methods: {
     handleSwitch(item, index) {
       // eslint-disable-next-line vue/no-mutating-props
-      this.tabProps.activeIndex = index
+      this.activeIndex = index
       uni.switchTab({ url: item.path })
     }
   }
@@ -63,13 +61,12 @@ export default {
     bottom: 0;
   }
   &__content {
-    padding: pxTorpx(10) pxTorpx(15) pxTorpx(15);
+    padding: pxTorpx(8) pxTorpx(15);
     background-color: $white;
     @include flex(center, space-between);
     .img {
-      width: pxTorpx(60);
-      height: pxTorpx(60);
-      // margin-top: -70rpx;
+      width: pxTorpx(50);
+      height: pxTorpx(50);
     }
   }
 }

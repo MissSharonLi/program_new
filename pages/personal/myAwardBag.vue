@@ -27,14 +27,17 @@
           @click="handleSelect(index)"
         ></text>
         <view class="text__content">
-          <view class="title">{{ item.item_name }}</view>
+          <view class="title">
+            <text class="text">{{ item.item_name }}</text>
+            <text>×{{ item.num }}</text>
+          </view>
         </view>
       </view>
     </view>
     <view class="my__award__bag__footer">
-      <view v-if="params.status === 0" class="button" @click="handleOperation">赏品寄售</view>
-      <view v-if="params.status === 0" class="button" @click="handleOperation(1)">打包发货</view>
-      <view v-if="params.status === 0" class="button" @click="handleOperation(2)">移入保险柜</view>
+      <view v-if="params.status === 1" class="button" @click="handleOperation">赏品寄售</view>
+      <view v-if="params.status === 1" class="button" @click="handleOperation(1)">打包发货</view>
+      <view v-if="params.status === 1" class="button" @click="handleOperation(2)">移入保险柜</view>
     </view>
     <SelectAddress ref="addressProps" type="batch"></SelectAddress>
     <VanDialog id="van-dialog"></VanDialog>
@@ -43,16 +46,19 @@
       :type="0"
       :notice="siteConfig.shipping_instructions"
     ></DeliveryTips>
+    <MyTabs :activeTab="1"></MyTabs>
   </view>
 </template>
 <script>
 import { api } from '@/api'
+import MyTabs from '@/components/MyTabs'
 import HomeNavBar from '@/components/HomeNavBar'
 import SelectAddress from '@/components/SelectAddress'
 import DeliveryTips from '@/components/DeliveryTips'
 export default {
   name: 'MyAwardBag',
   components: {
+    MyTabs,
     HomeNavBar,
     SelectAddress,
     DeliveryTips
@@ -62,13 +68,13 @@ export default {
       select: false,
       params: {
         page: 1,
-        status: 0
+        status: 1
       },
       returnData: [],
       subDatas: [
-        { label: '全部', value: 0 },
+        { label: '全部', value: 1 },
         { label: '已发货', value: 4 },
-        { label: '已寄售', value: 1 },
+        { label: '已寄售', value: 2 },
         { label: '保险柜', value: 6 }
       ]
     }
@@ -276,6 +282,15 @@ export default {
         font-family: $Yuanti;
         font-size: pxTorpx(14);
         color: #333;
+        min-height: pxTorpx(20);
+        line-height: pxTorpx(20);
+        @include flex(center, space-between);
+        .text {
+          max-width: 99%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       }
       .price {
         font-family: $Yuanti;
