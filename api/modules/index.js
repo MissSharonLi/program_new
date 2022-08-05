@@ -125,3 +125,6 @@ export const getMoneylogv2 = (params) => POST('users/money/moneylogv2', params, 
 
 // 批量加入保险柜
 export const handleJoinsafe = (params) => POST('rewardbag/joinsafe', params, null, true)
+
+// 批量移出保险柜
+export const handleRemovesafe = (params) => POST('rewardbag/removesafe', params, null, true)

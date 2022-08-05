@@ -38,7 +38,9 @@
       <view v-if="params.status === 1" class="button" @click="handleOperation">赏品寄售</view>
       <view v-if="params.status === 1" class="button" @click="handleOperation(1)">打包发货</view>
       <view v-if="params.status === 1" class="button" @click="handleOperation(2)">移入保险柜</view>
+      <view v-if="params.status === 6" class="button" @click="handleOperation(3)">移出保险柜</view>
     </view>
+    <view class="refresh" @click="refresh"></view>
     <SelectAddress ref="addressProps" type="batch"></SelectAddress>
     <VanDialog id="van-dialog"></VanDialog>
     <DeliveryTips
@@ -161,6 +163,19 @@ export default {
             }
           }
           break
+        case 3:
+          // 移出保险柜
+          {
+            const { code } = await api.handleRemovesafe({
+              order_ids: selectIds,
+              token: this.token
+            })
+            if (code === 1) {
+              this.$toast('操作成功!')
+              this.refresh()
+            }
+          }
+          break
         default: {
           // 批量回购
           const { code } = await api.handleToBackbuy({
@@ -184,6 +199,15 @@ export default {
     margin: pxTorpx(7);
     position: relative;
     padding-bottom: pxTorpx(110);
+    .refresh {
+      position: fixed;
+      right: 0;
+      top: 70%;
+      width: pxTorpx(40);
+      height: pxTorpx(40);
+      background: url('@/assets/images/refresh1.png') no-repeat center;
+      background-size: 100%;
+    }
     &__tips {
       @include flex(center, space-between);
       padding: pxTorpx(10) pxTorpx(20);
@@ -330,7 +354,7 @@ export default {
     }
     &__footer {
       position: fixed;
-      bottom: pxTorpx(100);
+      bottom: pxTorpx(85);
       left: 0;
       width: 100%;
       @include flex(center, space-around);

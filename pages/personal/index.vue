@@ -51,6 +51,7 @@
         </view>
       </view>
     </view>
+    <view class="refresh" @click="handleRefresh"></view>
     <DeliveryTips
       ref="tipsProps"
       backgroundColor="#fff"
@@ -179,6 +180,17 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.content {
+  .refresh {
+    position: fixed;
+    right: 0;
+    top: 70%;
+    width: pxTorpx(40);
+    height: pxTorpx(40);
+    background: url('@/assets/images/refresh1.png') no-repeat center;
+    background-size: 100%;
+  }
+}
 .personal__top {
   &__background {
     background-color: #4d4d4d;

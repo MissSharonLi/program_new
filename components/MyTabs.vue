@@ -59,11 +59,14 @@ export default {
     width: 100%;
     left: 0;
     bottom: 0;
+    background-color: $white;
+    padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+    padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
   }
   &__content {
     padding: pxTorpx(8) pxTorpx(15);
     background-color: $white;
-    @include flex(center, space-between);
+    @include flex(center, space-around);
     .img {
       width: pxTorpx(50);
       height: pxTorpx(50);
