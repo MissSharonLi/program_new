@@ -78,7 +78,7 @@ export default {
   data() {
     return {
       show: false,
-      checked: false
+      checked: true
     }
   },
   methods: {

@@ -198,7 +198,7 @@ export default {
   &__bag {
     margin: pxTorpx(7);
     position: relative;
-    padding-bottom: pxTorpx(110);
+    padding-bottom: pxTorpx(130);
     .refresh {
       position: fixed;
       right: 0;
@@ -354,7 +354,7 @@ export default {
     }
     &__footer {
       position: fixed;
-      bottom: pxTorpx(85);
+      bottom: pxTorpx(105);
       left: 0;
       width: 100%;
       @include flex(center, space-around);

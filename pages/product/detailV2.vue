@@ -51,7 +51,7 @@
             :src="item.item_image"
           ></image>
           <view class="title">
-            <text class="name">{{ item.tag_title }}</text>
+            <text class="name">{{ item.item_name }}</text>
             <text class="num">{{ item.stock_num }}/{{ item.item_num }}</text>
           </view>
         </view>
@@ -500,6 +500,13 @@ export default {
           font-weight: 700;
           font-size: pxTorpx(14);
           color: #231815;
+          max-width: 70%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          word-break: break-all;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
         .num {
           font-weight: 400;

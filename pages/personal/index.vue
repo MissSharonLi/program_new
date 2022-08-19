@@ -350,7 +350,7 @@ export default {
   position: fixed;
   width: 100%;
   left: 0;
-  bottom: pxTorpx(66);
+  bottom: pxTorpx(95);
   .personal__list {
     @include flex(center, space-between);
     margin: pxTorpx(5) 0 pxTorpx(20);

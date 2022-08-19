@@ -160,6 +160,10 @@ export default {
       .title {
         font-size: pxTorpx(12);
         color: #000000;
+        max-width: 99%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
