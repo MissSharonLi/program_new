@@ -1,26 +1,28 @@
 <template>
-  <view class="content" :style="{ 'padding-top': navBarHeight }">
-    <HomeNavBar class="nav__wrapper" title="浪漫模玩"></HomeNavBar>
-    <view class="nav__background">
-      <view class="home__main__content">
-        <view class="home__main__search">
-          <image class="search__icon" :src="require('@/assets/images/search-grey.png')"></image>
-          <input
-            class="search__input"
-            type="text"
-            :disabled="true"
-            placeholder="搜索商品"
-            @click="handleOperation"
-          />
+  <view class="content">
+    <view class="home__content" :style="{ 'margin-top': navBarHeight }">
+      <HomeNavBar class="nav__wrapper" title="浪漫模玩"></HomeNavBar>
+      <view class="nav__background">
+        <view class="home__main__content">
+          <view class="home__main__search">
+            <image class="search__icon" :src="require('@/assets/images/search-grey.png')"></image>
+            <input
+              class="search__input"
+              type="text"
+              :disabled="true"
+              placeholder="搜索商品"
+              @click="handleOperation"
+            />
+          </view>
+          <CustomSwiper :dataSource="bannerList"></CustomSwiper>
         </view>
-        <CustomSwiper :dataSource="bannerList"></CustomSwiper>
       </view>
+      <view class="home__main__list">
+        <HomeScrollView ref="scrollProps"></HomeScrollView>
+      </view>
+      <view class="refresh" @click="refresh()"></view>
+      <MyTabs :activeTab="0"></MyTabs>
     </view>
-    <view class="home__main__list">
-      <HomeScrollView ref="scrollProps"></HomeScrollView>
-    </view>
-    <view class="refresh" @click="refresh()"></view>
-    <MyTabs :activeTab="0"></MyTabs>
   </view>
 </template>
 
@@ -104,9 +106,8 @@ export default {
 .font-loaded {
   font-family: $Yuanti;
 }
-.content {
-  min-height: auto;
-  padding-bottom: pxTorpx(10);
+.home__content {
+  margin-bottom: pxTorpx(10);
   .refresh {
     position: fixed;
     right: 0;

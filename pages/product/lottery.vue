@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view class="lottery__list">
+    <view class="content lottery__list">
       <view v-for="(item, index) in list" :key="index" class="lottery__item first">
         <view class="left">
           <view class="rank__num">

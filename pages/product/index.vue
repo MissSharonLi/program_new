@@ -1,5 +1,5 @@
 <template>
-  <view class="product__content">
+  <view class="content product__content">
     <view class="search__input__wrapper">
       <view class="search__input__content">
         <input

@@ -64,7 +64,7 @@ export default {
           text-align: center;
           position: absolute;
           top: pxTorpx(70);
-          left: pxTorpx(60);
+          left: pxTorpx(55);
           color: $theme-light-color;
           font-size: pxTorpx(16);
         }

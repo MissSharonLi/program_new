@@ -1,5 +1,5 @@
 <template>
-  <view class="order__management">
+  <view class="content order__management">
     <view class="order__management__top">
       <view class="search__input__content">
         <input

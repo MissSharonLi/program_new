@@ -138,30 +138,34 @@ export default {
 }
 .buy {
   &__content {
-    min-height: calc(100% - 40rpx);
-    background: url('@/assets/images/bg.png') no-repeat center;
-    background-size: 100% 100%;
+    min-height: calc(100% - 50rpx);
+    background: url('@/assets/images/head_bg.jpg') repeat top;
+    background-size: 100%;
     padding: pxTorpx(10);
+    border-radius: 20px;
+    border: 2px solid #dbb666;
+    background-color: rgba(0, 0, 0, 0.8);
     .recharge {
       &__content {
-        padding: pxTorpx(10) pxTorpx(20);
+        padding: pxTorpx(5) pxTorpx(10);
       }
       &__list {
         @include flex(center, '', wrap);
       }
       &__item {
-        height: pxTorpx(46);
-        line-height: pxTorpx(46);
-        border: 1px solid #808080;
+        height: pxTorpx(40);
+        line-height: pxTorpx(40);
+        border: 2px solid #808080;
         text-align: center;
         margin-bottom: pxTorpx(10);
-        border-radius: pxTorpx(4);
+        border-radius: pxTorpx(40);
         font-family: $Yuanti;
         color: $white;
         font-size: pxTorpx(16);
         margin-bottom: pxTorpx(10);
-        width: 29%;
+        width: 28%;
         margin-right: 5%;
+        background-color: #333333;
         &:nth-child(3n) {
           margin-right: 0;
         }
@@ -194,7 +198,7 @@ export default {
       &__input {
         font-size: pxTorpx(35);
         color: $white;
-        border-bottom: 1px solid #fff;
+        border-bottom: 3px solid #fff;
         position: relative;
         height: pxTorpx(65);
         line-height: pxTorpx(65);
@@ -220,27 +224,19 @@ export default {
   }
   &__top__content {
     .buy__title {
-      width: 70%;
-      height: pxTorpx(50);
+      width: calc(70%);
+      height: pxTorpx(60);
       background: url('@/assets/images/bg3.png') no-repeat;
       background-size: 100% 100%;
       position: relative;
       padding-left: 30%;
       color: $white;
-      line-height: pxTorpx(50);
+      line-height: pxTorpx(65);
       margin-bottom: pxTorpx(20);
       margin-top: pxTorpx(10);
       font-size: pxTorpx(14);
-      padding-right: pxTorpx(10);
-      &::before {
-        content: '赏';
-        left: 0;
-        position: absolute;
-        width: pxTorpx(50);
-        height: pxTorpx(50);
-        text-align: center;
-        font-size: pxTorpx(20);
-      }
+      padding-right: pxTorpx(11);
+      text-indent: -20px;
     }
   }
   &__price__content {
@@ -248,11 +244,11 @@ export default {
       &:first-child {
         padding-bottom: pxTorpx(5);
         margin-bottom: pxTorpx(5);
-        border-bottom: 1px solid #808080;
+        border-bottom: 3px solid #808080;
       }
       @include flex(bottom, space-between);
       color: $white;
-      font-size: pxTorpx(14);
+      font-size: pxTorpx(15);
       .price {
         color: #f15a24;
         font-size: pxTorpx(13);

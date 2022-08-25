@@ -1,5 +1,5 @@
 <template>
-  <view class="gold__wrapper">
+  <view class="content gold__wrapper">
     <view class="gold__self">
       <image class="img" :src="userInfo.avatar"></image>
       <view class="nickname">{{ userInfo.nickname }}</view>

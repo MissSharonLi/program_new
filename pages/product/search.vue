@@ -1,5 +1,5 @@
 <template>
-  <view class="product__search__wrapper">
+  <view class="content product__search__wrapper">
     <view class="search__input__content">
       <input
         v-model="keyword"

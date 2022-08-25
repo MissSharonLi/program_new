@@ -1,5 +1,5 @@
 <template>
-  <view class="product__detail__content" :style="{ 'padding-top': navBarHeight }">
+  <view class="content product__detail__content" :style="{ 'margin-top': navBarHeight }">
     <HomeNavBar class="nav__wrapper" :isBack="true" :title="returnObj.goods_name"></HomeNavBar>
     <view class="product__detail__top">
       <view class="product__detail__swiper">
@@ -546,8 +546,8 @@ export default {
     padding: pxTorpx(20);
     @include flex(center, space-between);
     .img {
-      width: pxTorpx(60);
-      height: pxTorpx(60);
+      width: pxTorpx(70);
+      height: pxTorpx(70);
     }
   }
 }

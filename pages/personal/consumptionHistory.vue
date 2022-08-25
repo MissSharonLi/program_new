@@ -1,5 +1,5 @@
 <template>
-  <view class="consumption__content" :style="{ 'padding-top': navBarHeight }">
+  <view class="content consumption__content" :style="{ 'margin-top': navBarHeight }">
     <HomeNavBar class="nav__wrapper" :isBack="true" title="消费记录"></HomeNavBar>
     <view class="consumption__tab__content">
       <text
@@ -102,13 +102,20 @@ export default {
     font-family: $Yuanti;
     color: $white;
     font-size: pxTorpx(16);
-    margin-bottom: pxTorpx(15);
+    margin-bottom: pxTorpx(2);
+    padding-top: pxTorpx(10);
     .tab__item {
       display: block;
       line-height: 2;
-      padding: 0 pxTorpx(10);
+      padding: 0 pxTorpx(15);
+      background-color: #12264a;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 10px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border: 2px solid #dbb666;
       &.active {
-        border-bottom: 1px solid #f15a24;
+        color: #f15a24;
       }
     }
   }
@@ -117,7 +124,7 @@ export default {
     background-color: #4d4d4d;
     min-height: pxTorpx(500);
     border-radius: pxTorpx(20);
-    margin: pxTorpx(20) auto;
+    margin: 0 auto pxTorpx(20);
   }
   &__list {
     padding: pxTorpx(15);

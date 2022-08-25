@@ -1,5 +1,5 @@
 <template>
-  <view class="delivery__wrapper">
+  <view class="content delivery__wrapper">
     <view class="delivery__status">
       <text>已签收</text>
       <image class="img" :src="require('@/assets/images/logistics.png')"></image>

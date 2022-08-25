@@ -1,5 +1,5 @@
 <template>
-  <view class="set__address__content">
+  <view class="content set__address__content">
     <view class="set__address__list">
       <view class="set__address__item">
         <view class="label">收货人</view>

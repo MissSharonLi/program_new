@@ -1,5 +1,5 @@
 <template>
-  <view class="bind__wrapper">
+  <view class="content bind__wrapper">
     <view class="bind__content">
       <view class="bind__list">
         <view class="bind__success">

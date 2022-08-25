@@ -1,5 +1,5 @@
 <template>
-  <view class="address__wrapper">
+  <view class="content address__wrapper">
     <view class="address__list">
       <view
         v-for="(item, index) in returnData"

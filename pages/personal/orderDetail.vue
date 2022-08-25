@@ -1,5 +1,5 @@
 <template>
-  <view class="order__detail__wrapper">
+  <view class="content order__detail__wrapper">
     <view class="order__detail__status">
       <text>{{ returnObj.status_text }}</text>
       <image class="img" :src="require('@/assets/images/logistics.png')"></image>

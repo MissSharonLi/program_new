@@ -1,5 +1,5 @@
 <template>
-  <view class="product__detail__content">
+  <view class="content product__detail__content">
     <view class="product__detail__top">
       <CustomSwiper :isBanner="true" :dataSource="imgDataSource"></CustomSwiper>
       <view class="rank__content">

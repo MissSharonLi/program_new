@@ -1,5 +1,5 @@
 <template>
-  <view class="recharge__records__wrapper">
+  <view class="content recharge__records__wrapper">
     <view class="recharge__records__list">
       <view v-for="(item, index) in returnData" :key="index" class="recharge__records__item">
         <view class="left">

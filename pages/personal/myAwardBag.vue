@@ -1,62 +1,70 @@
 <template>
-  <view class="my__award__bag" :style="{ 'padding-top': navBarHeight }">
-    <HomeNavBar class="nav__wrapper" title="我的赏袋"></HomeNavBar>
-    <view class="my__award__bag__content">
-      <view class="subtitle">
-        <text
-          v-for="item in subDatas"
-          :key="item.value"
-          class="item"
-          :class="{ active: params.status === item.value }"
-          @click="handleTab(item.value)"
-        >
-          {{ item.label }}
-        </text>
+  <view class="content">
+    <view class="my__award__bag" :style="{ 'margin-top': navBarHeight }">
+      <HomeNavBar class="nav__wrapper" title="我的赏袋"></HomeNavBar>
+      <view class="my__award__bag__content">
+        <view class="subtitle">
+          <text
+            v-for="item in subDatas"
+            :key="item.value"
+            class="item"
+            :class="{ active: params.status === item.value }"
+            @click="handleTab(item.value)"
+          >
+            {{ item.label }}
+          </text>
+        </view>
       </view>
-    </view>
-    <view class="my__award__bag__tips">
-      <image class="img" :src="require('@/assets/images/bag1.png')" @click="handleTips"></image>
-      <view class="select__all" :class="{ select: select }" @click="handleSelectAll">全选</view>
-    </view>
-    <view class="my__award__bag__list">
-      <view v-for="(item, index) in returnData" :key="index" class="my__award__bag__item">
-        <image :src="item.item_image" class="img" @click="handleSelect(index)" />
-        <text
-          class="select__icon"
-          :class="{ selected: item.selected }"
-          @click="handleSelect(index)"
-        ></text>
-        <view class="text__content">
-          <view class="title">
-            <text class="text">{{ item.item_name }}</text>
-            <text>×{{ item.num }}</text>
+      <view class="my__award__bag__tips">
+        <image class="img" :src="require('@/assets/images/bag1.png')" @click="handleTips"></image>
+        <view class="select__all" :class="{ select: select }" @click="handleSelectAll">全选</view>
+      </view>
+      <view class="my__award__bag__list">
+        <view v-for="(item, index) in returnData" :key="index" class="my__award__bag__item">
+          <image :src="item.item_image" class="img" @click="handleSelect(index)" />
+          <text
+            class="select__icon"
+            :class="{ selected: item.selected }"
+            @click="handleSelect(index)"
+          ></text>
+          <text class="number">× {{ item.num }}</text>
+          <view class="text__content">
+            <view class="title">
+              <text class="text">{{ item.item_name }}</text>
+            </view>
+            <view class="title">
+              <text>参考价格：{{ item.price }}</text>
+            </view>
           </view>
         </view>
       </view>
+      <view class="my__award__bag__footer">
+        <view v-if="params.status === 1" class="button" @click="handleOperation(1)">打包发货</view>
+        <view v-if="params.status === 1" class="button" @click="handleOperation(2)">
+          移入保险柜
+        </view>
+        <view v-if="params.status === 6" class="button" @click="handleOperation(3)">
+          移出保险柜
+        </view>
+      </view>
+      <view class="refresh" @click="refresh"></view>
+      <SelectAddress ref="addressProps" type="batch"></SelectAddress>
+      <VanDialog id="van-dialog"></VanDialog>
+      <DeliveryTips
+        ref="deliveryProps"
+        :type="0"
+        :notice="siteConfig.shipping_instructions"
+      ></DeliveryTips>
+      <MyTabs :activeTab="1"></MyTabs>
     </view>
-    <view class="my__award__bag__footer">
-      <view v-if="params.status === 1" class="button" @click="handleOperation">赏品寄售</view>
-      <view v-if="params.status === 1" class="button" @click="handleOperation(1)">打包发货</view>
-      <view v-if="params.status === 1" class="button" @click="handleOperation(2)">移入保险柜</view>
-      <view v-if="params.status === 6" class="button" @click="handleOperation(3)">移出保险柜</view>
-    </view>
-    <view class="refresh" @click="refresh"></view>
-    <SelectAddress ref="addressProps" type="batch"></SelectAddress>
-    <VanDialog id="van-dialog"></VanDialog>
-    <DeliveryTips
-      ref="deliveryProps"
-      :type="0"
-      :notice="siteConfig.shipping_instructions"
-    ></DeliveryTips>
-    <MyTabs :activeTab="1"></MyTabs>
   </view>
 </template>
 <script>
 import { api } from '@/api'
 import MyTabs from '@/components/MyTabs'
 import HomeNavBar from '@/components/HomeNavBar'
-import SelectAddress from '@/components/SelectAddress'
 import DeliveryTips from '@/components/DeliveryTips'
+import SelectAddress from '@/components/SelectAddress'
 export default {
   name: 'MyAwardBag',
   components: {
@@ -76,7 +84,6 @@ export default {
       subDatas: [
         { label: '全部', value: 1 },
         { label: '已发货', value: 4 },
-        { label: '已寄售', value: 2 },
         { label: '保险柜', value: 6 }
       ]
     }
@@ -91,6 +98,7 @@ export default {
   },
   methods: {
     handleTab(index) {
+      this.select = false
       this.returnData = []
       this.params.page = 1
       this.params.status = index
@@ -198,7 +206,7 @@ export default {
   &__bag {
     margin: pxTorpx(7);
     position: relative;
-    padding-bottom: pxTorpx(130);
+    padding-bottom: pxTorpx(110);
     .refresh {
       position: fixed;
       right: 0;
@@ -218,11 +226,15 @@ export default {
       .select__all {
         color: $white;
         font-size: pxTorpx(14);
+        box-shadow: #fff 3px 3px 0px 0px;
+        background: #c98f53;
+        border-radius: pxTorpx(5);
+        padding: pxTorpx(5) pxTorpx(8);
         @include flex(center);
         &::before {
           content: '';
-          width: pxTorpx(20);
-          height: pxTorpx(20);
+          width: pxTorpx(18);
+          height: pxTorpx(18);
           display: inline-block;
           background-color: #fff;
           border-radius: 50%;
@@ -231,12 +243,13 @@ export default {
         &.select {
           &::before {
             content: '';
-            width: pxTorpx(20);
-            height: pxTorpx(20);
+            width: pxTorpx(18);
+            height: pxTorpx(18);
             display: inline-block;
             background: url('@/assets/images/select.png') no-repeat;
             background-size: 100% 100%;
             margin-right: pxTorpx(5);
+            background-color: #fff;
           }
         }
       }
@@ -245,7 +258,8 @@ export default {
       @include flex(center, center, wrap);
       position: relative;
       padding: 0 pxTorpx(10);
-      background-color: #4d4d4d;
+      background: url('@/assets/images/bg4.png') no-repeat top;
+      background-size: 100% 100%;
       height: pxTorpx(88);
       border-radius: pxTorpx(5);
       text-align: center;
@@ -260,18 +274,18 @@ export default {
       .subtitle {
         font-family: $Yuanti;
         font-weight: 400;
-        font-size: pxTorpx(18);
+        font-size: pxTorpx(15);
         color: $white;
         width: 100%;
-        @include flex(center, space-between);
+        @include flex(center, space-around);
         .item {
           display: block;
-          &:not(&:last-child) {
-            margin-right: pxTorpx(10);
-          }
+          box-shadow: #fff 3px 3px 0px 0px;
+          background: #c98f53;
+          border-radius: pxTorpx(5);
+          padding: pxTorpx(6) pxTorpx(15);
           &.active {
-            color: #c30d23;
-            font-size: pxTorpx(20);
+            color: red;
           }
         }
       }
@@ -284,9 +298,8 @@ export default {
     &__item {
       width: calc(33% - 26rpx);
       background-color: $white;
-      border-bottom-left-radius: pxTorpx(10);
-      border-bottom-right-radius: pxTorpx(10);
-      padding: pxTorpx(5);
+      border-radius: pxTorpx(5);
+      border: pxTorpx(5) solid #dbb666;
       margin-bottom: pxTorpx(7);
       position: relative;
       &:nth-child(3n-1) {
@@ -296,15 +309,26 @@ export default {
       .img {
         width: 100%;
         height: pxTorpx(118);
-        border-radius: pxTorpx(10);
         margin-bottom: pxTorpx(5);
+      }
+      .number {
+        position: absolute;
+        right: 0;
+        top: pxTorpx(95);
+        background: rgba(161, 161, 161, 0.8);
+        color: $white;
+        border-radius: pxTorpx(5);
+        padding: pxTorpx(3) pxTorpx(10);
+        text-align: right;
+        font-size: pxTorpx(10);
+        font-weight: 700;
       }
       .text__content {
         padding: 0 pxTorpx(5);
       }
       .title {
         font-family: $Yuanti;
-        font-size: pxTorpx(14);
+        font-size: pxTorpx(10);
         color: #333;
         min-height: pxTorpx(20);
         line-height: pxTorpx(20);
@@ -343,6 +367,7 @@ export default {
           &.selected {
             background: url('@/assets/images/selected.png') no-repeat center;
             background-size: 100% 100%;
+            background-color: #fff;
           }
         }
         &__text {
@@ -354,7 +379,7 @@ export default {
     }
     &__footer {
       position: fixed;
-      bottom: pxTorpx(105);
+      bottom: pxTorpx(85);
       left: 0;
       width: 100%;
       @include flex(center, space-around);
@@ -362,12 +387,13 @@ export default {
         min-width: pxTorpx(100);
         height: pxTorpx(40);
         line-height: pxTorpx(40);
-        box-shadow: #8c6239 5px -5px 0px 0px;
         color: $white;
-        font-size: pxTorpx(14);
+        font-size: pxTorpx(13);
         text-align: center;
-        background: #fbb03b;
         font-family: $Yuanti;
+        background: url('@/assets/images/bg9.png') no-repeat center;
+        background-size: 100% 100%;
+        padding: pxTorpx(8) pxTorpx(10);
       }
     }
   }

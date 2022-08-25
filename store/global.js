@@ -52,7 +52,7 @@ const globalModule = {
         (menuButtonInfo.top - systemInfo.statusBarHeight) * 2 +
         menuButtonInfo.height +
         systemInfo.statusBarHeight
-      return state.navBarHeight + 'px'
+      return state.navBarHeight * 1.5 + 'px'
     }
   },
   mutations: {

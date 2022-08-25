@@ -1,5 +1,5 @@
 <template>
-  <view class="recharge__wrapper">
+  <view class="content recharge__wrapper">
     <view class="recharge__top__content">
       <view class="left">
         <text class="label">当前余额</text>

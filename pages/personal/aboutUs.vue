@@ -1,5 +1,5 @@
 <template>
-  <view class="about__us">
+  <view class="content about__us">
     <rich-text :nodes="html"></rich-text>
   </view>
 </template>

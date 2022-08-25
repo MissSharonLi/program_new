@@ -1,7 +1,7 @@
 <template>
   <view class="content">
-    <HomeNavBar class="nav__wrapper" title="我的"></HomeNavBar>
-    <view class="personal__content" :style="{ 'padding-top': navBarHeight }">
+    <HomeNavBar class="nav__wrapper" title="MINE"></HomeNavBar>
+    <view class="personal__content" :style="{ 'margin-top': navBarHeight }">
       <view class="personal__top__background">
         <view class="personal__top__content">
           <view class="personal__top__item">
@@ -40,7 +40,7 @@
             class="personal__menu__item"
             @click="handleOperation(item)"
           >
-            <image class="img" :src="require('@/assets/images/' + item.url)"></image>
+            <image class="img" :src="require(`@/assets/images/${item.url}`)"></image>
           </view>
         </view>
       </view>
@@ -180,6 +180,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+::v-deep .custom__nav__content .nav__title {
+  padding-bottom: 0 !important;
+}
 .content {
   .refresh {
     position: fixed;
@@ -193,13 +196,16 @@ export default {
 }
 .personal__top {
   &__background {
-    background-color: #4d4d4d;
+    background-color: #12264a;
     border-radius: pxTorpx(20);
     min-height: pxTorpx(140);
     position: relative;
+    width: 85%;
+    margin: 0 auto pxTorpx(25);
+    border: pxTorpx(8) solid #dbb666;
   }
   &__content {
-    padding: pxTorpx(15) pxTorpx(30);
+    padding: pxTorpx(15);
   }
   &__item {
     @include flex(center, space-between);
@@ -222,6 +228,7 @@ export default {
         height: pxTorpx(55);
         border-radius: 50%;
         margin-right: pxTorpx(10);
+        border: 1px solid #f7931e;
       }
       &__detail {
         .left {
@@ -283,11 +290,18 @@ export default {
   }
   &__rank {
     @include flex(center, space-between);
-    padding: 0 pxTorpx(30);
+    padding: 0 pxTorpx(5);
     .text {
       font-family: $Yuanti;
       font-weight: 400;
       color: $white;
+      border: 1px solid #dbb666;
+      padding: 5px 10px;
+      border-radius: pxTorpx(10);
+      width: 45%;
+      &:first-child {
+        margin-right: pxTorpx(10);
+      }
       .block {
         display: block;
         text-align: center;
@@ -301,6 +315,7 @@ export default {
           border: 2px solid #fff;
           background-color: #c1272d;
           border-radius: pxTorpx(25);
+          margin: 0 auto;
         }
       }
     }
@@ -310,10 +325,12 @@ export default {
   padding-bottom: pxTorpx(80);
 }
 .personal__images__content {
-  width: 100%;
+  width: calc(100% - 30px);
   height: pxTorpx(135);
   border-radius: pxTorpx(20);
-  margin: pxTorpx(10) 0 0;
+  margin: 20rpx auto 0;
+  display: block;
+  border: pxTorpx(8) solid #dbb666;
 }
 .personal__menu {
   &__content {
@@ -350,7 +367,7 @@ export default {
   position: fixed;
   width: 100%;
   left: 0;
-  bottom: pxTorpx(95);
+  bottom: pxTorpx(75);
   .personal__list {
     @include flex(center, space-between);
     margin: pxTorpx(5) 0 pxTorpx(20);

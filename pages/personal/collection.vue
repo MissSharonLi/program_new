@@ -1,5 +1,5 @@
 <template>
-  <view class="collection__wrapper">
+  <view class="content collection__wrapper">
     <SubTabs :dataSource="tabList" @tabClick="handleTab"></SubTabs>
     <view class="collection__list">
       <view v-for="(item, index) in returnData" :key="index" class="collection__item">
