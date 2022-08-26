@@ -10,26 +10,28 @@
     <view class="buy__content">
       <view class="buy__top__content">
         <view class="buy__title">下单即送浪积分</view>
-        <view class="buy__product__detail">
-          <image class="img" :src="params.goods_image"></image>
-          <view class="product__info">
-            <view class="title">{{ params.goods_name }}</view>
-            <view class="price">￥{{ params.goods_price }}/{{ params.sub_title }}</view>
+        <view class="buy__content__item">
+          <view class="buy__product__detail">
+            <image class="img" :src="params.goods_image"></image>
+            <view class="product__info">
+              <view class="title">{{ params.goods_name }}</view>
+              <view class="price">￥{{ params.goods_price }}/{{ params.sub_title }}</view>
+            </view>
+            <view class="num">
+              ×
+              <text class="text">{{ params.num }}</text>
+            </view>
           </view>
-          <view class="num">
-            ×
-            <text class="text">{{ params.num }}</text>
-          </view>
-        </view>
-        <view class="buy__price__content">
-          <view class="buy__price__item">
-            <text class="text">购买金额</text>
-            <text class="em price">￥{{ params.goods_price }}</text>
-          </view>
-          <view class="buy__price__item">
-            {{ params.is_score === 0 ? '剩余浪值' : '积分数' }}：{{
-              params.is_score === 0 ? userInfo.money || 0 : userInfo.score || 0
-            }}
+          <view class="buy__price__content">
+            <view class="buy__price__item">
+              <text class="text">购买金额</text>
+              <text class="em price">￥{{ params.goods_price }}</text>
+            </view>
+            <view class="buy__price__item">
+              {{ params.is_score === 0 ? '剩余浪值' : '积分数' }}：{{
+                params.is_score === 0 ? userInfo.money || 0 : userInfo.score || 0
+              }}
+            </view>
           </view>
         </view>
       </view>
@@ -132,37 +134,38 @@ export default {
 }
 .buy {
   &__content {
-    min-height: calc(100% - 40rpx);
-    background: url('@/assets/images/bg.png') no-repeat center;
-    background-size: 100% 100%;
+    min-height: calc(100% - 50rpx);
+    background: url('@/assets/images/head_bg.jpg') repeat top;
+    background-size: 100%;
     padding: pxTorpx(10);
+    border-radius: 20px;
+    border: 2px solid #dbb666;
+    background-color: rgba(0, 0, 0, 0.8);
   }
   &__list__content {
     padding: 0 pxTorpx(20);
   }
   &__top__content {
     .buy__title {
-      width: 70%;
-      height: pxTorpx(50);
+      width: calc(70%);
+      height: pxTorpx(60);
       background: url('@/assets/images/bg3.png') no-repeat;
       background-size: 100% 100%;
       position: relative;
       padding-left: 30%;
       color: $white;
-      line-height: pxTorpx(50);
+      line-height: pxTorpx(65);
       margin-bottom: pxTorpx(20);
       margin-top: pxTorpx(10);
       font-size: pxTorpx(14);
-      padding-right: pxTorpx(10);
-      &::before {
-        content: '赏';
-        left: 0;
-        position: absolute;
-        width: pxTorpx(50);
-        height: pxTorpx(50);
-        text-align: center;
-        font-size: pxTorpx(20);
-      }
+      padding-right: pxTorpx(11);
+      text-indent: -20px;
+    }
+    .buy__content__item {
+      background-color: $white;
+      border-radius: pxTorpx(10);
+      padding: pxTorpx(10);
+      margin-bottom: pxTorpx(10);
     }
   }
   &__product__detail {
@@ -172,7 +175,6 @@ export default {
     .img {
       width: pxTorpx(100);
       height: pxTorpx(90);
-      border: pxTorpx(5) solid $white;
       margin-right: pxTorpx(15);
     }
     .product__info {
@@ -180,9 +182,11 @@ export default {
       max-width: calc(100% - 500rpx);
       font-size: pxTorpx(14);
       .title {
+        color: #ed1e79;
         margin-bottom: pxTorpx(20);
       }
       .price {
+        color: #603813;
         font-size: pxTorpx(12);
       }
     }
@@ -195,6 +199,7 @@ export default {
       .text {
         padding-left: pxTorpx(10);
         font-size: pxTorpx(18);
+        font-weight: 700;
       }
     }
   }
@@ -203,10 +208,10 @@ export default {
       &:first-child {
         padding-bottom: pxTorpx(5);
         margin-bottom: pxTorpx(5);
-        border-bottom: 1px solid #808080;
+        border-bottom: 2px solid #808080;
       }
       @include flex(bottom, space-between);
-      color: $white;
+      color: #603813;
       font-size: pxTorpx(14);
       .price {
         color: #f15a24;
@@ -217,18 +222,18 @@ export default {
   &__list {
     @include flex(center, center);
     margin: pxTorpx(5) 0 pxTorpx(20);
-
     .button {
       width: pxTorpx(120);
       height: pxTorpx(50);
       line-height: pxTorpx(50);
-      box-shadow: #808080 5px 5px 0px 0px;
       color: $white;
       border-radius: pxTorpx(4);
       font-size: pxTorpx(18);
       text-align: center;
-      background: #f7931e;
       font-family: $Yuanti;
+      box-shadow: #fff 3px 3px 0px 0px;
+      background: #dbb666;
+      border-radius: pxTorpx(5);
       &:last-child {
         margin-left: pxTorpx(40);
       }

@@ -11,38 +11,53 @@
       </view>
       <view class="product__detail__rank">
         <view class="rank__top">
-          <button class="share" data-name="shareBtn" open-type="share"></button>
+          <view>
+            <button class="share" data-name="shareBtn" open-type="share"></button>
+            <view class="tips">分享</view>
+          </view>
           <image
             class="img"
             :src="require('@/assets/images/gameinfo.png')"
             @click="handleShowTips(1)"
           ></image>
         </view>
-        <view class="rank__bottom">
-          <view class="love" :class="{ active: is_collect }" @click="handleToCollect"></view>
+        <view class="rank__middle">
+          <view>
+            <view class="love" @click="handleToCollect"></view>
+            <view class="tips">我的喜好</view>
+          </view>
           <image
             class="img"
             :src="require('@/assets/images/presale.png')"
             @click="handleShowTips"
           ></image>
         </view>
+        <view class="rank__bottom">
+          <view class="amount">
+            剩余：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
+          </view>
+          <view class="price">
+            {{ returnObj.goods_price || 0 }}{{ returnObj.is_score === 0 ? '浪币' : '积分' }}/枚
+          </view>
+        </view>
       </view>
+    </view>
+    <view class="bottom__tab__content">
+      <text
+        v-for="(item, index) in tabList"
+        :key="index"
+        class="tab__item"
+        :class="{ active: tabIndex === index }"
+        @click="handleTab(index)"
+      >
+        {{ item.label }}
+      </text>
     </view>
     <view class="product__detail__bottom">
       <view class="bottom__title__content">
         剩余：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
       </view>
-      <view class="bottom__tab__content">
-        <text
-          v-for="(item, index) in tabList"
-          :key="index"
-          class="tab__item"
-          :class="{ active: tabIndex === index }"
-          @click="handleTab(index)"
-        >
-          {{ item.label }}
-        </text>
-      </view>
+
       <view v-if="tabIndex === 0" class="product__detail__list">
         <view v-for="(item, index) in dataSource" :key="index" class="list__item">
           <image
@@ -232,9 +247,6 @@ export default {
 </script>
 <style lang="scss">
 @import '@/wxcomponents/vant/dialog/index.wxss';
-// page {
-//   background-position-y: 25%;
-// }
 </style>
 
 <style lang="scss" scoped>
@@ -248,7 +260,7 @@ export default {
     @include flex(center, space-around);
     .img {
       width: pxTorpx(150);
-      height: pxTorpx(150);
+      height: pxTorpx(170);
       border: pxTorpx(10) solid $white;
       margin: 0 auto;
       display: block;
@@ -287,56 +299,160 @@ export default {
       background: url('@/assets/images/refresh1.png') no-repeat center;
       background-size: 100%;
     }
+    .bottom__tab__content {
+      @include flex(center, space-around);
+      font-family: $Yuanti;
+      color: $white;
+      font-size: pxTorpx(16);
+      margin-bottom: pxTorpx(15);
+      position: relative;
+      .tab__item {
+        display: block;
+        line-height: 2;
+        padding: 0 pxTorpx(10);
+        padding: 0 pxTorpx(15);
+        background-color: #12264a;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: 2px solid #dbb666;
+        min-width: pxTorpx(50);
+        position: relative;
+        text-align: center;
+        &.active {
+          color: #f15a24;
+        }
+        &::before {
+          content: '';
+          display: block;
+          width: pxTorpx(50);
+          height: pxTorpx(20);
+          background-size: 100% 100%;
+          left: -10px;
+          top: -10rpx;
+          background: url('@/assets/images/cloud.png') no-repeat center;
+          background-size: 100% 100%;
+          position: absolute;
+        }
+      }
+      &::before {
+        content: '';
+        display: block;
+        width: pxTorpx(30);
+        height: pxTorpx(30);
+        background-size: 100% 100%;
+        left: pxTorpx(20);
+        bottom: 0;
+        background: url('@/assets/images/flower.png') no-repeat center;
+        background-size: 100% 100%;
+      }
+      &::after {
+        content: '';
+        display: block;
+        width: pxTorpx(30);
+        height: pxTorpx(30);
+        background-size: 100% 100%;
+        right: pxTorpx(20);
+        bottom: 0;
+        background: url('@/assets/images/flower.png') no-repeat center;
+        background-size: 100% 100%;
+      }
+    }
   }
   &__top {
     position: relative;
     width: calc(100% - 20px);
     margin: pxTorpx(15) auto;
-    background-color: $theme-title-bg-color;
-    border-radius: pxTorpx(20);
+    background-color: #dbb666;
+    border-bottom-left-radius: pxTorpx(20);
+    border-bottom-right-radius: pxTorpx(20);
+    position: relative;
+    &:before {
+      content: '';
+      width: pxTorpx(50);
+      height: pxTorpx(50);
+      display: block;
+      background: url('@/assets/images/bg8.png') no-repeat center;
+      background-size: 100%;
+      left: 0;
+      top: -40px;
+      position: absolute;
+      z-index: 99999999;
+    }
   }
   &__rank {
     .img {
-      width: pxTorpx(48);
-      height: pxTorpx(48);
+      width: pxTorpx(55);
+      height: pxTorpx(55);
       margin-right: pxTorpx(20);
     }
     .rank__top {
       width: calc(100% - 40rpx);
       position: absolute;
-      top: pxTorpx(10);
+      top: pxTorpx(15);
       left: pxTorpx(20);
       @include flex(center, space-between);
       .share {
-        width: pxTorpx(24);
-        height: pxTorpx(28);
+        width: pxTorpx(40);
+        height: pxTorpx(40);
         display: block;
         background: url('@/assets/images/share.png') no-repeat center;
-        background-size: pxTorpx(24) pxTorpx(28);
+        background-size: 100% 100%;
         margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .tips {
+        color: #12264a;
+        font-size: pxTorpx(10);
+        display: block;
+        text-align: center;
+        margin-top: pxTorpx(2);
       }
     }
-    .rank__bottom {
+    .rank__middle {
       width: calc(100% - 40rpx);
       position: absolute;
-      bottom: pxTorpx(10);
+      bottom: pxTorpx(70);
       left: pxTorpx(20);
       @include flex(center, space-between);
       .love {
-        width: pxTorpx(24);
-        height: pxTorpx(24);
+        width: pxTorpx(40);
+        height: pxTorpx(40);
         display: block;
         background: url('@/assets/images/love.png') no-repeat center;
-        background-size: pxTorpx(24) pxTorpx(24);
-        margin-left: pxTorpx(5);
-        &.active {
-          background: url('@/assets/images/loved.png') no-repeat center;
-          background-size: pxTorpx(24) pxTorpx(24);
-          margin-left: pxTorpx(5);
-        }
+        background-size: 100% 100%;
+      }
+      .tips {
+        color: #12264a;
+        font-size: pxTorpx(10);
+        display: block;
+        margin-top: pxTorpx(2);
+        text-align: center;
+      }
+    }
+    .rank__bottom {
+      width: calc(100% - 20rpx);
+      position: absolute;
+      bottom: pxTorpx(15);
+      left: 0;
+      font-size: pxTorpx(12);
+      padding: 0 pxTorpx(5);
+      @include flex(center, space-between);
+      .amount {
+        color: $white;
+      }
+      .price {
+        background-color: #96886d;
+        color: #c1272d;
+        min-width: pxTorpx(50);
+        text-align: center;
+        padding: pxTorpx(5) pxTorpx(10);
       }
     }
   }
+
   &__bottom {
     background-color: $theme-title-bg-color;
     border-radius: pxTorpx(20);
@@ -348,21 +464,6 @@ export default {
       font-size: pxTorpx(20);
       text-align: center;
       padding: pxTorpx(20) 0 pxTorpx(10);
-    }
-    .bottom__tab__content {
-      @include flex(center, space-around);
-      font-family: $Yuanti;
-      color: $white;
-      font-size: pxTorpx(16);
-      margin-bottom: pxTorpx(15);
-      .tab__item {
-        display: block;
-        line-height: 2;
-        padding: 0 pxTorpx(10);
-        &.active {
-          border-bottom: 1px solid red;
-        }
-      }
     }
   }
   &__buttons {
@@ -440,7 +541,8 @@ export default {
       min-height: pxTorpx(40);
       margin-bottom: pxTorpx(10);
       position: relative;
-      background-color: $white;
+      background: url('@/assets/images/bg10.png') no-repeat center;
+      background-size: 100% 100%;
       border-bottom-left-radius: pxTorpx(5);
       border-bottom-right-radius: pxTorpx(5);
       padding-bottom: pxTorpx(10);
@@ -448,9 +550,10 @@ export default {
         margin-right: 25rpx;
       }
       &__image {
-        width: 100%;
-        height: pxTorpx(80);
+        width: calc(100% - 20rpx);
+        height: pxTorpx(100);
         position: relative;
+        margin: pxTorpx(5) pxTorpx(5) 0;
         &.sold__out {
           &::after {
             content: '售罄';
@@ -461,7 +564,7 @@ export default {
             border-radius: pxTorpx(10);
             text-align: center;
             position: absolute;
-            top: pxTorpx(30);
+            top: pxTorpx(40);
             left: calc(50% - 45rpx);
             color: $theme-light-color;
             font-size: pxTorpx(12);
@@ -471,7 +574,7 @@ export default {
             content: '';
             position: absolute;
             width: 100%;
-            height: pxTorpx(80);
+            height: pxTorpx(100);
             left: 0;
             top: 0;
             background: rgba(0, 0, 0, 0.5);

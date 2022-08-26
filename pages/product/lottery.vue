@@ -1,32 +1,30 @@
 <template>
-  <view>
-    <view class="content lottery__list">
-      <view v-for="(item, index) in list" :key="index" class="lottery__item first">
-        <view class="left">
-          <view class="rank__num">
-            <view class="text yellow">{{ item.rank_num }}</view>
-            <view class="text yellow">{{ item.nickname }}</view>
-          </view>
-          <view class="images__content speacial">
-            <view class="text">{{ item.pay_time }}</view>
-            <view class="text">{{ item.item_name }}</view>
-          </view>
+  <view class="lottery__list">
+    <view v-for="(item, index) in list" :key="index" class="lottery__item first">
+      <view class="left">
+        <view class="rank__num">
+          <view class="text yellow">{{ item.rank_num }}</view>
+          <view class="text yellow">{{ item.nickname }}</view>
         </view>
-        <view class="right"></view>
-      </view>
-      <view v-for="(item, index) in returnData" :key="index" class="lottery__item second">
-        <view class="left">
-          <view class="rank__num">
-            <view class="text">{{ item.rank_num }}</view>
-            <view class="text">{{ item.nickname }}</view>
-          </view>
-          <view class="images__content">
-            <view class="text">{{ item.nickname }}</view>
-            <view class="text">{{ item.item_name }}</view>
-          </view>
+        <view class="images__content speacial">
+          <view class="text">{{ item.pay_time }}</view>
+          <view class="text">{{ item.item_name }}</view>
         </view>
-        <view class="right"></view>
       </view>
+      <view class="right"></view>
+    </view>
+    <view v-for="(item, index) in returnData" :key="index" class="lottery__item second">
+      <view class="left">
+        <view class="rank__num">
+          <view class="text">{{ item.rank_num }}</view>
+          <view class="text">{{ item.nickname }}</view>
+        </view>
+        <view class="images__content">
+          <view class="text">{{ item.nickname }}</view>
+          <view class="text">{{ item.item_name }}</view>
+        </view>
+      </view>
+      <view class="right"></view>
     </view>
   </view>
 </template>
