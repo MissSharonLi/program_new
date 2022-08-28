@@ -42,25 +42,29 @@ export default {
   font-family: $STHupo;
   font-weight: 400;
   font-size: pxTorpx(16);
-  color: #f6c25f;
+  color: $white;
   font-style: normal;
   letter-spacing: 1px;
+  margin: 0 pxTorpx(10);
+  padding: 0 pxTorpx(30);
+  background: url('@/assets/images/bg7.png') no-repeat center;
+  background-size: 100%;
   .active {
-    color: #f6a60f;
-    font-size: pxTorpx(18);
+    color: #ffff00;
     font-family: $STHupo;
     position: relative;
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: pxTorpx(13);
-      height: pxTorpx(13);
-      background: url('@/assets/images/sub.png') no-repeat;
-      background-size: 100% 100%;
-      bottom: 0;
-      left: calc(50% - 15rpx);
-    }
+    -webkit-text-stroke: 1px #fbc90f;
+    // &::after {
+    //   content: '';
+    //   display: block;
+    //   position: absolute;
+    //   width: pxTorpx(13);
+    //   height: pxTorpx(13);
+    //   background: url('@/assets/images/sub.png') no-repeat;
+    //   background-size: 100% 100%;
+    //   bottom: 0;
+    //   left: calc(50% - 15rpx);
+    // }
   }
 }
 </style>

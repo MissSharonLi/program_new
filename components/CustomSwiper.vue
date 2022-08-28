@@ -46,18 +46,19 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .swiper__content {
-  height: pxTorpx(140);
+  height: pxTorpx(150);
   .swiper {
     margin-top: pxTorpx(5);
   }
   .swiper-item {
-    height: pxTorpx(128);
+    height: pxTorpx(125);
     text-align: center;
+    border-radius: pxTorpx(16);
+    border: pxTorpx(10) solid #dbb666;
     .swiper-image {
-      height: pxTorpx(130);
-      border-radius: pxTorpx(16);
+      height: pxTorpx(125);
       text-align: center;
-      width: pxTorpx(350);
+      width: 100%;
     }
   }
   &.banner {

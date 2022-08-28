@@ -1,9 +1,10 @@
 <template>
   <view class="content">
     <view class="home__content" :style="{ 'margin-top': navBarHeight }">
-      <HomeNavBar class="nav__wrapper" title="浪漫模玩"></HomeNavBar>
+      <CustomNavBar class="nav__wrapper" :home="true"></CustomNavBar>
       <view class="nav__background">
         <view class="home__main__content">
+          <CustomSwiper :dataSource="bannerList"></CustomSwiper>
           <view class="home__main__search">
             <image class="search__icon" :src="require('@/assets/images/search-grey.png')"></image>
             <input
@@ -14,7 +15,6 @@
               @click="handleOperation"
             />
           </view>
-          <CustomSwiper :dataSource="bannerList"></CustomSwiper>
         </view>
       </view>
       <view class="home__main__list">
@@ -29,13 +29,13 @@
 <script>
 import { api } from '@/api'
 import MyTabs from '@/components/MyTabs'
-import HomeNavBar from '@/components/HomeNavBar'
+import CustomNavBar from '@/components/CustomNavBar'
 import CustomSwiper from '@/components/CustomSwiper'
 import HomeScrollView from '@/components/HomeScrollView'
 export default {
   components: {
     MyTabs,
-    HomeNavBar,
+    CustomNavBar,
     CustomSwiper,
     HomeScrollView
   },
@@ -120,7 +120,7 @@ export default {
 }
 .home__main {
   &__content {
-    padding: 10rpx 30rpx;
+    padding: 0 30rpx;
   }
   &__slogan {
     @include flex(center, space-between);
@@ -154,10 +154,9 @@ export default {
   }
   &__search {
     height: pxTorpx(34);
-    margin-bottom: pxTorpx(10);
     background-color: $white;
-    border: 1px solid #f2f2f2;
-    border-radius: 9px;
+    border: 4px solid #000;
+    border-radius: 30px;
     line-height: pxTorpx(34);
     @include flex(center, space-between);
     .search__icon {
