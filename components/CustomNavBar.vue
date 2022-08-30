@@ -4,8 +4,8 @@
     :class="{ default: isDefault }"
     :style="{ width: '100%', height: navBarHeight }"
   >
-    <view class="nav__bar__content">
-      <view class="nav__title">
+    <view class="nav__bar__content" :style="{ height: navBarHeight }">
+      <view class="nav__title" :style="{ height: navBarHeight }">
         <image
           v-if="isBack"
           class="img"
@@ -111,8 +111,6 @@ export default {
     height: 100%;
     position: relative;
     padding-bottom: 0;
-    padding-top: constant(safe-area-inset-top); /*兼容 IOS<11.2*/
-    padding-top: env(safe-area-inset-top); /*兼容 IOS>11.2*/
     .title__name {
       width: pxTorpx(225);
       min-height: pxTorpx(60);

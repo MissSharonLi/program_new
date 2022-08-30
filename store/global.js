@@ -29,7 +29,7 @@ const globalModule = {
       },
       {
         family: 'STHupo',
-        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/STHupo_64.woff2")'
+        source: 'url("https://a.yiyunrj.com/assets/apifonts/FangZhengHeiTi-GBK-1.ttf")'
       },
       {
         family: 'Yuanti',

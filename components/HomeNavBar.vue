@@ -79,8 +79,6 @@ export default {
     width: 100%;
     position: relative;
     padding-bottom: pxTorpx(10);
-    padding-top: constant(safe-area-inset-top); /*兼容 IOS<11.2*/
-    padding-top: env(safe-area-inset-top); /*兼容 IOS>11.2*/
     .title__name {
       width: pxTorpx(150);
       line-height: pxTorpx(60);
@@ -97,7 +95,7 @@ export default {
       height: pxTorpx(20);
       position: absolute;
       left: pxTorpx(8);
-      top: pxTorpx(1);
+      top: pxTorpx(20);
     }
     .beauty {
       display: block;

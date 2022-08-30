@@ -3,8 +3,8 @@
     <HomeNavBar class="nav__wrapper" :isBack="true" :title="returnObj.goods_name"></HomeNavBar>
     <view class="product__detail__top">
       <view class="product__detail__swiper">
-        <image v-if="tabIndex === 0" class="img" :src="returnObj.goods_image"></image>
-        <view v-if="tabIndex === 1" class="lottery">
+        <!-- <image v-if="tabIndex === 0" class="img" :src="returnObj.goods_image"></image> -->
+        <view class="lottery">
           <image class="lottery_img" :src="returnObj.goods_image"></image>
           <view class="lottery_title">{{ returnObj.goods_name }}</view>
         </view>
