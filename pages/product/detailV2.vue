@@ -294,8 +294,8 @@ export default {
       position: fixed;
       right: 0;
       top: 70%;
-      width: pxTorpx(50);
-      height: pxTorpx(50);
+      width: pxTorpx(64);
+      height: pxTorpx(64);
       background: url('@/assets/images/refresh1.png') no-repeat center;
       background-size: 100%;
     }
