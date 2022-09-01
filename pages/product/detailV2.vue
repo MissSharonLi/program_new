@@ -601,7 +601,7 @@ export default {
         @include flex(center, space-between);
         .name {
           font-weight: 700;
-          font-size: pxTorpx(14);
+          font-size: pxTorpx(10);
           color: #231815;
           max-width: 70%;
           overflow: hidden;
