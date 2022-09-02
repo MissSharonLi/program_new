@@ -138,7 +138,6 @@ export default {
     },
     // 修改昵称
     handleEditNickName() {
-      if (!this.userInfo.mobile || !this.userInfo.nickname) return
       this.$refs.nickNameProps.show = true
     },
     handleOperation(record, type) {
