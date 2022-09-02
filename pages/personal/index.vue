@@ -9,7 +9,7 @@
               <image v-if="userInfo.avatar" class="left__avator" :src="userInfo.avatar"></image>
               <view v-else class="login_btn" @click="doLogin">登录</view>
               <view class="left__detail">
-                <text class="left__text">
+                <text class="left__text" @click="handleEditNickName">
                   {{
                     userInfo.mobile ? commonUtils.getTel(userInfo.mobile) : userInfo.nickname || ''
                   }}
@@ -59,6 +59,7 @@
       :type="1"
       :notice="siteConfig.user_service_agreement"
     ></DeliveryTips>
+    <EditNickName ref="nickNameProps" @success="handleRefresh"></EditNickName>
     <RechargeDetail ref="rechargeProps" @success="handleRefresh"></RechargeDetail>
     <MyTabs :activeTab="2"></MyTabs>
   </view>
@@ -69,11 +70,13 @@ import MyTabs from '@/components/MyTabs'
 import DeliveryTips from '@/components/DeliveryTips'
 import HomeNavBar from '@/components/HomeNavBar'
 import RechargeDetail from '@/components/RechargeDetail'
+import EditNickName from '@/components/EditNickName'
 export default {
   components: {
     MyTabs,
     DeliveryTips,
     HomeNavBar,
+    EditNickName,
     RechargeDetail
   },
   data() {
@@ -132,6 +135,11 @@ export default {
     handleDoRecharge() {
       this.$refs.rechargeProps.show = true
       this.$refs.rechargeProps.runApiToGetConfigList()
+    },
+    // 修改昵称
+    handleEditNickName() {
+      if (!this.userInfo.mobile || !this.userInfo.nickname) return
+      this.$refs.nickNameProps.show = true
     },
     handleOperation(record, type) {
       switch (type) {

@@ -128,3 +128,6 @@ export const handleJoinsafe = (params) => POST('rewardbag/joinsafe', params, nul
 
 // 批量移出保险柜
 export const handleRemovesafe = (params) => POST('rewardbag/removesafe', params, null, true)
+
+// 修改昵称
+export const handleEditNickName = (params) => POST('user/changenickname', params, null, true)
