@@ -6,7 +6,12 @@
         <view class="personal__top__content">
           <view class="personal__top__item">
             <view class="left">
-              <image v-if="userInfo.avatar" class="left__avator" :src="userInfo.avatar"></image>
+              <image
+                v-if="userInfo.avatar"
+                referrerPolicy="no-referrer"
+                class="left__avator"
+                :src="userInfo.avatar"
+              ></image>
               <view v-else class="login_btn" @click="doLogin">登录</view>
               <view class="left__detail">
                 <text class="left__text" @click="handleEditNickName">
@@ -31,7 +36,12 @@
           </view>
         </view>
       </view>
-      <image class="personal__images__content" :src="siteConfig.user_center_top_img"></image>
+      <image
+        v-if="imgSrc"
+        referrerPolicy="no-referrer"
+        class="personal__images__content"
+        :src="imgSrc"
+      ></image>
       <view class="personal__menu__content">
         <view class="personal__menu__list">
           <view
@@ -40,7 +50,11 @@
             class="personal__menu__item"
             @click="handleOperation(item)"
           >
-            <image class="img" :src="require(`@/assets/images/${item.url}`)"></image>
+            <image
+              class="img"
+              referrerPolicy="no-referrer"
+              :src="require(`@/assets/images/${item.url}`)"
+            ></image>
           </view>
         </view>
       </view>
@@ -81,6 +95,7 @@ export default {
   },
   data() {
     return {
+      imgSrc: '',
       menuData: [
         {
           url: 'buy.png',
@@ -116,14 +131,14 @@ export default {
     }
   },
   async onPullDownRefresh() {
-    await this.runApiToGetUserInfo()
     await this.runApiToGetSiteconfig()
+    await this.runApiToGetUserInfo()
     uni.stopPullDownRefresh()
   },
   onLoad() {
     this.runApiToGetAreaList()
-    this.runApiToGetUserInfo()
     this.runApiToGetSiteconfig()
+    this.runApiToGetUserInfo()
   },
   methods: {
     // 重置刷新
@@ -174,8 +189,8 @@ export default {
     async runApiToGetSiteconfig() {
       const { code, data } = await api.getSiteconfig({ token: this.token })
       if (code === 1 && data) {
-        this.$store.commit('setSiteConfig', JSON.stringify(data))
-        uni.setStorageSync('storage_siteConfig', JSON.stringify(data))
+        this.imgSrc = data.user_center_top_img
+        this.$forceUpdate()
       }
     },
     async runApiToGetAreaList() {

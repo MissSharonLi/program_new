@@ -16,12 +16,22 @@
         </view>
       </view>
       <view class="my__award__bag__tips">
-        <image class="img" :src="require('@/assets/images/bag1.png')" @click="handleTips"></image>
+        <image
+          class="img"
+          referrerPolicy="no-referrer"
+          :src="require('@/assets/images/bag1.png')"
+          @click="handleTips"
+        ></image>
         <view class="select__all" :class="{ select: select }" @click="handleSelectAll">全选</view>
       </view>
       <view class="my__award__bag__list">
         <view v-for="(item, index) in returnData" :key="index" class="my__award__bag__item">
-          <image :src="item.item_image" class="img" @click="handleSelect(index)" />
+          <image
+            referrerPolicy="no-referrer"
+            :src="item.item_image"
+            class="img"
+            @click="handleSelect(index)"
+          />
           <text
             class="select__icon"
             :class="{ selected: item.selected }"

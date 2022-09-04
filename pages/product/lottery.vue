@@ -20,7 +20,7 @@
           <view class="text">{{ item.nickname }}</view>
         </view>
         <view class="images__content">
-          <view class="text">{{ item.nickname }}</view>
+          <view class="text">{{ item.pay_time }}</view>
           <view class="text">{{ item.item_name }}</view>
         </view>
       </view>

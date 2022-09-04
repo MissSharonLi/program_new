@@ -8,6 +8,7 @@
       <image
         v-if="isBack"
         class="img"
+        referrerPolicy="no-referrer"
         :src="require('@/assets/images/back.png')"
         @click="handleBack"
       ></image>

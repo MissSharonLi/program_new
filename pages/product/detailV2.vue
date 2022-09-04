@@ -5,7 +5,11 @@
       <view class="product__detail__swiper">
         <!-- <image v-if="tabIndex === 0" class="img" :src="returnObj.goods_image"></image> -->
         <view class="lottery">
-          <image class="lottery_img" :src="returnObj.goods_image"></image>
+          <image
+            class="lottery_img"
+            :src="returnObj.goods_image"
+            referrerPolicy="no-referrer"
+          ></image>
           <view class="lottery_title">{{ returnObj.goods_name }}</view>
         </view>
       </view>
@@ -64,6 +68,7 @@
             class="list__item__image"
             :class="{ sold__out: item.stock_num === 0 }"
             :src="item.item_image"
+            referrerPolicy="no-referrer"
           ></image>
           <view class="title">
             <text class="name">{{ item.item_name }}</text>
@@ -177,6 +182,7 @@ export default {
         this.returnObj = data || {}
         this.is_collect = data.is_collect
         this.dataSource = data.item_list || []
+        this.$forceUpdate()
       }
     },
     // 切换商品Tab

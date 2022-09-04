@@ -10,7 +10,7 @@
               <text v-if="item.num" style="padding-left: 5px">{{ ` 补${item.num}箱` }}</text>
             </text>
             <view class="progress__image">
-              <image class="img" :src="item.thumb_image"></image>
+              <image class="img" referrerPolicy="no-referrer" :src="item.thumb_image"></image>
               <view>
                 <text class="progress__title">{{ item.title }}</text>
                 <text class="progress__price">￥{{ item.price }}/张</text>

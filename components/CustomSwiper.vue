@@ -10,7 +10,13 @@
       <Block v-for="(item, index) in dataSource" :key="index">
         <SwiperItem>
           <view class="swiper-item">
-            <image class="swiper-image" :class="{ unique: isUnique }" :src="item"></image>
+            <image
+              v-if="item"
+              class="swiper-image"
+              :class="{ unique: isUnique }"
+              :src="item"
+              referrerPolicy="no-referrer"
+            ></image>
           </view>
         </SwiperItem>
       </Block>

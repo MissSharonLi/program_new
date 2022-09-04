@@ -9,13 +9,24 @@
         <image
           v-if="isBack"
           class="img"
-          :src="require('@/assets/images/back.png')"
+          referrerPolicy="no-referrer"
+          src="../assets/images/back.png"
           @click="handleBack"
         ></image>
-        <image class="beauty" :src="require('@/assets/images/bg8.png')"></image>
-        <image class="beauty1" :src="require('@/assets/images/bg8.png')"></image>
+        <image
+          class="beauty"
+          referrerPolicy="no-referrer"
+          :src="require('@/assets/images/bg8.png')"
+        ></image>
+        <image
+          class="beauty1"
+          referrerPolicy="no-referrer"
+          :src="require('@/assets/images/bg8.png')"
+        >
+          >
+        </image>
         <view class="title__name">
-          <image class="title" :src="require('@/assets/images/home.png')"></image>
+          <image class="title" referrerPolicy="no-referrer" src="../assets/images/home.png"></image>
         </view>
       </view>
     </view>

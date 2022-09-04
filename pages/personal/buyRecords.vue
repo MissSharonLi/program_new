@@ -4,7 +4,7 @@
       <view v-for="(item, index) in returnData" :key="index" class="collection__item">
         <text class="collection__time">{{ item.pay_time }}</text>
         <view class="collection__images">
-          <image class="img" :src="item.goods_image"></image>
+          <image class="img" referrerPolicy="no-referrer" :src="item.goods_image"></image>
           <view class="collection__detail">
             <text class="title">{{ item.goods_name }}</text>
             <view class="price">￥{{ item.goods_price }}/张</view>

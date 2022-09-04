@@ -7,6 +7,7 @@
         <view class="collection__images">
           <image
             class="img"
+            referrerPolicy="no-referrer"
             :class="{ sold__out: item.stock_num === 0 }"
             :src="item.goods_image"
           ></image>

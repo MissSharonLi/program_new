@@ -27,7 +27,7 @@
               :key="index1"
               class="consumption__images__item"
             >
-              <image class="img" :src="item1.item_image"></image>
+              <image class="img" referrerPolicy="no-referrer" :src="item1.item_image"></image>
               <view class="title">{{ item1.name }}</view>
             </view>
           </view>

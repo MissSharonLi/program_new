@@ -5,7 +5,7 @@
       <view class="rank__list">
         <view v-for="(item, index) in dataSource" :key="index" class="rank__item">
           <view class="nickname">
-            <image class="img" :src="item.avatar"></image>
+            <image class="img" referrerPolicy="no-referrer" :src="item.avatar"></image>
             <text>{{ item.nickname }}</text>
           </view>
           <view class="number">

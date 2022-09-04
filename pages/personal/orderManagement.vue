@@ -32,7 +32,7 @@
             </text>
           </view>
           <view class="order__management__images">
-            <image class="img" :src="item.item_image"></image>
+            <image class="img" referrerPolicy="no-referrer" :src="item.item_image"></image>
             <view class="order__management__detail">
               <text class="title">{{ item.goods_name }}</text>
               <view class="price">

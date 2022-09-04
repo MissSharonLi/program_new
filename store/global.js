@@ -8,36 +8,16 @@ const globalModule = {
     navBarHeight: '',
     familyArray: [
       {
-        family: 'FZYuan',
-        source: 'url("https://modao.cc/mb-sigma/fonts/zh-CN/FZYuan/Bold.woff2")'
-      },
-      {
-        family: 'ZKKuaiLeTi',
-        source: 'url("https://modao.cc/mb-sigma/fonts/zh-CN/ZKKuaiLeTi/Regular.woff2")'
-      },
-      {
-        family: 'ZKWenYi',
-        source: 'url("https://modao.cc/mb-sigma/fonts/zh-CN/ZKWenYi/Regular.woff2")'
-      },
-      {
-        family: 'SFUIText',
-        source: 'url("https://modao.cc/fonts/sf-ui/Text-Regular.woff2")'
-      },
-      {
-        family: 'SourceHanSansSC',
-        source: 'url("https://modao.cc/mb-sigma/fonts/zh-CN/SourceHanSansSC/Regular.woff2")'
-      },
-      {
         family: 'STHupo',
-        source: 'url("https://a.yiyunrj.com/assets/apifonts/FangZhengHeiTi-GBK-1.ttf")'
+        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/FangZhengHeiTi-GBK-1.ttf")'
       },
       {
         family: 'Yuanti',
-        source: 'url("https://a.yiyunrj.com/assets/apifonts/AozoraMincho-bold-2.ttf")'
+        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/AozoraMincho-bold-2.ttf")'
       },
       {
         family: 'PingFang',
-        source: 'url("https://a.yiyunrj.com/assets/apifonts/PingFang.ttf")'
+        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/PingFang.ttf")'
       }
     ]
   },

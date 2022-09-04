@@ -2,7 +2,11 @@
   <view class="content order__detail__wrapper">
     <view class="order__detail__status">
       <text>{{ returnObj.status_text }}</text>
-      <image class="img" :src="require('@/assets/images/logistics.png')"></image>
+      <image
+        class="img"
+        referrerPolicy="no-referrer"
+        :src="require('@/assets/images/logistics.png')"
+      ></image>
     </view>
     <view class="order__detail__list">
       <view
@@ -31,7 +35,11 @@
       <view class="collection__item">
         <text class="collection__time">{{ returnObj.createtime }}</text>
         <view class="collection__images">
-          <image class="img" :src="returnObj.goods.goods_image"></image>
+          <image
+            class="img"
+            referrerPolicy="no-referrer"
+            :src="returnObj.goods.goods_image"
+          ></image>
           <view class="collection__detail">
             <text class="title">{{ returnObj.goods.goods_name }}</text>
             <view class="price">

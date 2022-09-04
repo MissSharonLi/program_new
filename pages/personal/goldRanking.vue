@@ -1,7 +1,7 @@
 <template>
   <view class="content gold__wrapper">
     <view class="gold__self">
-      <image class="img" :src="userInfo.avatar"></image>
+      <image class="img" referrerPolicy="no-referrer" :src="userInfo.avatar"></image>
       <view class="nickname">{{ userInfo.nickname }}</view>
       <view class="rate">
         <text class="text">
@@ -20,7 +20,7 @@
       <view v-for="(item, index) in returnData" :key="index" class="gold__item">
         <view class="left">
           <view class="images__content" :class="{ champion: index === 0 }">
-            <image class="img" :src="item.avatar"></image>
+            <image class="img" referrerPolicy="no-referrer" :src="item.avatar"></image>
             <view class="text">{{ item.nickname }}</view>
           </view>
           <view class="ranking__content">

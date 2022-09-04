@@ -8,6 +8,7 @@
     >
       <image
         class="list__item__image"
+        referrerPolicy="no-referrer"
         :class="{ sold__out: item.stock_num === 0 }"
         :src="item.goods_image"
       ></image>

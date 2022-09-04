@@ -12,7 +12,7 @@
         <view class="buy__title">下单即送浪积分</view>
         <view class="buy__content__item">
           <view class="buy__product__detail">
-            <image class="img" :src="params.goods_image"></image>
+            <image referrerPolicy="no-referrer" class="img" :src="params.goods_image"></image>
             <view class="product__info">
               <view class="title">{{ params.goods_name }}</view>
               <view class="price">￥{{ params.goods_price }}/{{ params.sub_title }}</view>
