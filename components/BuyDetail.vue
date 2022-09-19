@@ -37,8 +37,8 @@
       </view>
       <view class="buy__list__content">
         <view v-if="params.is_score === 0" class="buy__list">
-          <view class="button" @click="handleToPay(1)">浪值余额支付</view>
-          <view class="button" @click="handleToPay(2)">微信支付</view>
+          <view class="button" style="margin-left: 0" @click="handleToPay(1)">浪值余额支付</view>
+          <!-- <view class="button" @click="handleToPay(2)">微信支付</view> -->
         </view>
         <view v-else class="buy__list">
           <view class="button" @click="handleToPay(3)">积分支付</view>

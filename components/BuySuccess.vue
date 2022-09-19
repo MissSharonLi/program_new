@@ -105,13 +105,13 @@ export default {
   &__footer {
     @include flex(center, center);
     .close {
-      width: pxTorpx(80);
-      height: pxTorpx(30);
-      line-height: pxTorpx(30);
+      width: pxTorpx(128);
+      height: pxTorpx(44);
+      line-height: pxTorpx(44);
       background-color: #f8dc4c;
       color: $white;
       text-align: center;
-      margin: pxTorpx(10) auto;
+      margin: 0 auto pxTorpx(10);
       border-radius: pxTorpx(5);
       // margin-right: pxTorpx(10);
     }
