@@ -5,6 +5,18 @@
       :dataSource="dataSource"
       @shift="handleOperation($event, 1)"
     ></CustomTabs>
+    <view class="home__main__search__content">
+      <view class="home__main__search">
+        <image class="search__icon" :src="require('@/assets/images/search-grey.png')"></image>
+        <input
+          class="search__input"
+          type="text"
+          :disabled="true"
+          placeholder="搜索商品"
+          @click="handleToSearch"
+        />
+      </view>
+    </view>
     <Swiper
       class="swiper"
       :style="{ height: swiperHeight }"
@@ -88,6 +100,9 @@ export default {
           this.network().runApiToGetProductList()
       }
     },
+    handleToSearch() {
+      uni.navigateTo({ url: '/pages/product/search' })
+    },
     network() {
       return {
         // 获取产品分类
@@ -117,12 +132,42 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/assets/css/index.scss';
 .swiper {
   position: relative;
   .scroll-item {
     overflow-y: scroll;
     touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
+  }
+}
+.home__main {
+  &__search {
+    &__content {
+      background-color: $white;
+      padding: pxTorpx(5) pxTorpx(10);
+      line-height: pxTorpx(34);
+      margin: 0 pxTorpx(15);
+      background: linear-gradient(to right, #045eb5, 20%, #bed5ec, 80%, #fff);
+    }
+    height: pxTorpx(34);
+    background-color: $white;
+    border: 4px solid #000;
+    border-radius: 30px;
+    line-height: pxTorpx(34);
+    @include flex(center, space-between);
+    .search__icon {
+      width: pxTorpx(21);
+      height: pxTorpx(21);
+      padding-left: pxTorpx(10);
+    }
+    .search__input {
+      height: pxTorpx(21);
+      width: calc(100% - 74rpx);
+      line-height: pxTorpx(21);
+      color: #888;
+      font-size: pxTorpx(13);
+    }
   }
 }
 .loader__more__content {

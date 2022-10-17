@@ -5,16 +5,6 @@
       <view class="nav__background">
         <view class="home__main__content">
           <CustomSwiper :dataSource="bannerList"></CustomSwiper>
-          <view class="home__main__search">
-            <image class="search__icon" :src="require('@/assets/images/search-grey.png')"></image>
-            <input
-              class="search__input"
-              type="text"
-              :disabled="true"
-              placeholder="搜索商品"
-              @click="handleOperation"
-            />
-          </view>
         </view>
       </view>
       <view class="home__main__list">
@@ -121,6 +111,7 @@ export default {
 .home__main {
   &__content {
     padding: 0 30rpx;
+    margin-top: -15px;
   }
   &__slogan {
     @include flex(center, space-between);
@@ -150,26 +141,6 @@ export default {
       font-size: pxTorpx(12);
       text-align: center;
       color: $white;
-    }
-  }
-  &__search {
-    height: pxTorpx(34);
-    background-color: $white;
-    border: 4px solid #000;
-    border-radius: 30px;
-    line-height: pxTorpx(34);
-    @include flex(center, space-between);
-    .search__icon {
-      width: pxTorpx(21);
-      height: pxTorpx(21);
-      padding-left: pxTorpx(10);
-    }
-    .search__input {
-      height: pxTorpx(21);
-      width: calc(100% - 74rpx);
-      line-height: pxTorpx(21);
-      color: #888;
-      font-size: pxTorpx(13);
     }
   }
   &__list {

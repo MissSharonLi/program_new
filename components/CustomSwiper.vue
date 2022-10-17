@@ -55,12 +55,13 @@ export default {
   height: pxTorpx(150);
   .swiper {
     margin-top: pxTorpx(5);
+    height: 100%;
   }
   .swiper-item {
     height: pxTorpx(125);
     text-align: center;
     border-radius: pxTorpx(16);
-    border: pxTorpx(10) solid #dbb666;
+    border: pxTorpx(8) solid #0071bc;
     .swiper-image {
       height: pxTorpx(125);
       text-align: center;

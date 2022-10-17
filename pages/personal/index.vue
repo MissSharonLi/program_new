@@ -55,6 +55,7 @@
               referrerPolicy="no-referrer"
               :src="require(`@/assets/images/${item.url}`)"
             ></image>
+            <p class="personal__menu__text">{{ item.title }}</p>
           </view>
         </view>
       </view>
@@ -381,8 +382,8 @@ export default {
     text-align: center;
     font-family: $Yuanti;
     font-weight: 400;
-    font-size: pxTorpx(15);
-    color: $white;
+    font-size: pxTorpx(18);
+    color: #00ab97;
   }
 }
 .personal__list__content {

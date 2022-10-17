@@ -22,11 +22,7 @@ export default {
 @import '/wxcomponents/vant/common/index.wxss';
 @import '@/assets/css/common.scss';
 page {
-  background-color: #123462;
-}
-.content {
-  background: url('@/assets/images/head_bg.jpg') repeat top;
-  background-size: 100%;
+  background-color: #fff;
 }
 .van-checkbox__icon--checked {
   background-color: #f15a24 !important;

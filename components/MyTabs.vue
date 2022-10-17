@@ -1,10 +1,12 @@
 <template>
   <view class="my__tabs__wrapper">
     <view class="my__tabs__content">
+      <image class="bg" src="../assets/images/tab_bg.png" referrerPolicy="no-referrer" />
       <template v-for="(item, index) in tabbarList">
         <image
           :key="item.path"
           class="img"
+          referrerPolicy="no-referrer"
           :src="item.url"
           @click="handleSwitch(item, index)"
         ></image>
@@ -56,14 +58,22 @@ export default {
     bottom: 0;
   }
   &__content {
-    padding: pxTorpx(8) pxTorpx(15) pxTorpx(15);
-    @include flex(center, space-around);
-    background: url('@/assets/images/tab_bg.png') no-repeat center;
-    background-size: 100%;
-    margin-bottom: -5px;
+    position: relative;
+    padding: pxTorpx(8) pxTorpx(10) pxTorpx(15);
+    @include flex(center, space-between);
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      left: 0;
+      bottom: 0;
+      z-index: -1;
+    }
     .img {
-      width: pxTorpx(68);
-      height: pxTorpx(68);
+      width: pxTorpx(88);
+      height: pxTorpx(80);
+      margin-top: -30rpx;
     }
   }
 }

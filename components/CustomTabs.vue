@@ -1,5 +1,6 @@
 <template>
   <view class="list__tab__content">
+    <image :src="require('@/assets/images/grass.png')" class="grass"></image>
     <text
       v-for="(item, index) in dataSource"
       :key="index"
@@ -41,30 +42,27 @@ export default {
   @include flex(center, space-around);
   font-family: $STHupo;
   font-weight: 400;
-  font-size: pxTorpx(16);
-  color: $white;
+  font-size: pxTorpx(18);
   font-style: normal;
   letter-spacing: 1px;
   margin: 0 pxTorpx(10);
   padding: 0 pxTorpx(30);
-  background: url('@/assets/images/bg7.png') no-repeat center;
-  background-size: 100%;
+  text-shadow: 0 1px #2e3192, 1px 0 #2e3192, -1px 0 #2e3192, 0 -1px #2e3192;
+  color: $white;
+  position: relative;
+  .grass {
+    width: 75rpx;
+    height: 140rpx;
+    position: absolute;
+    left: -5rpx;
+    top: -50rpx;
+    z-index: -1;
+  }
   .active {
     color: #ffff00;
     font-family: $STHupo;
     position: relative;
-    -webkit-text-stroke: 1px #fbc90f;
-    // &::after {
-    //   content: '';
-    //   display: block;
-    //   position: absolute;
-    //   width: pxTorpx(13);
-    //   height: pxTorpx(13);
-    //   background: url('@/assets/images/sub.png') no-repeat;
-    //   background-size: 100% 100%;
-    //   bottom: 0;
-    //   left: calc(50% - 15rpx);
-    // }
+    text-shadow: 0 1px #2e3192, 1px 0 #2e3192, -1px 0 #2e3192, 0 -1px #2e3192;
   }
 }
 </style>

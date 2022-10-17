@@ -1,35 +1,31 @@
 <template>
-  <view
-    class="custom__nav__content"
-    :class="{ default: isDefault }"
-    :style="{ width: '100%', height: navBarHeight }"
-  >
-    <view class="nav__bar__content" :style="{ height: navBarHeight }">
-      <view class="nav__title" :style="{ height: navBarHeight }">
+  <view class="custom__nav__wrapper">
+    <view
+      class="custom__nav__content"
+      :class="{ default: isDefault }"
+      :style="{ width: '100%', height: navBarHeight }"
+    >
+      <view class="nav__bar__content" :style="{ height: navBarHeight }">
         <image
-          v-if="isBack"
-          class="img"
           referrerPolicy="no-referrer"
-          src="../assets/images/back.png"
-          @click="handleBack"
-        ></image>
-        <image
-          class="beauty"
-          referrerPolicy="no-referrer"
-          :src="require('@/assets/images/bg8.png')"
-        ></image>
-        <image
-          class="beauty1"
-          referrerPolicy="no-referrer"
-          :src="require('@/assets/images/bg8.png')"
-        >
-          >
-        </image>
-        <view class="title__name">
-          <image class="title" referrerPolicy="no-referrer" src="../assets/images/home.png"></image>
+          class="custom__head__bg"
+          src="../assets/images/head_title_bg.png"
+        />
+        <image class="dolpin1" :src="require('@/assets/images/dolpin1.png')" />
+        <view class="nav__title" :style="{ height: navBarHeight }">
+          <view class="title__name">
+            <image class="fish" :src="require('@/assets/images/fish1.png')" />
+            <image class="title" :src="require('@/assets/images/home_title.png')"></image>
+          </view>
         </view>
       </view>
     </view>
+    <image
+      referrerPolicy="no-referrer"
+      class="custom__head__bg"
+      style="z-index: -1"
+      src="../assets/images/head_title_bg.png"
+    />
   </view>
 </template>
 <script>
@@ -69,6 +65,23 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.custom__nav__wrapper {
+  padding: pxTorpx(10) pxTorpx(15) 0;
+}
+.custom__head__bg {
+  position: absolute;
+  left: pxTorpx(10);
+  width: calc(100% - 40rpx);
+  top: 0;
+  height: pxTorpx(300);
+}
+.dolpin1 {
+  position: absolute;
+  left: pxTorpx(30);
+  top: 0;
+  width: pxTorpx(50);
+  height: pxTorpx(40);
+}
 .custom__nav__content {
   width: 100%;
   height: 100%;
@@ -80,34 +93,12 @@ export default {
   top: 0;
   left: 0;
   z-index: 999;
-  background: url('@/assets/images/head_bg.jpg') no-repeat top;
-  background-size: 100% 100%;
   .nav__bar__content {
     position: relative;
     width: 100%;
     height: 100%;
-    &::before {
-      content: '';
-      position: absolute;
-      width: pxTorpx(35);
-      height: pxTorpx(35);
-      display: block;
-      background: url('@/assets/images/flower.png') no-repeat top;
-      background-size: 100% 100%;
-      top: pxTorpx(10);
-      left: pxTorpx(10);
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      width: pxTorpx(35);
-      height: pxTorpx(35);
-      display: block;
-      background: url('@/assets/images/flower.png') no-repeat top;
-      background-size: 100% 100%;
-      top: pxTorpx(10);
-      right: pxTorpx(10);
-    }
+    overflow: hidden;
+    background-color: #fff;
   }
   .nav__title {
     font-family: $PingFang;
@@ -122,54 +113,73 @@ export default {
     height: 100%;
     position: relative;
     padding-bottom: 0;
+    &::before {
+      content: '';
+      position: absolute;
+      width: pxTorpx(10);
+      height: pxTorpx(10);
+      display: block;
+      background: url('@/assets/images/point.png') no-repeat top;
+      background-size: 100% 100%;
+      top: 26%;
+      left: 28%;
+      z-index: 9;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      width: pxTorpx(10);
+      height: pxTorpx(10);
+      display: block;
+      background: url('@/assets/images/point.png') no-repeat top;
+      background-size: 100% 100%;
+      top: 46%;
+      right: 18%;
+      z-index: 9;
+    }
     .title__name {
       width: pxTorpx(225);
-      min-height: pxTorpx(60);
-      margin: 0 auto;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      background-color: $white;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 10px;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      border: 8px solid #c69c6d;
+      height: pxTorpx(75);
       position: absolute;
-      bottom: 16px;
+      bottom: 10px;
       left: calc(50% - 130px);
       z-index: 1;
-      .title {
-        width: 80%;
-        height: pxTorpx(65);
-        margin: -10px auto 0;
+      .fish {
+        position: absolute;
+        width: pxTorpx(50);
+        height: pxTorpx(30);
+        display: block;
+        bottom: -10rpx;
+        right: -60rpx;
+        z-index: 9;
       }
-    }
-    .img {
-      display: block;
-      width: pxTorpx(20);
-      height: pxTorpx(20);
-      position: absolute;
-      left: pxTorpx(8);
-      top: pxTorpx(1);
-    }
-    .beauty {
-      display: block;
-      width: pxTorpx(50);
-      height: pxTorpx(25);
-      position: absolute;
-      right: 10%;
-      bottom: 0;
-      z-index: 9;
-    }
-    .beauty1 {
-      display: block;
-      width: pxTorpx(50);
-      height: pxTorpx(25);
-      position: absolute;
-      left: 10%;
-      bottom: 0;
-      z-index: 9;
+      &::before {
+        content: '';
+        position: absolute;
+        width: pxTorpx(55);
+        height: pxTorpx(75);
+        display: block;
+        background: url('@/assets/images/lantern.png') no-repeat top;
+        background-size: 100% 100%;
+        top: -10rpx;
+        left: -60rpx;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        width: pxTorpx(55);
+        height: pxTorpx(75);
+        display: block;
+        background: url('@/assets/images/lantern.png') no-repeat top;
+        background-size: 100% 100%;
+        top: -10rpx;
+        right: -110rpx;
+      }
+      .title {
+        width: 90%;
+        height: pxTorpx(90);
+        margin: 0 auto -15px;
+      }
     }
   }
 }

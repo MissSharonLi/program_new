@@ -1,25 +1,27 @@
 <template>
   <view class="product__list__content">
-    <view
-      v-for="(item, index) in dataSource"
-      :key="index"
-      class="list__item"
-      @click="handleClick(item)"
-    >
-      <image
-        class="list__item__image"
-        referrerPolicy="no-referrer"
-        :class="{ sold__out: item.stock_num === 0 }"
-        :src="item.goods_image"
-      ></image>
-      <text class="number">{{ item.stock_num }}/{{ item.goods_num }}</text>
-      <text class="price">{{ item.goods_price }}{{ item.is_score === 0 ? '浪币' : '积分' }}</text>
-      <view class="title">{{ item.goods_name }}</view>
-      <!-- <view class="sub__title">
-        {{ item.goods_price }}{{ item.is_score === 0 ? '浪币' : '积分' }}/张
-      </view> -->
+    <view class="product__list__item" :style="{ minHeight: swiperHeight }">
+      <view
+        v-for="(item, index) in dataSource"
+        :key="index"
+        class="list__item"
+        @click="handleClick(item)"
+      >
+        <image
+          class="list__item__image"
+          referrerPolicy="no-referrer"
+          :class="{ sold__out: item.stock_num === 0 }"
+          :src="item.goods_image"
+        ></image>
+        <text class="number">{{ item.stock_num }}/{{ item.goods_num }}</text>
+        <text class="price">{{ item.goods_price }}{{ item.is_score === 0 ? '浪币' : '积分' }}</text>
+        <view class="title">{{ item.goods_name }}</view>
+        <view class="sub__title">
+          {{ item.goods_price }}{{ item.is_score === 0 ? '浪币' : '积分' }}/张
+        </view>
+      </view>
+      <view v-if="dataSource.length === 0" class="empty">暂无数据哦~</view>
     </view>
-    <view v-if="dataSource.length === 0" class="empty">暂无数据哦~</view>
   </view>
 </template>
 <script>
@@ -28,6 +30,11 @@ export default {
     dataSource: {
       type: Array,
       default: () => []
+    }
+  },
+  computed: {
+    swiperHeight() {
+      return Math.ceil((this.dataSource.length || 1) / 2) * 200 + 'px'
     }
   },
   methods: {
@@ -42,8 +49,12 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .product__list__content {
-  @include flex(center, space-between, wrap);
-  padding: pxTorpx(5) pxTorpx(15);
+  padding: 0 pxTorpx(15) pxTorpx(5);
+  .product__list__item {
+    border-radius: pxTorpx(16);
+    border: pxTorpx(8) solid #29abe2;
+    @include flex(center, space-between, wrap);
+  }
   .list__item {
     width: calc(50% - 60rpx);
     min-height: pxTorpx(40);
@@ -143,7 +154,7 @@ export default {
     }
   }
   .empty {
-    color: #fff;
+    color: #999;
     font-size: 14px;
     text-align: center;
     margin: 20px auto;
