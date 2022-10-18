@@ -1,7 +1,7 @@
 <template>
   <view class="content">
-    <view class="my__award__bag" :style="{ 'margin-top': navBarHeight }">
-      <HomeNavBar class="nav__wrapper" title="我的赏袋"></HomeNavBar>
+    <view class="my__award__bag" :style="{ 'margin-top': navHeight + 'px' }">
+      <HomeNavBar class="nav__wrapper" title="赏袋"></HomeNavBar>
       <view class="my__award__bag__content">
         <view class="subtitle">
           <text
@@ -256,7 +256,7 @@ export default {
             width: pxTorpx(18);
             height: pxTorpx(18);
             display: inline-block;
-            background: url('@/assets/images/select.png') no-repeat;
+            background: url('@/assets/images/selected.png') no-repeat;
             background-size: 100% 100%;
             margin-right: pxTorpx(5);
             background-color: #fff;
@@ -268,12 +268,13 @@ export default {
       @include flex(center, center, wrap);
       position: relative;
       padding: 0 pxTorpx(10);
-      background: url('@/assets/images/bg4.png') no-repeat top;
-      background-size: 100% 100%;
       height: pxTorpx(88);
       border-radius: pxTorpx(5);
       text-align: center;
       z-index: 9;
+      border: 2px solid #366ba3;
+      background-color: #29abe2;
+      border-radius: pxTorpx(16);
       .title {
         font-family: $Yuanti;
         font-weight: 400;
@@ -401,7 +402,7 @@ export default {
         font-size: pxTorpx(13);
         text-align: center;
         font-family: $Yuanti;
-        background: url('@/assets/images/bg9.png') no-repeat center;
+        // background: url('@/assets/images/bg9.png') no-repeat center;
         background-size: 100% 100%;
         padding: pxTorpx(8) pxTorpx(10);
       }

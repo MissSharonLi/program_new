@@ -30,7 +30,7 @@
       <Block v-for="(item, index) in dataSource" :key="index">
         <SwiperItem class="scroll-item">
           <view class="swiper-item" :style="{ height: swiperHeight }">
-            <ProductList :dataSource="productDataSource"></ProductList>
+            <ProductList :dataSource="productDataSource" :isEmpty="isEmpty"></ProductList>
           </view>
         </SwiperItem>
       </Block>
@@ -57,6 +57,7 @@ export default {
     return {
       loadStatus: 0, // 0=>加载更多 1=>加载中...
       dataSource: [],
+      isEmpty: false,
       productDataSource: [],
       indicatorDots: false,
       current: 0,
@@ -71,7 +72,7 @@ export default {
   },
   computed: {
     swiperHeight() {
-      return Math.ceil((this.productDataSource.length || 1) / 2) * 260 + 'px'
+      return Math.ceil((this.productDataSource.length || 1) / 2) * 280 + 'px'
     },
     contentText() {
       return this.loadStatus === 0 ? '上拉加载更多数据' : this.loadStatus === 1 ? '加载中...' : ''
@@ -82,18 +83,21 @@ export default {
     this.network().runApiToGetProductList()
   },
   methods: {
-    handleOperation(e, type) {
+    async handleOperation(e, type) {
       switch (type) {
         case 1: // 切换tab&Swiper
           this.current = e
+          this.isEmpty = false
           break
         case 2: // 切换swiper
           this.loadStatus = 1
           this.params.page = 1
+          this.isEmpty = false
           this.productDataSource = []
           this.$refs.tabsProps.handleShift(e.target.current)
           this.params.cat_id = this.dataSource[e.target.current].id
-          this.network().runApiToGetProductList()
+          await this.network().runApiToGetProductList()
+          this.isEmpty = this.productDataSource.length === 0
           break
         default: // 分页查询商品
           this.params.page++

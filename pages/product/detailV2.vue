@@ -337,7 +337,7 @@ export default {
           background-size: 100% 100%;
           left: -10px;
           top: -10rpx;
-          background: url('@/assets/images/cloud.png') no-repeat center;
+          // background: url('@/assets/images/cloud.png') no-repeat center;
           background-size: 100% 100%;
           position: absolute;
         }
@@ -350,7 +350,7 @@ export default {
         background-size: 100% 100%;
         left: pxTorpx(20);
         bottom: 0;
-        background: url('@/assets/images/flower.png') no-repeat center;
+        // background: url('@/assets/images/flower.png') no-repeat center;
         background-size: 100% 100%;
       }
       &::after {
@@ -361,7 +361,7 @@ export default {
         background-size: 100% 100%;
         right: pxTorpx(20);
         bottom: 0;
-        background: url('@/assets/images/flower.png') no-repeat center;
+        // background: url('@/assets/images/flower.png') no-repeat center;
         background-size: 100% 100%;
       }
     }
@@ -379,7 +379,7 @@ export default {
       width: pxTorpx(50);
       height: pxTorpx(50);
       display: block;
-      background: url('@/assets/images/bg8.png') no-repeat center;
+      // background: url('@/assets/images/bg8.png') no-repeat center;
       background-size: 100%;
       left: 0;
       top: -40px;
@@ -547,7 +547,7 @@ export default {
       min-height: pxTorpx(40);
       margin-bottom: pxTorpx(10);
       position: relative;
-      background: url('@/assets/images/bg10.png') no-repeat center;
+      // background: url('@/assets/images/bg10.png') no-repeat center;
       background-size: 100% 100%;
       border-bottom-left-radius: pxTorpx(5);
       border-bottom-right-radius: pxTorpx(5);

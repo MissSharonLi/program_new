@@ -3,6 +3,9 @@ const mixins = {
     navBarHeight() {
       return this.$store.getters.getNavBarHeight
     },
+    navHeight() {
+      return Number(this.$store.getters.getNavBarHeight.replace('px', '')) - 20
+    },
     token() {
       return this.$store.state.token || uni.getStorageSync('storage_token')
     },

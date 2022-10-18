@@ -119,7 +119,7 @@ export default {
         position: absolute;
         width: pxTorpx(17);
         height: pxTorpx(17);
-        background: url('@/assets/images/select.png') no-repeat;
+        background: url('@/assets/images/selected.png') no-repeat;
         background-size: 100% 100%;
         left: pxTorpx(12);
         top: pxTorpx(30);

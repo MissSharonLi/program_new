@@ -9,7 +9,7 @@
         <image
           referrerPolicy="no-referrer"
           class="custom__head__bg"
-          src="../assets/images/head_title_bg.png"
+          :src="require('@/assets/images/head_title_bg.png')"
         />
         <image class="dolpin1" :src="require('@/assets/images/dolpin1.png')" />
         <view class="nav__title" :style="{ height: navBarHeight }">
@@ -20,60 +20,48 @@
         </view>
       </view>
     </view>
-    <image
-      referrerPolicy="no-referrer"
-      class="custom__head__bg"
-      style="z-index: -1"
-      src="../assets/images/head_title_bg.png"
-    />
+    <view class="custom__head__content" :style="{ top: navHeight + 'px' }">
+      <image
+        referrerPolicy="no-referrer"
+        class="custom__head__content__bg"
+        :style="{ 'z-index': -1, 'margin-top': -navHeight + 'px' }"
+        :src="require('@/assets/images/head_title_bg.png')"
+      />
+    </view>
   </view>
 </template>
 <script>
 export default {
   name: 'CustomNavBar',
-  props: {
-    type: {
-      type: Number,
-      default: null
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    isDefault: {
-      type: Boolean,
-      default: false
-    },
-    isBack: {
-      type: Boolean,
-      default: false
-    }
-  },
   computed: {
     navBarHeight() {
       return this.$store.getters.getNavBarHeight
-    }
-  },
-  methods: {
-    handleBack() {
-      uni.navigateBack({
-        delta: 1
-      })
+    },
+    navHeight() {
+      return Number(this.$store.getters.getNavBarHeight.replace('px', ''))
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
-.custom__nav__wrapper {
-  padding: pxTorpx(10) pxTorpx(15) 0;
+.custom__head__content {
+  position: absolute;
+  left: pxTorpx(10);
+  width: calc(100% - 40rpx);
+  overflow: hidden;
+  z-index: -1;
+  &__bg {
+    width: 100%;
+    height: pxTorpx(290);
+  }
 }
 .custom__head__bg {
   position: absolute;
   left: pxTorpx(10);
   width: calc(100% - 40rpx);
   top: 0;
-  height: pxTorpx(300);
+  height: pxTorpx(290);
 }
 .dolpin1 {
   position: absolute;
@@ -142,7 +130,7 @@ export default {
       height: pxTorpx(75);
       position: absolute;
       bottom: 10px;
-      left: calc(50% - 130px);
+      left: calc(50% - 250rpx);
       z-index: 1;
       .fish {
         position: absolute;

@@ -111,7 +111,6 @@ export default {
 .home__main {
   &__content {
     padding: 0 30rpx;
-    margin-top: -15px;
   }
   &__slogan {
     @include flex(center, space-between);

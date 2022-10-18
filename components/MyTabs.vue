@@ -1,7 +1,7 @@
 <template>
   <view class="my__tabs__wrapper">
     <view class="my__tabs__content">
-      <image class="bg" src="../assets/images/tab_bg.png" referrerPolicy="no-referrer" />
+      <image class="bg" :src="require('@/assets/images/tab_bg.png')" referrerPolicy="no-referrer" />
       <template v-for="(item, index) in tabbarList">
         <image
           :key="item.path"

@@ -139,7 +139,7 @@ export default {
 .buy {
   &__content {
     min-height: calc(100% - 50rpx);
-    background: url('@/assets/images/head_bg.jpg') repeat top;
+    // background: url('@/assets/images/head_bg.jpg') repeat top;
     background-size: 100%;
     padding: pxTorpx(10);
     border-radius: 20px;
@@ -226,7 +226,7 @@ export default {
     .buy__title {
       width: calc(70%);
       height: pxTorpx(60);
-      background: url('@/assets/images/bg3.png') no-repeat;
+      // background: url('@/assets/images/bg3.png') no-repeat;
       background-size: 100% 100%;
       position: relative;
       padding-left: 30%;
