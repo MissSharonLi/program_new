@@ -13,7 +13,7 @@ const globalModule = {
       },
       {
         family: 'Yuanti',
-        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/AozoraMincho-bold-2.ttf")'
+        source: 'url("https://a.yiyunrj.com/assets/apifonts/TengXiangJiaLiZhunCuYuanJian-2.ttf")'
       },
       {
         family: 'PingFang',

@@ -1,7 +1,7 @@
 <template>
   <view class="content">
-    <HomeNavBar class="nav__wrapper" title="MINE"></HomeNavBar>
-    <view class="personal__content" :style="{ 'margin-top': navBarHeight }">
+    <HomeNavBar class="nav__wrapper" title="我的"></HomeNavBar>
+    <view class="personal__content" :style="{ 'margin-top': navHeight + 'px' }">
       <view class="personal__top__background">
         <view class="personal__top__content">
           <view class="personal__top__item">
@@ -14,8 +14,9 @@
               ></image>
               <view v-else class="login_btn" @click="doLogin">登录</view>
               <view class="left__detail">
+                <text class="left__text">客户ID：</text>
                 <text class="left__text" @click="handleEditNickName">
-                  {{
+                  客户昵称：{{
                     userInfo.mobile ? commonUtils.getTel(userInfo.mobile) : userInfo.nickname || ''
                   }}
                 </text>
@@ -23,15 +24,15 @@
             </view>
           </view>
           <view class="personal__top__rank">
+            <view class="text">
+              <text class="block">我的积分</text>
+              <text class="block">{{ userInfo.score || 0 }}</text>
+              <text class="block"></text>
+            </view>
             <view class="text" @click="handleDoRecharge()">
               <text class="block">我的浪值</text>
               <text class="block">{{ userInfo.money || 0 }}</text>
               <text class="block">充值</text>
-            </view>
-            <view class="text">
-              <text class="block">我的积分</text>
-              <text class="block">{{ userInfo.score || 0 }}</text>
-              <text class="block">兑换</text>
             </view>
           </view>
         </view>
@@ -59,12 +60,6 @@
           </view>
         </view>
       </view>
-      <!-- <view class="personal__list__content">
-        <view class="personal__list">
-          <view class="button" @click="handleOperation(null, 2)">用户服务協议</view>
-          <view class="button" @click="handleOperation(null, 2)">用户服务協议</view>
-        </view>
-      </view> -->
     </view>
     <view class="refresh" @click="handleRefresh"></view>
     <DeliveryTips
@@ -74,7 +69,7 @@
       :type="1"
       :notice="siteConfig.user_service_agreement"
     ></DeliveryTips>
-    <EditNickName ref="nickNameProps" @success="handleRefresh"></EditNickName>
+    <EditNickName ref="nickNameProps" :fileList="fileList" @success="handleRefresh"></EditNickName>
     <RechargeDetail ref="rechargeProps" @success="handleRefresh"></RechargeDetail>
     <MyTabs :activeTab="2"></MyTabs>
   </view>
@@ -140,6 +135,11 @@ export default {
     this.runApiToGetAreaList()
     this.runApiToGetSiteconfig()
     this.runApiToGetUserInfo()
+  },
+  computed: {
+    fileList() {
+      return (this.userInfo.avatar || '').split(' ')
+    }
   },
   methods: {
     // 重置刷新
@@ -207,6 +207,7 @@ export default {
   padding-bottom: 0 !important;
 }
 .content {
+  min-height: auto;
   .refresh {
     position: fixed;
     right: 0;
@@ -219,13 +220,13 @@ export default {
 }
 .personal__top {
   &__background {
-    background-color: #12264a;
+    background-color: #29abe2;
     border-radius: pxTorpx(20);
     min-height: pxTorpx(140);
     position: relative;
-    width: 85%;
-    margin: 0 auto pxTorpx(25);
-    border: pxTorpx(8) solid #dbb666;
+    width: 90%;
+    margin: 0 auto pxTorpx(6);
+    border: pxTorpx(3) solid #366ba3;
   }
   &__content {
     padding: pxTorpx(15);
@@ -241,8 +242,9 @@ export default {
       text-align: center;
       font-size: pxTorpx(14);
       line-height: pxTorpx(55);
-      background-color: #b5b5b5;
+      background-color: #fff;
       color: #fff;
+      border: 1px solid #29abe2;
     }
     .left {
       @include flex(center, '');
@@ -251,16 +253,17 @@ export default {
         height: pxTorpx(55);
         border-radius: 50%;
         margin-right: pxTorpx(10);
-        border: 1px solid #f7931e;
+        border: 1px solid #29abe2;
       }
       &__detail {
         .left {
           &__text {
-            font-family: $PingFang;
+            font-family: $Yuanti;
             font-weight: 400;
-            font-size: rpxTorpx(16);
-            color: $white;
-            text-align: center;
+            font-size: pxTorpx(16);
+            color: #000;
+            text-align: left;
+            display: block;
           }
           &__button {
             min-width: pxTorpx(100);
@@ -295,7 +298,7 @@ export default {
       }
     }
     .right {
-      font-family: $PingFang;
+      font-family: $Yuanti;
       font-weight: 400;
       font-size: pxTorpx(12);
       color: $white;
@@ -312,13 +315,15 @@ export default {
     }
   }
   &__rank {
-    @include flex(center, space-between);
-    padding: 0 pxTorpx(5);
+    @include flex(top, space-between);
+    padding: pxTorpx(10) pxTorpx(5);
+    background-color: #12264a;
+    border: 1px solid #dbb666;
+    border-radius: pxTorpx(15);
     .text {
       font-family: $Yuanti;
       font-weight: 400;
       color: $white;
-      border: 1px solid #dbb666;
       padding: 5px 10px;
       border-radius: pxTorpx(10);
       width: 45%;
@@ -333,12 +338,16 @@ export default {
         &:nth-child(2) {
           font-size: pxTorpx(22);
         }
-        &:last-child {
-          width: pxTorpx(50);
-          border: 2px solid #fff;
-          background-color: #c1272d;
-          border-radius: pxTorpx(25);
-          margin: 0 auto;
+      }
+      &:last-child {
+        .block {
+          &:last-child {
+            width: pxTorpx(50);
+            box-shadow: 1px 1px #29abe2;
+            background-color: #0071bc;
+            border-radius: pxTorpx(5);
+            margin: 0 auto;
+          }
         }
       }
     }
@@ -351,15 +360,17 @@ export default {
   width: calc(100% - 30px);
   height: pxTorpx(135);
   border-radius: pxTorpx(20);
-  margin: 20rpx auto 0;
+  margin: 0 auto;
   display: block;
-  border: pxTorpx(8) solid #dbb666;
+  border: pxTorpx(6) solid #29abe2;
 }
 .personal__menu {
   &__content {
-    margin: pxTorpx(10);
-    padding-bottom: pxTorpx(35);
-    margin-top: pxTorpx(40);
+    margin: 0 pxTorpx(10);
+    padding: pxTorpx(15) pxTorpx(10) 0;
+    margin-top: pxTorpx(6);
+    border: pxTorpx(6) solid #29abe2;
+    border-radius: pxTorpx(20);
   }
   &__list {
     font-size: pxTorpx(14);

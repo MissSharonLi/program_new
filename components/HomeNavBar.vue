@@ -72,7 +72,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .common__head__content {
-  position: fixed;
+  position: absolute;
   left: pxTorpx(10);
   width: calc(100% - 40rpx);
   overflow: hidden;
@@ -184,7 +184,7 @@ export default {
         display: block;
         background: url('@/assets/images/lantern.png') no-repeat top;
         background-size: 100% 100%;
-        top: -10rpx;
+        top: 10px;
         left: -60rpx;
       }
       &::after {
@@ -195,7 +195,7 @@ export default {
         display: block;
         background: url('@/assets/images/lantern.png') no-repeat top;
         background-size: 100% 100%;
-        top: -10rpx;
+        top: 10px;
         right: -110rpx;
       }
       .title {

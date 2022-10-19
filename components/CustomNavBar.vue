@@ -149,7 +149,7 @@ export default {
         display: block;
         background: url('@/assets/images/lantern.png') no-repeat top;
         background-size: 100% 100%;
-        top: -10rpx;
+        top: 0;
         left: -60rpx;
       }
       &::after {
@@ -160,7 +160,7 @@ export default {
         display: block;
         background: url('@/assets/images/lantern.png') no-repeat top;
         background-size: 100% 100%;
-        top: -10rpx;
+        top: 0;
         right: -110rpx;
       }
       .title {

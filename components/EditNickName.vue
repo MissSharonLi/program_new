@@ -6,9 +6,12 @@
     title="修改昵称"
     show-cancel-button
     :asyncClose="true"
+    theme="round-button"
+    custom-style="border: 2px solid #29abe2;border-radius:20px"
     @close.native="handleClose($event)"
     @confirm.native="handleConfirm($event)"
   >
+    <VanUploader :file-list="fileList" />
     <VanCellGroup>
       <VanField
         :value="value"
@@ -28,13 +31,21 @@ import { api } from '@/api'
 import VanField from '@/wxcomponents/vant/field/index'
 import VanDialog from '@/wxcomponents/vant/dialog/index'
 import VanCellGroup from '@/wxcomponents/vant/cell-group/index'
+import VanUploader from '@/wxcomponents/vant/uploader/index'
 
 export default {
   name: 'EditNickName',
   components: {
     VanField,
     VanDialog,
-    VanCellGroup
+    VanCellGroup,
+    VanUploader
+  },
+  props: {
+    fileList: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
@@ -81,4 +92,10 @@ export default {
 </script>
 <style lang="scss">
 @import '@/wxcomponents/vant/dialog/index.wxss';
+.customDialog {
+  border: 2px solid #29abe2 !important;
+  .van-popup {
+    border: 2px solid #29abe2 !important;
+  }
+}
 </style>
