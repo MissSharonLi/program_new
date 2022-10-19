@@ -3,39 +3,14 @@
     custom-class="custom__van__popup"
     :show="show"
     round
-    custom-style="height:900rpx;background:transparent;padding-bottom: 0;padding:0 5px"
+    custom-style="height:600rpx;background:transparent;padding-bottom: 0;padding:0 5px"
     position="bottom"
     @close.native="handleClose"
   >
     <view class="buy__content">
-      <view class="buy__top__content">
-        <view class="buy__title">充值</view>
-        <view class="buy__price__content">
-          <view class="buy__price__item">
-            <text class="text">微信充值</text>
-          </view>
-        </view>
-      </view>
+      <view class="buy__top__content">微信充值</view>
       <view class="recharge__wrapper">
         <view class="recharge__content">
-          <view class="recharge__list">
-            <view
-              v-for="(item, index) in list"
-              :key="index"
-              :class="{ active: listIndex === index }"
-              class="recharge__item"
-              @click="handleTabs(item, index)"
-            >
-              {{ item }}元
-            </view>
-            <view
-              class="recharge__item"
-              :class="{ active: listIndex === 5 }"
-              @click="handleTabs(modelForm.money, 5)"
-            >
-              其他
-            </view>
-          </view>
           <view class="recharge__custom">
             <text class="em">自定义金额</text>
             <view class="submit__content">
@@ -45,7 +20,6 @@
           </view>
         </view>
         <view class="recharge__tips">
-          <view class="recharge__tips__title">充值提示</view>
           <view class="recharge__tips__item">
             {{ modelForm.money_notice }}
           </view>
@@ -72,12 +46,10 @@ export default {
   data() {
     return {
       show: false,
-      listIndex: 5,
       modelForm: {
         money: ''
       },
-      list: [],
-      tipsList: ['', '', '']
+      list: []
     }
   },
   methods: {
@@ -88,10 +60,6 @@ export default {
       this.$toast('充值成功！')
       this.$emit('success', data)
       this.show = false
-    },
-    handleTabs(item, index) {
-      this.listIndex = index
-      this.modelForm.money = item
     },
     async runApiToGetConfigList() {
       const { code, data } = await api.getConfigList()
@@ -139,13 +107,16 @@ export default {
 .buy {
   &__content {
     min-height: calc(100% - 50rpx);
-    // background: url('@/assets/images/head_bg.jpg') repeat top;
-    background-size: 100%;
     padding: pxTorpx(10);
     border-radius: 20px;
-    border: 2px solid #dbb666;
-    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #2e3192;
+    background-color: #fff;
     .recharge {
+      &__wrapper {
+        border: 2px solid #2e3192;
+        background-color: #d7fdff;
+        border-radius: 20px;
+      }
       &__content {
         padding: pxTorpx(5) pxTorpx(10);
       }
@@ -180,12 +151,12 @@ export default {
         font-weight: 400;
         font-size: pxTorpx(12);
         .submit__content {
+          margin-top: pxTorpx(20);
           @include flex(center, space-between);
         }
         .em {
-          color: $white;
+          color: #000;
           display: block;
-          margin-top: pxTorpx(5);
         }
         .submit {
           width: pxTorpx(60);
@@ -197,12 +168,13 @@ export default {
       }
       &__input {
         font-size: pxTorpx(35);
-        color: $white;
-        border-bottom: 3px solid #fff;
+        color: #333;
         position: relative;
-        height: pxTorpx(65);
-        line-height: pxTorpx(65);
-        width: calc(100% - 80rpx);
+        height: pxTorpx(44);
+        line-height: pxTorpx(44);
+        width: calc(100% - 160rpx);
+        background-color: $white;
+        padding-left: pxTorpx(15);
       }
       &__tips {
         font-family: $Yuanti;
@@ -223,21 +195,16 @@ export default {
     }
   }
   &__top__content {
-    .buy__title {
-      width: calc(70%);
-      height: pxTorpx(60);
-      // background: url('@/assets/images/bg3.png') no-repeat;
-      background-size: 100% 100%;
-      position: relative;
-      padding-left: 30%;
-      color: $white;
-      line-height: pxTorpx(65);
-      margin-bottom: pxTorpx(20);
-      margin-top: pxTorpx(10);
-      font-size: pxTorpx(14);
-      padding-right: pxTorpx(11);
-      text-indent: -20px;
-    }
+    border: 2px solid #2e3192;
+    color: #000;
+    font-size: pxTorpx(16);
+    max-width: pxTorpx(120);
+    line-height: pxTorpx(44);
+    height: pxTorpx(44);
+    text-align: center;
+    margin: pxTorpx(10) auto;
+    border-radius: pxTorpx(20);
+    font-family: $Yuanti;
   }
   &__price__content {
     .buy__price__item {

@@ -11,7 +11,10 @@
     @close.native="handleClose($event)"
     @confirm.native="handleConfirm($event)"
   >
-    <VanUploader :file-list="fileList" />
+    <view class="dialog__avator__content">
+      <text class="label">头像：</text>
+      <image class="img" :src="fileList[0] || ''" @click="handlePreview(0, fileList)"></image>
+    </view>
     <VanCellGroup>
       <VanField
         :value="value"
@@ -20,7 +23,7 @@
         placeholder="请输入昵称"
         clearable
         left-icon="smile-o"
-        custom-style="margin-top:20px"
+        custom-style="margin-top:20px;color: #2d3192;font-family: $Yuanti;"
         @change.native="handleChange($event)"
       ></VanField>
     </VanCellGroup>
@@ -31,15 +34,13 @@ import { api } from '@/api'
 import VanField from '@/wxcomponents/vant/field/index'
 import VanDialog from '@/wxcomponents/vant/dialog/index'
 import VanCellGroup from '@/wxcomponents/vant/cell-group/index'
-import VanUploader from '@/wxcomponents/vant/uploader/index'
 
 export default {
   name: 'EditNickName',
   components: {
     VanField,
     VanDialog,
-    VanCellGroup,
-    VanUploader
+    VanCellGroup
   },
   props: {
     fileList: {
@@ -54,6 +55,13 @@ export default {
     }
   },
   methods: {
+    // 预览图片
+    handlePreview(index, urls) {
+      uni.previewImage({
+        current: index,
+        urls: urls
+      })
+    },
     // 异步关闭弹框
     handleClose(event) {
       const action = event.mp.detail
@@ -91,11 +99,22 @@ export default {
 }
 </script>
 <style lang="scss">
+@import '@/assets/css/index.scss';
 @import '@/wxcomponents/vant/dialog/index.wxss';
-.customDialog {
-  border: 2px solid #29abe2 !important;
-  .van-popup {
-    border: 2px solid #29abe2 !important;
+.dialog__avator__content {
+  @include flex(center, flex-start);
+  .label {
+    display: block;
+    margin-right: pxTorpx(5);
+    padding-left: pxTorpx(15);
+    color: #2d3192;
+    font-size: pxTorpx(16);
+  }
+  .img {
+    width: pxTorpx(55);
+    height: pxTorpx(55);
+    border-radius: 50%;
+    margin-right: pxTorpx(10);
   }
 }
 </style>

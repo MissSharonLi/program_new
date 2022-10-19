@@ -11,6 +11,7 @@
                 referrerPolicy="no-referrer"
                 class="left__avator"
                 :src="userInfo.avatar"
+                @click="handlePreview(0, fileList)"
               ></image>
               <view v-else class="login_btn" @click="doLogin">登录</view>
               <view class="left__detail">
@@ -142,6 +143,13 @@ export default {
     }
   },
   methods: {
+    // 预览图片
+    handlePreview(index, urls) {
+      uni.previewImage({
+        current: index,
+        urls: urls
+      })
+    },
     // 重置刷新
     handleRefresh() {
       this.runApiToGetUserInfo()
