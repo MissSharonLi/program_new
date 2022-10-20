@@ -13,7 +13,7 @@
   >
     <view class="dialog__avator__content">
       <text class="label">头像：</text>
-      <image class="img" :src="fileList[0] || ''" @click="handlePreview(0, fileList)"></image>
+      <image class="img" :src="fileList[0] || ''" @click="$parent.handlePreview()"></image>
     </view>
     <VanCellGroup>
       <VanField
@@ -55,13 +55,6 @@ export default {
     }
   },
   methods: {
-    // 预览图片
-    handlePreview(index, urls) {
-      uni.previewImage({
-        current: index,
-        urls: urls
-      })
-    },
     // 异步关闭弹框
     handleClose(event) {
       const action = event.mp.detail

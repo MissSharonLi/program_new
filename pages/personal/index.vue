@@ -11,7 +11,7 @@
                 referrerPolicy="no-referrer"
                 class="left__avator"
                 :src="userInfo.avatar"
-                @click="handlePreview(0, fileList)"
+                @click="handlePreview()"
               ></image>
               <view v-else class="login_btn" @click="doLogin">登录</view>
               <view class="left__detail">
@@ -144,10 +144,16 @@ export default {
   },
   methods: {
     // 预览图片
-    handlePreview(index, urls) {
+    handlePreview() {
+      const len = this.userInfo.avatar.length
+      const str = this.userInfo.avatar.substr(len - 4)
+      let bigAvatar = this.userInfo.avatar
+      if (str === '/132') {
+        bigAvatar = this.userInfo.avatar.substring(0, len - 4) + '/0'
+      }
       uni.previewImage({
-        current: index,
-        urls: urls
+        current: 0,
+        urls: [bigAvatar]
       })
     },
     // 重置刷新
@@ -251,7 +257,7 @@ export default {
       font-size: pxTorpx(14);
       line-height: pxTorpx(55);
       background-color: #fff;
-      color: #fff;
+      color: #000;
       border: 1px solid #29abe2;
     }
     .left {
