@@ -1,7 +1,7 @@
 <template>
   <view class="content">
+    <HomeNavBar class="nav__wrapper" title="赏袋"></HomeNavBar>
     <view class="my__award__bag" :style="{ 'margin-top': navHeight + 'px' }">
-      <HomeNavBar class="nav__wrapper" title="赏袋"></HomeNavBar>
       <view class="my__award__bag__content">
         <view class="subtitle">
           <text
@@ -81,14 +81,12 @@
 <script>
 import { api } from '@/api'
 import MyTabs from '@/components/MyTabs'
-import HomeNavBar from '@/components/HomeNavBar'
 import DeliveryTips from '@/components/DeliveryTips'
 import SelectAddress from '@/components/SelectAddress'
 export default {
   name: 'MyAwardBag',
   components: {
     MyTabs,
-    HomeNavBar,
     SelectAddress,
     DeliveryTips
   },

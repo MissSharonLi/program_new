@@ -1,22 +1,25 @@
 <template>
-  <view class="content product__content">
-    <view class="search__input__wrapper">
-      <view class="search__input__content">
-        <input
-          v-model="params.keyword"
-          class="search__input"
-          placeholder-style="color:#fff"
-          type="text"
-          placeholder="海贼王"
-          @confirm="handleOperation(0)"
-        />
+  <view class="content product__content" :style="{ 'margin-top': navHeight + 'px' }">
+    <HomeNavBar :isBack="true" class="nav__wrapper" title="商品搜索"></HomeNavBar>
+    <view class="product__search__list" :style="{ 'min-height': sightHeight + 'px' }">
+      <view class="search__input__wrapper">
+        <view class="search__input__content">
+          <input
+            v-model="params.keyword"
+            class="search__input"
+            placeholder-style="color:#888"
+            type="text"
+            placeholder="海贼王"
+            @confirm="handleOperation(0)"
+          />
+        </view>
       </view>
-    </view>
-    <ProductList :dataSource="returnData"></ProductList>
-    <view v-if="returnData.length > 0" class="loader__more__content">
-      <VanLoading size="18px" color="#fff" :type="loadStatus === 1 && 'spinner'">
-        {{ contentText }}
-      </VanLoading>
+      <ProductList :dataSource="returnData"></ProductList>
+      <view v-if="returnData.length > 0" class="loader__more__content">
+        <VanLoading size="18px" color="#999" :type="loadStatus === 1 && 'spinner'">
+          {{ contentText }}
+        </VanLoading>
+      </view>
     </view>
   </view>
 </template>
@@ -36,7 +39,124 @@ export default {
         page: 1,
         keyword: ''
       },
-      returnData: []
+      returnData: [],
+      tableData: {
+        code: 1,
+        msg: '获取成功',
+        time: '1666158721',
+        data: {
+          total: 8,
+          per_page: 10,
+          current_page: 1,
+          last_page: 1,
+          data: [
+            {
+              id: 1055,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1053,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1052,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1051,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1050,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1049,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1048,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            },
+            {
+              id: 1047,
+              goods_name: '苹果MAX  - 大擂台',
+              goods_image:
+                'https://www.langmanwu2021.cn/uploads/20220924/1a10df2a5d9206a8e38c8ece670a693c.jpeg',
+              goods_price: '390.00',
+              goods_num: 5,
+              stock_num: 0,
+              is_score: 0,
+              give_score: '39.00',
+              tag_title: 'A赏',
+              sub_title: '明星信片'
+            }
+          ]
+        }
+      }
     }
   },
   computed: {
@@ -81,8 +201,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.content {
+  min-height: auto;
+}
 .product__content {
-  min-height: 100vh;
+  .product__search__list {
+    background-color: #f0fcff;
+  }
   .search__input {
     width: calc(100% - 100rpx);
     padding-left: 30rpx;
@@ -90,8 +215,9 @@ export default {
       padding: pxTorpx(5) pxTorpx(15);
     }
     &__content {
-      background-color: $sub-nav-theme-color;
-      border-radius: pxTorpx(15);
+      background-color: $white;
+      border: 3px solid #000;
+      border-radius: pxTorpx(25);
       font-size: pxTorpx(14);
       height: pxTorpx(40);
       line-height: pxTorpx(40);
@@ -103,7 +229,7 @@ export default {
         display: block;
         width: pxTorpx(27);
         height: pxTorpx(27);
-        background: url('@/assets/images/search.png') no-repeat;
+        background: url('@/assets/images/search-grey.png') no-repeat;
         background-size: 100% 100%;
         margin-right: pxTorpx(15);
       }

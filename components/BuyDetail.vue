@@ -3,13 +3,12 @@
     custom-class="custom__van__popup"
     :show="show"
     round
-    custom-style="height:900rpx;background:transparent;padding-bottom: 0;padding:0 5px"
+    custom-style="height:560rpx;background:transparent;padding-bottom: 0;padding:0 5px"
     position="bottom"
     @close.native="handleClose"
   >
     <view class="buy__content">
       <view class="buy__top__content">
-        <view class="buy__title">下单即送浪积分</view>
         <view class="buy__content__item">
           <view class="buy__product__detail">
             <image referrerPolicy="no-referrer" class="img" :src="params.goods_image"></image>
@@ -49,12 +48,13 @@
           custom-class="special"
           icon-class="icon__class"
           icon-size="10px"
+          style="display: none"
           @change="handleChange"
         >
           同意
           <text class="em">{用户购买协议 } { 发货须知 }</text>
         </VanCheckbox>
-        <view class="buy__tips em">
+        <view class="buy__tips em" style="display: none">
           {{ params.notice }}
         </view>
       </view>
@@ -135,12 +135,11 @@ export default {
 .buy {
   &__content {
     min-height: calc(100% - 50rpx);
-    // background: url('@/assets/images/head_bg.jpg') repeat top;
     background-size: 100%;
-    padding: pxTorpx(10);
+    padding: pxTorpx(10) 0;
     border-radius: 20px;
     border: 2px solid #dbb666;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: $white;
   }
   &__list__content {
     padding: 0 pxTorpx(20);
@@ -149,7 +148,6 @@ export default {
     .buy__title {
       width: calc(70%);
       height: pxTorpx(60);
-      // background: url('@/assets/images/bg3.png') no-repeat;
       background-size: 100% 100%;
       position: relative;
       padding-left: 30%;
@@ -179,23 +177,27 @@ export default {
     }
     .product__info {
       color: $white;
-      max-width: calc(100% - 500rpx);
+      max-width: calc(100% - 430rpx);
       font-size: pxTorpx(14);
+      font-family: $Yuanti;
       .title {
-        color: #ed1e79;
+        color: #c0262c;
+        font-family: $Yuanti;
         margin-bottom: pxTorpx(20);
       }
       .price {
-        color: #603813;
+        color: #c0262c;
         font-size: pxTorpx(12);
+        font-family: $Yuanti;
       }
     }
     .num {
       position: absolute;
       right: pxTorpx(20);
       bottom: pxTorpx(30);
-      color: #f7931e;
+      color: #f7921e;
       font-size: pxTorpx(12);
+      font-family: $Yuanti;
       .text {
         padding-left: pxTorpx(10);
         font-size: pxTorpx(18);
@@ -205,6 +207,7 @@ export default {
   }
   &__price__content {
     .buy__price__item {
+      font-family: $Yuanti;
       &:first-child {
         padding-bottom: pxTorpx(5);
         margin-bottom: pxTorpx(5);

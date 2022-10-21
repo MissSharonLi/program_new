@@ -2,7 +2,7 @@
   <VanPopup
     :show="show"
     round
-    :custom-style="`border-radius:10px;width:90%;background-color:#fff`"
+    :custom-style="`border-radius:10px;width:90%;background-color:#fff;border:2px solid #0071bc`"
     @close.native="handleClose"
   >
     <view class="tips" :class="{ custom: type === 1 }">
@@ -54,9 +54,19 @@ export default {
   min-height: pxTorpx(250);
   padding: pxTorpx(20);
   line-height: 1.8;
-  color: $white;
+  color: #fff;
   font-family: $Yuanti;
-  background-color: #f8dc4c;
+  background-color: $white;
+  &::after {
+    content: '';
+    position: absolute;
+    width: pxTorpx(45);
+    height: pxTorpx(30);
+    background: url('@/assets/images/dolphin.png') no-repeat;
+    background-size: 100% 100%;
+    right: 0;
+    top: 0;
+  }
   &.custom {
     color: #000;
     background-color: #fff;

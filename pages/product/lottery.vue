@@ -3,10 +3,10 @@
     <view v-for="(item, index) in list" :key="index" class="lottery__item first">
       <view class="left">
         <view class="rank__num">
-          <view class="text yellow">{{ item.rank_num }}</view>
-          <view class="text yellow">{{ item.nickname }}</view>
+          <view class="text">{{ item.rank_num }}</view>
+          <view class="text">{{ item.nickname }}</view>
         </view>
-        <view class="images__content speacial">
+        <view class="images__content">
           <view class="text">{{ item.pay_time }}</view>
           <view class="text">{{ item.item_name }}</view>
         </view>
@@ -94,13 +94,26 @@ export default {
         width: pxTorpx(60);
         height: pxTorpx(20);
       }
+      .rank__num {
+        .text {
+          color: #ec1b24;
+        }
+      }
+      .images__content {
+        .text {
+          color: #ec1b24;
+        }
+      }
     }
     &.second {
       .rank__num {
         .text {
-          &:nth-child(2) {
-            color: $white;
-          }
+          color: #28abe1;
+        }
+      }
+      .images__content {
+        .text {
+          color: #28abe1;
         }
       }
       .right {
@@ -119,23 +132,15 @@ export default {
         margin-right: pxTorpx(30);
         .text {
           &:first-child {
-            color: $white;
             font-size: pxTorpx(18);
           }
-        }
-        .yellow {
-          color: #f15a24;
         }
       }
       .images__content {
         @include flex(bottom, '');
         .text {
           &:first-child {
-            color: $white;
             font-size: pxTorpx(12);
-          }
-          &:nth-child(2) {
-            color: #ff0000;
           }
         }
       }
@@ -152,16 +157,6 @@ export default {
           font-size: pxTorpx(15);
           min-width: 180px;
           max-width: 180px;
-        }
-      }
-      .speacial {
-        .text {
-          &:first-child {
-            color: $white;
-          }
-          &:nth-child(2) {
-            color: #f15a24 !important;
-          }
         }
       }
     }

@@ -13,6 +13,12 @@
         />
         <image class="dolpin1" :src="require('@/assets/images/dolpin1.png')" />
         <view class="nav__title" :style="{ height: navHeight + 'px' }">
+          <image
+            v-if="isBack"
+            class="nav__back"
+            :src="require('@/assets/images/back.png')"
+            @click="handleBack"
+          ></image>
           <view class="title__name">
             <image class="fish" :src="require('@/assets/images/shell.png')" />
             <image class="sugar" :src="require('@/assets/images/sugar.png')" />
@@ -214,6 +220,14 @@ export default {
         padding: 0 pxTorpx(25) 0 pxTorpx(10);
       }
     }
+  }
+  .nav__back {
+    position: absolute;
+    width: pxTorpx(32);
+    height: pxTorpx(32);
+    left: pxTorpx(10);
+    bottom: pxTorpx(10);
+    z-index: 999;
   }
 }
 </style>

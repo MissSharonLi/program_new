@@ -1,5 +1,5 @@
 <template>
-  <view class="notify__nav__content" :style="{ top: isCustom && navBarHeight }">
+  <view class="notify__nav__content" :style="{ top: isCustom && navHeight + 'px' }">
     <view
       v-for="(item, index) in dataSource"
       :key="index"
@@ -40,36 +40,24 @@ export default {
 @import '@/assets/css/index.scss';
 .notify__nav {
   &__content {
-    background-color: $sub-nav-theme-color;
     @include flex(center, space-around);
     position: fixed;
     width: 100%;
     left: 0;
     z-index: 9;
-    height: pxTorpx(55);
+    padding-top: pxTorpx(10);
   }
   &__item {
-    font-family: $PingFang;
+    font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
+    background-color: #29abe2;
+    border-radius: pxTorpx(10);
+    border: pxTorpx(4) solid #29abe2;
     color: $white;
-    padding-top: pxTorpx(20);
-    padding-bottom: pxTorpx(5);
-    &::after {
-      content: '';
-      display: block;
-      width: pxTorpx(16);
-      height: pxTorpx(3);
-      background-color: transparent;
-      margin: 0 auto;
-      margin-top: pxTorpx(5);
-      border-radius: pxTorpx(3);
-    }
+    padding: pxTorpx(5) pxTorpx(15);
     &.active {
-      color: $theme-light-color;
-      &::after {
-        background-color: $theme-light-color;
-      }
+      background-color: #0071bc;
     }
   }
 }

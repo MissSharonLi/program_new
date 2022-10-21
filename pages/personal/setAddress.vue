@@ -1,6 +1,7 @@
 <template>
-  <view class="content set__address__content">
-    <view class="set__address__list">
+  <view class="content set__address__content" :style="{ 'margin-top': navHeight + 'px' }">
+    <HomeNavBar class="nav__wrapper" :isBack="true" title="地址"></HomeNavBar>
+    <view class="set__address__list" :style="{ 'min-height': sightHeight + 'px' }">
       <view class="set__address__item">
         <view class="label">收货人</view>
         <view class="input">
@@ -29,14 +30,18 @@
           ></textarea>
         </view>
       </view>
-    </view>
-    <view class="set__address__default">
-      <view class="title__content">
-        <view class="title">设置默认地址</view>
-        <view class="tips">提醒：每次下单会默认推荐该地址</view>
-      </view>
-      <view class="shift__content">
-        <view class="switch" :class="{ active: formProps.is_default }" @click="handleShift"></view>
+      <view class="set__address__default">
+        <view class="title__content">
+          <view class="title">设置默认地址</view>
+          <view class="tips">提醒：每次下单会默认推荐该地址</view>
+        </view>
+        <view class="shift__content">
+          <view
+            class="switch"
+            :class="{ active: formProps.is_default }"
+            @click="handleShift"
+          ></view>
+        </view>
       </view>
     </view>
     <view class="set__address__footer">
@@ -116,10 +121,17 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.content {
+  min-height: auto;
+}
 .set__address {
   &__list {
     padding-bottom: pxTorpx(40);
-    background-color: $sub-nav-theme-color;
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    border: pxTorpx(6) solid #29abe2;
+    background-color: #f0fcff;
+    border-radius: pxTorpx(16);
   }
   &__item {
     @include flex(center, '');
@@ -128,7 +140,7 @@ export default {
     font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
-    color: $white;
+    color: #000;
     &:first-child {
       border-top: 1px solid #10101014;
     }
@@ -157,7 +169,6 @@ export default {
     }
   }
   &__default {
-    background-color: $sub-nav-theme-color;
     margin-top: pxTorpx(30);
     padding: pxTorpx(20);
     @include flex(center, space-between);
@@ -165,10 +176,10 @@ export default {
       font-family: $Yuanti;
       font-weight: 400;
       font-size: pxTorpx(14);
-      color: $white;
+      color: #000;
       .tips {
         font-size: pxTorpx(12);
-        color: $white;
+        color: #000;
         margin-top: pxTorpx(5);
       }
     }
@@ -208,22 +219,19 @@ export default {
     }
   }
   &__footer {
+    font-family: $Yuanti;
+    height: pxTorpx(50);
+    background-color: #12264a;
+    border: 2px solid #dbb666;
+    color: #dbb666;
+    border-radius: pxTorpx(16);
+    font-size: pxTorpx(16);
+    text-align: center;
+    line-height: pxTorpx(50);
     position: fixed;
-    width: calc(100% - 60rpx);
-    bottom: 0;
-    left: 0;
-    background-color: $sub-nav-theme-color;
-    padding: pxTorpx(20) pxTorpx(15);
-    .button {
-      width: 100%;
-      line-height: pxTorpx(40);
-      height: pxTorpx(40);
-      text-align: center;
-      background-color: $theme-light-color;
-      color: $white;
-      font-size: pxTorpx(14);
-      border-radius: pxTorpx(100);
-    }
+    bottom: pxTorpx(20);
+    left: 20%;
+    width: 60%;
   }
 }
 </style>

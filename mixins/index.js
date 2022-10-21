@@ -6,6 +6,15 @@ const mixins = {
     navHeight() {
       return Number(this.$store.getters.getNavBarHeight.replace('px', '')) - 20
     },
+    sightHeight() {
+      const _this = this
+      uni.getSystemInfo({
+        success: function (res) {
+          _this.screenHeight = res.windowHeight - _this.navHeight - 50
+        }
+      })
+      return this.screenHeight
+    },
     token() {
       return this.$store.state.token || uni.getStorageSync('storage_token')
     },

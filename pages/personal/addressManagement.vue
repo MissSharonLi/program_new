@@ -1,6 +1,7 @@
 <template>
-  <view class="content address__wrapper">
-    <view class="address__list">
+  <view class="content address__wrapper" :style="{ 'margin-top': navHeight + 'px' }">
+    <HomeNavBar class="nav__wrapper" :isBack="true" title="地址"></HomeNavBar>
+    <view class="address__list" :style="{ 'min-height': sightHeight + 'px' }">
       <view
         v-for="(item, index) in returnData"
         :key="index"
@@ -83,15 +84,24 @@ export default {
 </style>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.content {
+  min-height: auto;
+}
 .address {
   &__list {
-    margin-top: pxTorpx(1);
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    border: pxTorpx(6) solid #29abe2;
+    background-color: #f0fcff;
+    border-radius: pxTorpx(16);
   }
   &__item {
-    background-color: $sub-nav-theme-color;
     padding: pxTorpx(20);
     margin-bottom: pxTorpx(1);
     position: relative;
+    &:not(:last-child) {
+      border-bottom: 1px solid #29abe2;
+    }
     &.default {
       position: relative;
       padding-left: pxTorpx(40);
@@ -117,7 +127,7 @@ export default {
               width: pxTorpx(34);
               height: pxTorpx(18);
               line-height: pxTorpx(18);
-              color: $white;
+              color: #fff;
               text-align: center;
               margin-left: pxTorpx(10);
               background-color: $theme-light-color;
@@ -133,7 +143,7 @@ export default {
     font-family: $Yuanti;
     font-weight: 700;
     font-size: 14px;
-    color: $white;
+    color: #000;
     margin-bottom: pxTorpx(10);
     .text {
       &:first-child {
@@ -145,7 +155,7 @@ export default {
     font-family: $Yuanti;
     font-weight: 400;
     font-size: pxTorpx(14);
-    color: $white;
+    color: #000;
     @include flex(center, space-between);
     .delete {
       width: pxTorpx(18);
@@ -161,18 +171,19 @@ export default {
     }
   }
   &__footer {
-    height: pxTorpx(40);
-    background-color: $theme-light-color;
-    border: 1px solid $theme-light-color;
-    color: rgb(255, 255, 255);
-    border-radius: pxTorpx(100);
-    font-size: pxTorpx(14);
+    font-family: $Yuanti;
+    height: pxTorpx(50);
+    background-color: #12264a;
+    border: 2px solid #dbb666;
+    color: #dbb666;
+    border-radius: pxTorpx(16);
+    font-size: pxTorpx(16);
     text-align: center;
-    line-height: pxTorpx(40);
+    line-height: pxTorpx(50);
     position: fixed;
     bottom: pxTorpx(20);
-    left: pxTorpx(20);
-    width: calc(100% - 80rpx);
+    left: 20%;
+    width: 60%;
   }
 }
 </style>

@@ -1,35 +1,42 @@
 <template>
-  <view class="content product__detail__content" :style="{ 'margin-top': navBarHeight }">
+  <view class="content product__detail__content" :style="{ 'margin-top': navHeight + 'px' }">
     <HomeNavBar class="nav__wrapper" :isBack="true" :title="returnObj.goods_name"></HomeNavBar>
     <view class="product__detail__top">
       <view class="product__detail__swiper">
-        <!-- <image v-if="tabIndex === 0" class="img" :src="returnObj.goods_image"></image> -->
         <view class="lottery">
           <image
             class="lottery_img"
             :src="returnObj.goods_image"
             referrerPolicy="no-referrer"
           ></image>
-          <view class="lottery_title">{{ returnObj.goods_name }}</view>
+          <view class="lottery_title">
+            <view class="amount">{{ returnObj.stock_num || 0 }}积分</view>
+            <view class="amount">
+              剩余：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
+            </view>
+          </view>
+          <view class="price">
+            {{ returnObj.goods_price || 0 }}{{ returnObj.is_score === 0 ? '浪币' : '积分' }}/枚
+          </view>
         </view>
       </view>
       <view class="product__detail__rank">
         <view class="rank__top">
           <view>
-            <button class="share" data-name="shareBtn" open-type="share"></button>
-            <view class="tips">分享</view>
+            <view class="love" @click="handleToCollect"></view>
+            <view class="tips">收藏</view>
           </view>
+          <view>
+            <button class="share" data-name="shareBtn" open-type="share"></button>
+            <view class="tips toshare">分享</view>
+          </view>
+        </view>
+        <view class="rank__middle">
           <image
             class="img"
             :src="require('@/assets/images/gameinfo.png')"
             @click="handleShowTips(1)"
           ></image>
-        </view>
-        <view class="rank__middle">
-          <view>
-            <view class="love" @click="handleToCollect"></view>
-            <view class="tips">我的喜好</view>
-          </view>
           <image
             class="img"
             :src="require('@/assets/images/presale.png')"
@@ -37,12 +44,11 @@
           ></image>
         </view>
         <view class="rank__bottom">
-          <view class="amount">
-            剩余：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
+          <view class="item">
+            全局：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
           </view>
-          <view class="price">
-            {{ returnObj.goods_price || 0 }}{{ returnObj.is_score === 0 ? '浪币' : '积分' }}/枚
-          </view>
+          <view class="item">A赏：{{ returnObj.goods_price || 0 }}%</view>
+          <view class="item">B赏：{{ returnObj.goods_price || 0 }}%</view>
         </view>
       </view>
     </view>
@@ -70,9 +76,9 @@
             :src="item.item_image"
             referrerPolicy="no-referrer"
           ></image>
+          <text class="num">{{ item.stock_num }}/{{ item.item_num }}</text>
           <view class="title">
             <text class="name">{{ item.item_name }}</text>
-            <text class="num">{{ item.stock_num }}/{{ item.item_num }}</text>
           </view>
         </view>
       </view>
@@ -118,7 +124,6 @@ import BuySuccess from '@/components/BuySuccess'
 import BuyDetail from '@/components/BuyDetail'
 import BuyTips from '@/components/BuyTips'
 import DeliveryTips from '@/components/DeliveryTips'
-import HomeNavBar from '@/components/HomeNavBar'
 import Lottery from './lottery'
 export default {
   name: 'DetailV2',
@@ -126,7 +131,6 @@ export default {
     BuyTips,
     BuyDetail,
     BuySuccess,
-    HomeNavBar,
     Lottery,
     DeliveryTips
   },
@@ -272,24 +276,46 @@ export default {
       display: block;
     }
     .lottery {
-      width: pxTorpx(170);
-      min-height: pxTorpx(170);
-      background-color: $white;
+      width: pxTorpx(144);
+      height: pxTorpx(150);
+      background-color: #366ba3;
       margin: 0 auto;
-      border-bottom-left-radius: pxTorpx(10);
-      border-bottom-right-radius: pxTorpx(10);
+      border-radius: pxTorpx(10);
+      padding: pxTorpx(6);
+      position: relative;
       &_img {
         width: 100%;
-        height: pxTorpx(150);
+        height: pxTorpx(149);
+        border: 1px solid #000;
       }
       &_title {
         font-family: $Yuanti;
+        position: absolute;
+        top: 0;
+        width: calc(100% - 14px);
+        top: 7px;
+        left: 7px;
+        @include flex(center, space-between);
+        .amount {
+          background-color: $white;
+          color: #c0262c;
+          font-size: pxTorpx(12);
+          border-radius: pxTorpx(25);
+          padding: pxTorpx(5);
+        }
+      }
+      .price {
+        font-family: $Yuanti;
+        position: absolute;
+        bottom: 7px;
+        right: 7px;
+        background-color: #fff;
+        color: #c0262c;
         font-size: pxTorpx(12);
-        padding: pxTorpx(2) pxTorpx(5) pxTorpx(10);
-        max-width: 99%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        border-radius: pxTorpx(25);
+        min-width: pxTorpx(50);
+        text-align: center;
+        padding: pxTorpx(5);
       }
     }
   }
@@ -310,69 +336,29 @@ export default {
       font-family: $Yuanti;
       color: $white;
       font-size: pxTorpx(16);
-      margin-bottom: pxTorpx(15);
       position: relative;
       .tab__item {
         display: block;
         line-height: 2;
-        padding: 0 pxTorpx(10);
         padding: 0 pxTorpx(15);
-        background-color: #12264a;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        border: 2px solid #dbb666;
+        background-color: #29abe2;
+        border-top-left-radius: pxTorpx(10);
+        border-top-right-radius: pxTorpx(10);
         min-width: pxTorpx(50);
         position: relative;
         text-align: center;
         &.active {
-          color: #f15a24;
+          color: #2d3192;
         }
-        &::before {
-          content: '';
-          display: block;
-          width: pxTorpx(50);
-          height: pxTorpx(20);
-          background-size: 100% 100%;
-          left: -10px;
-          top: -10rpx;
-          // background: url('@/assets/images/cloud.png') no-repeat center;
-          background-size: 100% 100%;
-          position: absolute;
-        }
-      }
-      &::before {
-        content: '';
-        display: block;
-        width: pxTorpx(30);
-        height: pxTorpx(30);
-        background-size: 100% 100%;
-        left: pxTorpx(20);
-        bottom: 0;
-        // background: url('@/assets/images/flower.png') no-repeat center;
-        background-size: 100% 100%;
-      }
-      &::after {
-        content: '';
-        display: block;
-        width: pxTorpx(30);
-        height: pxTorpx(30);
-        background-size: 100% 100%;
-        right: pxTorpx(20);
-        bottom: 0;
-        // background: url('@/assets/images/flower.png') no-repeat center;
-        background-size: 100% 100%;
       }
     }
   }
   &__top {
-    position: relative;
     width: calc(100% - 20px);
     margin: pxTorpx(15) auto;
-    background-color: #dbb666;
-    border-bottom-left-radius: pxTorpx(20);
-    border-bottom-right-radius: pxTorpx(20);
+    background-color: #29abe2;
+    border: 2px solid #366ba3;
+    border-radius: pxTorpx(16);
     position: relative;
     &:before {
       content: '';
@@ -389,15 +375,14 @@ export default {
   }
   &__rank {
     .img {
-      width: pxTorpx(55);
-      height: pxTorpx(55);
-      margin-right: pxTorpx(20);
+      width: pxTorpx(45);
+      height: pxTorpx(45);
     }
     .rank__top {
-      width: calc(100% - 40rpx);
+      width: calc(100% - 110rpx);
       position: absolute;
       top: pxTorpx(15);
-      left: pxTorpx(20);
+      left: pxTorpx(25);
       @include flex(center, space-between);
       .share {
         width: pxTorpx(40);
@@ -410,19 +395,16 @@ export default {
         padding-right: 0;
       }
       .tips {
-        color: #12264a;
-        font-size: pxTorpx(10);
+        color: #c0262c;
+        font-size: pxTorpx(16);
         display: block;
         text-align: center;
         margin-top: pxTorpx(2);
+        font-family: $Yuanti;
+        &.toshare {
+          color: #12264a;
+        }
       }
-    }
-    .rank__middle {
-      width: calc(100% - 40rpx);
-      position: absolute;
-      bottom: pxTorpx(70);
-      left: pxTorpx(20);
-      @include flex(center, space-between);
       .love {
         width: pxTorpx(40);
         height: pxTorpx(40);
@@ -430,43 +412,42 @@ export default {
         background: url('@/assets/images/love.png') no-repeat center;
         background-size: 100% 100%;
       }
-      .tips {
-        color: #12264a;
-        font-size: pxTorpx(10);
-        display: block;
-        margin-top: pxTorpx(2);
-        text-align: center;
-      }
+    }
+    .rank__middle {
+      width: pxTorpx(94);
+      position: absolute;
+      bottom: pxTorpx(70);
+      right: pxTorpx(3);
+      @include flex(center, space-between);
     }
     .rank__bottom {
-      width: calc(100% - 20rpx);
+      width: pxTorpx(80);
+      min-height: pxTorpx(89);
       position: absolute;
-      bottom: pxTorpx(15);
-      left: 0;
+      top: pxTorpx(90);
+      left: pxTorpx(5);
       font-size: pxTorpx(12);
-      padding: 0 pxTorpx(5);
-      @include flex(center, space-between);
-      .amount {
-        color: $white;
-      }
-      .price {
-        background-color: #96886d;
-        color: #c1272d;
-        min-width: pxTorpx(50);
-        text-align: center;
-        padding: pxTorpx(5) pxTorpx(10);
+      padding: pxTorpx(5);
+      border-radius: pxTorpx(10);
+      background-color: $white;
+      .item {
+        color: #932727;
+        font-family: $Yuanti;
+        font-size: pxTorpx(12);
       }
     }
   }
 
   &__bottom {
-    background-color: $theme-title-bg-color;
+    background-color: #f0fcff;
     border-radius: pxTorpx(20);
-    width: calc(100% - 20px);
-    margin: pxTorpx(15) auto;
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    border: pxTorpx(6) solid #29abe2;
+    min-height: pxTorpx(400);
     .bottom__title__content {
       font-family: $Yuanti;
-      color: $white;
+      color: #2d3192;
       font-size: pxTorpx(20);
       text-align: center;
       padding: pxTorpx(20) 0 pxTorpx(10);
@@ -547,13 +528,23 @@ export default {
       min-height: pxTorpx(40);
       margin-bottom: pxTorpx(10);
       position: relative;
-      // background: url('@/assets/images/bg10.png') no-repeat center;
+      background: url('@/assets/images/bg10.png') no-repeat center;
       background-size: 100% 100%;
       border-bottom-left-radius: pxTorpx(5);
       border-bottom-right-radius: pxTorpx(5);
       padding-bottom: pxTorpx(10);
       &:not(:nth-child(3n)) {
         margin-right: 25rpx;
+      }
+      .num {
+        position: absolute;
+        background-color: $white;
+        padding: pxTorpx(2) pxTorpx(15);
+        border-radius: pxTorpx(5);
+        right: pxTorpx(5);
+        font-family: $Yuanti;
+        font-size: pxTorpx(16);
+        top: pxTorpx(80);
       }
       &__image {
         width: calc(100% - 20rpx);
@@ -604,23 +595,18 @@ export default {
         font-family: $Yuanti;
         margin-top: pxTorpx(4);
         padding: 0 pxTorpx(5);
-        @include flex(center, space-between);
         .name {
           font-weight: 700;
           font-size: pxTorpx(10);
           color: #231815;
-          max-width: 70%;
+          max-width: 99%;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
           word-break: break-all;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
-        }
-        .num {
-          font-weight: 400;
-          color: #231815;
-          font-size: pxTorpx(10);
+          text-align: center;
         }
       }
       .sub__title {

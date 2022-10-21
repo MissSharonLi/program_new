@@ -38,12 +38,9 @@
           </view>
         </view>
       </view>
-      <image
-        v-if="imgSrc"
-        referrerPolicy="no-referrer"
-        class="personal__images__content"
-        :src="imgSrc"
-      ></image>
+      <view class="personal__images__content">
+        <image v-if="imgSrc" referrerPolicy="no-referrer" class="img" :src="imgSrc"></image>
+      </view>
       <view class="personal__menu__content">
         <view class="personal__menu__list">
           <view
@@ -79,14 +76,12 @@
 import { api } from '@/api'
 import MyTabs from '@/components/MyTabs'
 import DeliveryTips from '@/components/DeliveryTips'
-import HomeNavBar from '@/components/HomeNavBar'
 import RechargeDetail from '@/components/RechargeDetail'
 import EditNickName from '@/components/EditNickName'
 export default {
   components: {
     MyTabs,
     DeliveryTips,
-    HomeNavBar,
     EditNickName,
     RechargeDetail
   },
@@ -371,12 +366,17 @@ export default {
   padding-bottom: pxTorpx(80);
 }
 .personal__images__content {
+  border: pxTorpx(6) solid #29abe2;
   width: calc(100% - 30px);
   height: pxTorpx(135);
   border-radius: pxTorpx(20);
   margin: 0 auto;
-  display: block;
-  border: pxTorpx(6) solid #29abe2;
+  overflow: hidden;
+  .img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 }
 .personal__menu {
   &__content {

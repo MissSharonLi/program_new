@@ -1,5 +1,5 @@
 <template>
-  <view class="content consumption__content" :style="{ 'margin-top': navBarHeight }">
+  <view class="content consumption__content" :style="{ 'margin-top': navHeight + 'px' }">
     <HomeNavBar class="nav__wrapper" :isBack="true" title="消费记录"></HomeNavBar>
     <view class="consumption__tab__content">
       <text
@@ -12,7 +12,7 @@
         {{ item.label }}
       </text>
     </view>
-    <view class="consumption__main">
+    <view class="consumption__main" :style="{ 'min-height': listHeight + 'px' }">
       <view class="consumption__list">
         <view v-for="(item, index) in returnData" :key="index" class="consumption__item">
           <view class="text">操作: {{ item.memo }}</view>
@@ -38,12 +38,8 @@
 </template>
 <script>
 import { api } from '@/api'
-import HomeNavBar from '@/components/HomeNavBar'
 export default {
   name: 'ConsumptionHistory',
-  components: {
-    HomeNavBar
-  },
   data() {
     return {
       tabIndex: 0,
@@ -66,6 +62,17 @@ export default {
   onLoad(options) {
     this.tabIndex = Number(options.type)
     this.getData(true)
+  },
+  computed: {
+    listHeight() {
+      const _this = this
+      uni.getSystemInfo({
+        success: function (res) {
+          _this.screenHeight = res.windowHeight - _this.navHeight - 100
+        }
+      })
+      return this.screenHeight
+    }
   },
   methods: {
     async getData(init) {
@@ -96,6 +103,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.content {
+  min-height: auto;
+}
 .consumption {
   &__tab__content {
     @include flex(center, space-around);
@@ -107,34 +117,35 @@ export default {
     .tab__item {
       display: block;
       line-height: 2;
-      padding: 0 pxTorpx(15);
-      background-color: #12264a;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 10px;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      border: 2px solid #dbb666;
+      padding: pxTorpx(1) pxTorpx(15);
+      background-color: #29abe2;
+      border-radius: pxTorpx(10);
+      margin-bottom: -4px;
+      border: pxTorpx(4) solid #29abe2;
       &.active {
-        color: #f15a24;
+        color: #fff;
+        background-color: #0071bc;
       }
     }
   }
   &__main {
-    width: calc(100% - 20px);
-    background-color: #4d4d4d;
-    min-height: pxTorpx(500);
-    border-radius: pxTorpx(20);
+    width: calc(100% - 36px);
+    background-color: #f0fcff;
+    border-radius: pxTorpx(16);
     margin: 0 auto pxTorpx(20);
+    border: pxTorpx(6) solid #29abe2;
   }
   &__list {
     padding: pxTorpx(15);
   }
   &__item {
     margin-bottom: pxTorpx(10);
+    font-family: $Yuanti;
     .text {
       @include flex(center, flex-start);
       font-size: pxTorpx(14);
-      color: $white;
+      color: #2d3192;
+      font-family: $Yuanti;
       margin-bottom: pxTorpx(8);
       .span {
         &:last-child {
@@ -144,7 +155,7 @@ export default {
     }
     .em {
       font-size: pxTorpx(12);
-      color: #000000;
+      color: #f15924;
     }
   }
   &__images {
@@ -170,6 +181,7 @@ export default {
         max-width: 99%;
         text-overflow: ellipsis;
         overflow: hidden;
+        font-family: $Yuanti;
         white-space: nowrap;
       }
     }

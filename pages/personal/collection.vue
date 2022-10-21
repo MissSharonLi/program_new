@@ -1,27 +1,30 @@
 <template>
-  <view class="content collection__wrapper">
-    <SubTabs :dataSource="tabList" @tabClick="handleTab"></SubTabs>
-    <view class="collection__list">
-      <view v-for="(item, index) in returnData" :key="index" class="collection__item">
-        <text class="collection__time">{{ item.createtime }}</text>
-        <view class="collection__images">
-          <image
-            class="img"
-            referrerPolicy="no-referrer"
-            :class="{ sold__out: item.stock_num === 0 }"
-            :src="item.goods_image"
-          ></image>
-          <view>
-            <text class="title">{{ item.goods_name }}</text>
-            <text class="price">￥{{ item.goods_price }}/张</text>
+  <view class="content collection__wrapper" :style="{ 'margin-top': navHeight + 'px' }">
+    <HomeNavBar class="nav__wrapper" :isBack="true" title="我的收藏"></HomeNavBar>
+    <SubTabs :dataSource="tabList" :isCustom="true" @tabClick="handleTab"></SubTabs>
+    <view class="collection__content">
+      <view class="collection__list" :style="{ 'min-height': sightHeight + 'px' }">
+        <view v-for="(item, index) in returnData" :key="index" class="collection__item">
+          <text class="collection__time">{{ item.createtime }}</text>
+          <view class="collection__images">
+            <image
+              class="img"
+              referrerPolicy="no-referrer"
+              :class="{ sold__out: item.stock_num === 0 }"
+              :src="item.goods_image"
+            ></image>
+            <view>
+              <text class="title">{{ item.goods_name }}</text>
+              <text class="price">￥{{ item.goods_price }}/张</text>
+            </view>
           </view>
-        </view>
-        <view class="collection__footer">
-          <text class="footer__text">
-            剩余
-            <text class="speacial">{{ item.stock_num }}</text>
-            /{{ item.goods_num }}张
-          </text>
+          <view class="collection__footer">
+            <text class="footer__text">
+              剩余
+              <text class="speacial">{{ item.stock_num }}</text>
+              /{{ item.goods_num }}张
+            </text>
+          </view>
         </view>
       </view>
     </view>
@@ -76,9 +79,16 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
 .collection {
+  &__content {
+    padding-top: pxTorpx(40);
+  }
   &__list {
     padding: pxTorpx(10);
-    padding-top: pxTorpx(65);
+    border: pxTorpx(6) solid #29abe2;
+    background-color: #f0fcff;
+    border-radius: pxTorpx(16);
+    width: calc(100% - 60px);
+    margin: 0 auto;
   }
   &__item {
     background-color: $sub-nav-theme-color;
