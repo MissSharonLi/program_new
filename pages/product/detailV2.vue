@@ -23,7 +23,7 @@
       <view class="product__detail__rank">
         <view class="rank__top">
           <view>
-            <view class="love" @click="handleToCollect"></view>
+            <view class="love" :class="{ active: is_collect }" @click="handleToCollect"></view>
             <view class="tips">收藏</view>
           </view>
           <view>
@@ -242,7 +242,11 @@ export default {
     // 收藏
     async handleToCollect() {
       const { id: goods_id } = this.params
-      const { code, data } = await api.handleAddCollect({ goods_id, token: this.token })
+      const { code, data } = await api.handleAddCollect({
+        goods_id,
+        token: this.token,
+        is_collect: this.is_collect === 0 ? 1 : 0
+      })
       if (code === 1 && data) {
         this.is_collect = !this.is_collect
         this.is_collect ? this.$toast('已成功收藏') : this.$toast('已取消收藏')
@@ -411,6 +415,10 @@ export default {
         display: block;
         background: url('@/assets/images/love.png') no-repeat center;
         background-size: 100% 100%;
+        &.active {
+          background: url('@/assets/images/loved.png') no-repeat center;
+          background-size: 100% 100%;
+        }
       }
     }
     .rank__middle {

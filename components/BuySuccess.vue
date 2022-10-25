@@ -1,5 +1,9 @@
 <template>
-  <VanPopup :show="show" round custom-style="border-radius:10px;background-color:#808080">
+  <VanPopup
+    :show="show"
+    round
+    custom-style="border-radius:10px;background-color:#fff;border:2px solid #0071bc"
+  >
     <view class="rank__content">
       <view class="rank__title">中奖商品</view>
       <view class="rank__list">
@@ -53,16 +57,27 @@ export default {
 @import '@/assets/css/index.scss';
 .rank {
   &__content {
-    // background-color: $white;
     width: pxTorpx(300);
     height: pxTorpx(400);
     border-radius: pxTorpx(5);
+    font-family: $Yuanti;
+    background-color: $white;
+    &::after {
+      content: '';
+      position: absolute;
+      width: pxTorpx(45);
+      height: pxTorpx(30);
+      background: url('@/assets/images/dolphin.png') no-repeat;
+      background-size: 100% 100%;
+      right: 0;
+      top: 0;
+    }
   }
   &__title {
     font-family: $PingFang;
     font-weight: 400;
     font-size: pxTorpx(14);
-    color: $white;
+    color: #000;
     text-align: center;
     line-height: pxTorpx(40);
   }
@@ -111,9 +126,8 @@ export default {
       background-color: #f8dc4c;
       color: $white;
       text-align: center;
-      margin: 0 auto pxTorpx(10);
+      margin: pxTorpx(3) auto 0;
       border-radius: pxTorpx(5);
-      // margin-right: pxTorpx(10);
     }
     .check {
       width: pxTorpx(80);

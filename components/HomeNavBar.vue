@@ -112,7 +112,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 999999999;
   .nav__bar__content {
     position: relative;
     width: 100%;
@@ -227,7 +227,7 @@ export default {
     height: pxTorpx(32);
     left: pxTorpx(10);
     bottom: pxTorpx(10);
-    z-index: 999;
+    z-index: 99999999;
   }
 }
 </style>

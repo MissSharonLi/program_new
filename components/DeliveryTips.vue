@@ -54,7 +54,7 @@ export default {
   min-height: pxTorpx(250);
   padding: pxTorpx(20);
   line-height: 1.8;
-  color: #fff;
+  color: #000;
   font-family: $Yuanti;
   background-color: $white;
   &::after {

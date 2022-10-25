@@ -138,7 +138,7 @@ export default {
     background-size: 100%;
     padding: pxTorpx(10) 0;
     border-radius: 20px;
-    border: 2px solid #dbb666;
+    border: 2px solid #0071bc;
     background-color: $white;
   }
   &__list__content {
