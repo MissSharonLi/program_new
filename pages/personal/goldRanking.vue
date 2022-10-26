@@ -6,8 +6,8 @@
       <view class="userinfo__content">
         <image class="img" referrerPolicy="no-referrer" :src="userInfo.avatar"></image>
         <view class="info__content">
-          <view class="custom__id">客户ID：</view>
-          <view class="nickname">客户昵称：{{ userInfo.nickname }}</view>
+          <view class="custom__id">客户ID：{{ userInfo.uuid || '' }}</view>
+          <view class="nickname">客户昵称：{{ userInfo.nickname || '' }}</view>
         </view>
       </view>
     </view>

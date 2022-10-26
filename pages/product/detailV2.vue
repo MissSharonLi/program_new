@@ -45,10 +45,10 @@
         </view>
         <view class="rank__bottom">
           <view class="item">
-            全局：{{ returnObj.stock_num || 0 }}/{{ returnObj.goods_num || 0 }}
+            {{ returnObj.whole_tickets_text || '' }}
           </view>
-          <view class="item">A赏：{{ returnObj.goods_price || 0 }}%</view>
-          <view class="item">B赏：{{ returnObj.goods_price || 0 }}%</view>
+          <view class="item">{{ returnObj.a_tickets_text || '' }}%</view>
+          <view class="item">{{ returnObj.b_tickets_text || '' }}%</view>
         </view>
       </view>
     </view>

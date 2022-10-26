@@ -15,7 +15,7 @@
               ></image>
               <view v-else class="login_btn" @click="doLogin">登录</view>
               <view class="left__detail">
-                <text class="left__text">客户ID：</text>
+                <text class="left__text">客户ID：{{ userInfo.uuid || '' }}</text>
                 <text class="left__text" @click="handleEditNickName">
                   客户昵称：{{
                     userInfo.mobile ? commonUtils.getTel(userInfo.mobile) : userInfo.nickname || ''
