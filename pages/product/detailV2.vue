@@ -47,8 +47,8 @@
           <view class="item">
             {{ returnObj.whole_tickets_text || '' }}
           </view>
-          <view class="item">{{ returnObj.a_tickets_text || '' }}%</view>
-          <view class="item">{{ returnObj.b_tickets_text || '' }}%</view>
+          <view class="item">{{ returnObj.a_tickets_text || '' }}</view>
+          <view class="item">{{ returnObj.b_tickets_text || '' }}</view>
         </view>
       </view>
     </view>
