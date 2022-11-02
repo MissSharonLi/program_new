@@ -31,10 +31,12 @@ export default {
   },
   data() {
     return {
+      isRefresh: false,
       bannerList: []
     }
   },
   onShow() {
+    this.refresh()
     this.network().runApiToGetBannerList()
   },
   async onPullDownRefresh() {
@@ -45,16 +47,16 @@ export default {
     uni.stopPullDownRefresh()
   },
   async onReachBottom() {
-    await this.$nextTick()
+    if (this.isRefresh) return
     this.$refs.scrollProps.handleOperation(null, 3)
   },
   methods: {
     async refresh() {
-      await this.$nextTick()
+      this.isRefresh = true
       this.$refs.scrollProps.params.page = 1
       this.$refs.scrollProps.productDataSource = []
       await this.$refs.scrollProps.network().runApiToGetProductList()
-      uni.stopPullDownRefresh()
+      this.isRefresh = false
     },
     network() {
       return {

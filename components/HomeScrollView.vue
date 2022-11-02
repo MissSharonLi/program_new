@@ -79,8 +79,7 @@ export default {
     }
   },
   async created() {
-    await this.network().runApiToGetProductCat()
-    this.network().runApiToGetProductList()
+    this.network().runApiToGetProductCat()
   },
   methods: {
     async handleOperation(e, type) {

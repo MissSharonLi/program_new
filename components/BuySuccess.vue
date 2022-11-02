@@ -46,6 +46,7 @@ export default {
   methods: {
     handleClose(val) {
       this.show = false
+      this.$emit('success')
     },
     handleToDetail() {
       uni.navigateTo({ url: '/pages/personal/orderManagement?status=1' })

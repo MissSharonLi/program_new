@@ -93,6 +93,7 @@ export default {
   data() {
     return {
       select: false,
+      isRefresh: false,
       params: {
         page: 1,
         status: 1
@@ -107,9 +108,12 @@ export default {
   },
   onLoad() {
     this.runApiToGetSiteconfig()
-    this.getData()
+  },
+  onShow() {
+    this.refresh()
   },
   onReachBottom() {
+    if (this.isRefresh) return
     this.params.page++
     this.getData()
   },
@@ -121,10 +125,12 @@ export default {
       this.params.status = index
       this.getData()
     },
-    refresh() {
+    async refresh() {
+      this.isRefresh = false
       this.returnData = []
       this.params.page = 1
-      this.getData()
+      await this.getData()
+      this.isRefresh = true
     },
     // 获取说明
     async runApiToGetSiteconfig() {

@@ -129,6 +129,8 @@ export default {
   },
   onLoad() {
     this.runApiToGetAreaList()
+  },
+  onShow() {
     this.runApiToGetSiteconfig()
     this.runApiToGetUserInfo()
   },

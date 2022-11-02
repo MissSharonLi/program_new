@@ -119,7 +119,11 @@
     </view>
     <view class="refresh" @click="handleRefresh"></view>
     <BuyDetail ref="buyProps" :params="buyParams" @success="handleSuccess"></BuyDetail>
-    <BuySuccess ref="rankProps" :dataSource="rankProps.dataSource"></BuySuccess>
+    <BuySuccess
+      ref="rankProps"
+      :dataSource="rankProps.dataSource"
+      @success="handleRefresh"
+    ></BuySuccess>
     <VanDialog id="van-dialog"></VanDialog>
     <BuyTips ref="buyTipsProps" :notice="returnObj.pre_sale_content"></BuyTips>
     <DeliveryTips ref="tipsProps" :notice="returnObj.introduce_content"></DeliveryTips>
@@ -228,7 +232,7 @@ export default {
     },
     // 点击购买
     handleToBuy(num) {
-      this.commonUtils.login().then(async (res) => {
+      const handle = () => {
         this.buyParams = {
           ...this.params,
           num,
@@ -244,7 +248,8 @@ export default {
           sub_title: this.returnObj.sub_title
         }
         this.$refs.buyProps.show = true
-      })
+      }
+      !this.token ? this.commonUtils.login().then(async (res) => handle()) : handle()
     },
     // 收藏
     async handleToCollect() {
