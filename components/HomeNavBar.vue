@@ -121,7 +121,7 @@ export default {
     background-color: #fff;
   }
   .nav__title {
-    font-family: $PingFang;
+    font-family: $ShenPin;
     font-weight: 700;
     font-size: pxTorpx(18);
     color: $white;

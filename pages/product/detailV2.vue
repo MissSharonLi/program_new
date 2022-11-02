@@ -87,7 +87,7 @@
       </view>
     </view>
     <view class="product__detail__footer">
-      <view class="product__detail__lang">
+      <view v-if="!returnObj.onlyOne" class="product__detail__lang">
         <image
           class="img"
           :src="require('@/assets/images/lang1.png')"
@@ -107,6 +107,13 @@
           class="img"
           :src="require('@/assets/images/lang4.png')"
           @click="handleToBuy(10)"
+        ></image>
+      </view>
+      <view v-else class="product__detail__lang">
+        <image
+          class="img"
+          :src="require('@/assets/images/lang1.png')"
+          @click="handleToBuy(1)"
         ></image>
       </view>
     </view>
@@ -647,7 +654,7 @@ export default {
   }
   &__lang {
     padding: pxTorpx(20);
-    @include flex(center, space-between);
+    @include flex(center, space-around);
     .img {
       width: pxTorpx(70);
       height: pxTorpx(70);

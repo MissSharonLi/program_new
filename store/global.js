@@ -18,6 +18,11 @@ const globalModule = {
       {
         family: 'PingFang',
         source: 'url("https://www.langmanwu2021.cn/assets/apifonts/PingFang.ttf")'
+      },
+      {
+        family: 'ShenPin',
+        source:
+          'url("https://a.yiyunrj.com/assets/apifonts/RuiZiAoYunJingShenPinBoJianMianFei-Shan(REEJI-PinboGB-Flash)-2.ttf")'
       }
     ]
   },
