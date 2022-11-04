@@ -4,10 +4,18 @@
     :show="show"
     round
     custom-style="height:560rpx;background:transparent;padding-bottom: 0;padding:0 5px"
+    closeable
+    close-icon="close"
     position="bottom"
-    @close.native="handleClose"
   >
     <view class="buy__content">
+      <VanIcon
+        name="close"
+        color="#999"
+        custom-style="position:absolute;right:10px;top:10px;z-index:9999"
+        size="28px"
+        @click.native="handleClose"
+      />
       <view class="buy__top__content">
         <view class="buy__content__item">
           <view class="buy__product__detail">
@@ -65,11 +73,13 @@
 import { api } from '@/api'
 import VanPopup from '@/wxcomponents/vant/popup/index'
 import VanCheckbox from '@/wxcomponents/vant/checkbox/index'
+import VanIcon from '@/wxcomponents/vant/icon/index'
 export default {
   name: 'BuyDetail',
   components: {
     VanPopup,
-    VanCheckbox
+    VanCheckbox,
+    VanIcon
   },
   props: {
     params: {

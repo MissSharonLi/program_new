@@ -113,6 +113,7 @@
         <image
           class="img"
           :src="require('@/assets/images/lang1.png')"
+          style="width: 128px; height: 98px"
           @click="handleToBuy(1)"
         ></image>
       </view>

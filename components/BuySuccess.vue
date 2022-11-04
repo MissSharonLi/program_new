@@ -3,6 +3,7 @@
     :show="show"
     round
     custom-style="border-radius:10px;background-color:#fff;border:2px solid #0071bc"
+    @close.native="handleClose"
   >
     <view class="rank__content">
       <view class="rank__title">中奖商品</view>
