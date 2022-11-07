@@ -3,7 +3,7 @@
     <HomeNavBar class="nav__wrapper" :isBack="true" title="我的收藏"></HomeNavBar>
     <SubTabs :dataSource="tabList" :isCustom="true" @tabClick="handleTab"></SubTabs>
     <view class="collection__content">
-      <view class="collection__list" :style="{ 'min-height': (sightHeight - 70) * 2 + 'rpx' }">
+      <view class="collection__list" :style="{ 'min-height': (sightHeight - 100) * 2 + 'rpx' }">
         <view
           v-for="(item, index) in returnData"
           :key="index"
