@@ -72,7 +72,9 @@ export default {
   },
   computed: {
     swiperHeight() {
-      return Math.ceil((this.productDataSource.length || 1) / 2) * 280 + 'px'
+      return !this.productDataSource.length
+        ? 400 + 'rpx'
+        : 80 + Math.ceil(this.productDataSource.length / 2) * 500 + 'rpx'
     },
     contentText() {
       return this.loadStatus === 0 ? '上拉加载更多数据' : this.loadStatus === 1 ? '加载中...' : ''
