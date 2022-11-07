@@ -3,8 +3,13 @@
     <HomeNavBar class="nav__wrapper" :isBack="true" title="我的收藏"></HomeNavBar>
     <SubTabs :dataSource="tabList" :isCustom="true" @tabClick="handleTab"></SubTabs>
     <view class="collection__content">
-      <view class="collection__list" :style="{ 'min-height': sightHeight + 'px' }">
-        <view v-for="(item, index) in returnData" :key="index" class="collection__item">
+      <view class="collection__list" :style="{ 'min-height': (sightHeight - 70) * 2 + 'rpx' }">
+        <view
+          v-for="(item, index) in returnData"
+          :key="index"
+          class="collection__item"
+          @click="handleClick(item)"
+        >
           <text class="collection__time">{{ item.createtime }}</text>
           <view class="collection__images">
             <image
@@ -62,6 +67,11 @@ export default {
       this.params.type = index
       this.getData()
     },
+    handleClick(item) {
+      uni.navigateTo({
+        url: '/pages/product/detailV2?id=' + item.id
+      })
+    },
     async getData() {
       const { code, data } = await api.getCollectionList({ ...this.params, token: this.token })
       if (code === 1 && data) {
@@ -78,6 +88,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/index.scss';
+.content {
+  min-height: auto;
+}
 .collection {
   &__content {
     padding-top: pxTorpx(40);
