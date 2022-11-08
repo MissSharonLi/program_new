@@ -35,9 +35,10 @@ export default {
       bannerList: []
     }
   },
-  onShow() {
-    this.refresh()
+  async onShow() {
     this.network().runApiToGetBannerList()
+    await this.$nextTick()
+    this.refresh()
   },
   async onPullDownRefresh() {
     await this.$nextTick()
