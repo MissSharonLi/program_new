@@ -193,7 +193,7 @@ export default {
       }
     },
     async query() {
-      const { code, data } = await api.getProductDetail(this.params)
+      const { code, data } = await api.getProductDetail({ ...this.params, token: this.token })
       if (code === 1 && data) {
         this.returnObj = data || {}
         this.is_collect = data.is_collect
