@@ -36,7 +36,7 @@ export default {
     }
   },
   async onShow() {
-    this.network().runApiToGetBannerList()
+    await this.network().runApiToGetBannerList()
     await this.$nextTick()
     this.refresh()
   },
