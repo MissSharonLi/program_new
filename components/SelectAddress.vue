@@ -1,6 +1,11 @@
 <template>
   <view>
-    <VanPopup :show="show" round custom-style="border-radius:10px;width:90%">
+    <VanPopup
+      :show="show"
+      round
+      custom-style="border-radius:10px;width:90%"
+      @click.native="handleClose"
+    >
       <view class="address__wrapper">
         <view class="address__list">
           <view

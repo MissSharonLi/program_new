@@ -87,7 +87,7 @@
       </view>
     </view>
     <view class="product__detail__footer">
-      <view v-if="!returnObj.onlyOne" class="product__detail__lang">
+      <view v-if="returnObj.onlyOne" class="product__detail__lang">
         <image
           class="img"
           :src="require('@/assets/images/lang1.png')"
@@ -98,11 +98,11 @@
           :src="require('@/assets/images/lang2.png')"
           @click="handleToBuy(3)"
         ></image>
-        <image
+        <!-- <image
           class="img"
           :src="require('@/assets/images/lang3.png')"
           @click="handleToBuy(5)"
-        ></image>
+        ></image> -->
         <image
           class="img"
           :src="require('@/assets/images/lang4.png')"
@@ -662,8 +662,8 @@ export default {
     padding: pxTorpx(20);
     @include flex(center, space-around);
     .img {
-      width: pxTorpx(70);
-      height: pxTorpx(70);
+      width: pxTorpx(118);
+      height: pxTorpx(88);
     }
   }
 }
