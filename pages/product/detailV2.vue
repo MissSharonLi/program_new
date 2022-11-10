@@ -87,7 +87,7 @@
       </view>
     </view>
     <view class="product__detail__footer">
-      <view v-if="returnObj.onlyOne" class="product__detail__lang">
+      <view v-if="!returnObj.onlyOne" class="product__detail__lang">
         <image
           class="img"
           :src="require('@/assets/images/lang1.png')"
