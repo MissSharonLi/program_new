@@ -107,7 +107,8 @@ export default {
     },
     async handleToPay(type) {
       if (!this.checked) return this.$toast('请先勾选同意')
-      const params = { ...this.params, type }
+      const { id, num, token } = this.params
+      const params = { id, num, token, type }
       const { code, data } = await api.handleToBuy(params)
       if (code === 1) {
         if (type === 2) {
