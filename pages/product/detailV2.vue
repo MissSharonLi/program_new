@@ -1,6 +1,12 @@
 <template>
   <view class="content product__detail__content" :style="{ 'margin-top': navHeight + 'px' }">
-    <HomeNavBar class="nav__wrapper" :isBack="true" :title="returnObj.goods_name"></HomeNavBar>
+    <HomeNavBar
+      class="nav__wrapper"
+      :isBack="true"
+      :isCustom="true"
+      :title="returnObj.goods_name"
+      @goHome="handleGoHome"
+    ></HomeNavBar>
     <view class="product__detail__top">
       <view class="product__detail__swiper">
         <view class="lottery">
@@ -185,6 +191,10 @@ export default {
     }
   },
   methods: {
+    // 返回首页
+    handleGoHome() {
+      uni.switchTab({ url: '/pages/home/index' })
+    },
     handleRefresh() {
       this.query()
       if (this.tabIndex === 1) {

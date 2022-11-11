@@ -56,6 +56,10 @@ export default {
     isBack: {
       type: Boolean,
       default: false
+    },
+    isCustom: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -68,6 +72,10 @@ export default {
   },
   methods: {
     handleBack() {
+      if (this.isCustom) {
+        this.$emit('goHome')
+        return
+      }
       uni.navigateBack({
         delta: 1
       })
