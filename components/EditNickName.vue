@@ -17,7 +17,7 @@
         头像：
       </text>
       <button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="handleUpload">
-        <image class="img" :src="avatar || fileList[0] || ''"></image>
+        <image class="img" referrerPolicy="no-referrer" :src="avatar || fileList[0] || ''"></image>
       </button>
     </view>
     <VanCellGroup>
@@ -58,7 +58,8 @@ export default {
     return {
       show: false,
       value: '',
-      avatar: ''
+      avatar: '',
+      imgUrl: ''
     }
   },
   methods: {
@@ -97,6 +98,7 @@ export default {
           const { code, data, msg } = JSON.parse(res.data || '{}')
           if (code === 1 && data) {
             this.avatar = data.fullurl
+            this.imgUrl = data.url
           } else {
             this.$toast(msg)
           }
@@ -108,7 +110,7 @@ export default {
     },
     // 提交
     async handleConfirm({ detail }) {
-      if (!this.avatar) {
+      if (!this.imgUrl) {
         this.$toast('请先上传头像！')
         detail.dialog.stopLoading()
         return false
@@ -122,7 +124,7 @@ export default {
       const { code } = await api.handleEditNickName({
         nickname: this.value,
         token: this.token,
-        avatar: this.avatar
+        avatar: this.imgUrl
       })
       detail.dialog.stopLoading()
       if (code === 1) {
