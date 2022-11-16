@@ -1,3 +1,4 @@
+import { domain } from '../sdk/config'
 const globalModule = {
   namespaced: true,
   state: {
@@ -9,20 +10,19 @@ const globalModule = {
     familyArray: [
       {
         family: 'STHupo',
-        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/FangZhengHeiTi-GBK-1.ttf")'
+        source: `url("${domain}assets/apifonts/FangZhengHeiTi-GBK-1.ttf")`
       },
       {
         family: 'Yuanti',
-        source: 'url("https://a.yiyunrj.com/assets/apifonts/TengXiangJiaLiZhunCuYuanJian-2.ttf")'
+        source: `url("${domain}assets/apifonts/TengXiangJiaLiZhunCuYuanJian-2.ttf")`
       },
       {
         family: 'PingFang',
-        source: 'url("https://www.langmanwu2021.cn/assets/apifonts/PingFang.ttf")'
+        source: `url("${domain}assets/apifonts/PingFang.ttf")`
       },
       {
         family: 'ShenPin',
-        source:
-          'url("https://a.yiyunrj.com/assets/apifonts/RuiZiAoYunJingShenPinBoJianMianFei-Shan(REEJI-PinboGB-Flash)-2.ttf")'
+        source: `url("${domain}assets/apifonts/RuiZiAoYunJingShenPinBoJianMianFei-Shan(REEJI-PinboGB-Flash)-2.ttf")`
       }
     ]
   },
