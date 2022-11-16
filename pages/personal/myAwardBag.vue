@@ -109,8 +109,9 @@ export default {
   onLoad() {
     this.runApiToGetSiteconfig()
   },
-  onShow() {
-    this.refresh()
+  async onShow() {
+    await this.refresh()
+    this.isRefresh = false
   },
   onReachBottom() {
     if (this.isRefresh) return
