@@ -17,9 +17,10 @@
               <view class="left__detail">
                 <text class="left__text">客户ID：{{ userInfo.uuid || '' }}</text>
                 <text class="left__text" @click="handleEditNickName">
-                  客户昵称：{{
+                  <!-- 客户昵称：{{
                     userInfo.mobile ? commonUtils.getTel(userInfo.mobile) : userInfo.nickname || ''
-                  }}
+                  }} -->
+                  客户昵称：{{ userInfo.nickname || '' }}
                 </text>
               </view>
             </view>
@@ -137,6 +138,16 @@ export default {
   computed: {
     fileList() {
       return (this.userInfo.avatar || '').split(' ')
+    },
+    isNeedUpdate() {
+      return this.userInfo.is_need_update
+    }
+  },
+  watch: {
+    isNeedUpdate(newVal) {
+      if (newVal === 1) {
+        this.handleEditNickName()
+      }
     }
   },
   methods: {
@@ -258,6 +269,7 @@ export default {
       border: 1px solid #29abe2;
     }
     .left {
+      width: 100%;
       @include flex(center, '');
       &__avator {
         width: pxTorpx(55);
@@ -267,6 +279,7 @@ export default {
         border: 1px solid #29abe2;
       }
       &__detail {
+        width: calc(100% - 140rpx);
         .left {
           &__text {
             font-family: $Yuanti;
@@ -275,6 +288,10 @@ export default {
             color: #000;
             text-align: left;
             display: block;
+            max-width: 98%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           &__button {
             min-width: pxTorpx(100);

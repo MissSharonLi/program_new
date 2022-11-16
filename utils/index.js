@@ -1,5 +1,6 @@
 import { api } from '@/api'
 import store from '@/store'
+import md5 from 'js-md5'
 const commonUtils = {
   toast() {
     uni.showToast({
@@ -134,6 +135,30 @@ const commonUtils = {
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
+  },
+  /**
+   * 参数md5加密
+   * @param {Object} params - 参数
+   */
+  jsonSort(params) {
+    let xtoken = ''
+    const timestamp = Date.parse(new Date())
+    const xtime = timestamp / 1000
+    params['x-time'] = xtime
+    const arr = []
+    const json = {}
+    for (const key in params) {
+      if (params[key] !== null) arr.push(key)
+    }
+    arr.sort()
+    for (const i in arr) {
+      xtoken += md5(params[arr[i]].toString()) + 'romantic'
+      json[arr[i]] = params[arr[i]]
+    }
+    xtoken = md5('roman_' + xtoken + '_tic')
+    delete json['x-time']
+    const myJson = JSON.parse(JSON.stringify(json))
+    return { 'x-time': xtime, 'x-token': xtoken, data: myJson }
   }
 }
 export default commonUtils

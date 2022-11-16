@@ -131,3 +131,6 @@ export const handleRemovesafe = (params) => POST('rewardbag/removesafe', params,
 
 // 修改昵称
 export const handleEditNickName = (params) => POST('user/changenickname', params, null, true)
+
+// 修改昵称
+export const handleUploadFile = (params) => POST('user/upload', params, null, true)
