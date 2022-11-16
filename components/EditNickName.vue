@@ -12,8 +12,13 @@
     @confirm.native="handleConfirm($event)"
   >
     <view class="dialog__avator__content">
-      <text class="label">头像：</text>
-      <image class="img" :src="avatar || fileList[0] || ''" @click="handleUpload"></image>
+      <text class="label">
+        <text class="em">*</text>
+        头像：
+      </text>
+      <button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="handleUpload">
+        <image class="img" :src="avatar || fileList[0] || ''"></image>
+      </button>
     </view>
     <VanCellGroup>
       <VanField
@@ -72,37 +77,32 @@ export default {
       })
     },
     // 上传图片
-    handleUpload() {
+    handleUpload(e) {
       const token = this.token
       const transformData = this.commonUtils.jsonSort({ token })
-      uni.chooseImage({
-        success: async (chooseImageRes) => {
-          // 获取的格式是数组，多选会同时返回，单选只返回一项
-          const tempFilePaths = chooseImageRes.tempFilePaths
-          wx.uploadFile({
-            url: `${baseUrl}/user/upload`,
-            filePath: tempFilePaths[0],
-            name: 'file',
-            header: {
-              'x-token': transformData['x-token'],
-              'x-time': transformData['x-time']
-            },
-            formData: {
-              token
-            },
-            success: (res) => {
-              // 上传成功
-              const { code, data, msg } = JSON.parse(res.data || '{}')
-              if (code === 1 && data) {
-                this.avatar = data.fullurl
-              } else {
-                this.$toast(msg)
-              }
-            },
-            fail: (res) => {
-              console.log(res)
-            }
-          })
+      const tempFilePaths = e.detail.avatarUrl
+      wx.uploadFile({
+        url: `${baseUrl}/user/upload`,
+        filePath: tempFilePaths,
+        name: 'file',
+        header: {
+          'x-token': transformData['x-token'],
+          'x-time': transformData['x-time']
+        },
+        formData: {
+          token
+        },
+        success: (res) => {
+          // 上传成功
+          const { code, data, msg } = JSON.parse(res.data || '{}')
+          if (code === 1 && data) {
+            this.avatar = data.fullurl
+          } else {
+            this.$toast(msg)
+          }
+        },
+        fail: (res) => {
+          console.log(res)
         }
       })
     },
@@ -149,6 +149,17 @@ export default {
     padding-left: pxTorpx(15);
     color: #2d3192;
     font-size: pxTorpx(16);
+  }
+  .em {
+    color: red;
+  }
+  .avatar-wrapper {
+    margin: 0;
+    padding: 0;
+    width: pxTorpx(55);
+    height: pxTorpx(55);
+    border-radius: 50%;
+    margin-right: pxTorpx(10);
   }
   .img {
     width: pxTorpx(55);
