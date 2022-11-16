@@ -13,7 +13,7 @@
   >
     <view class="dialog__avator__content">
       <text class="label">
-        <text class="em">*</text>
+        <text v-if="isNeedUpdate" class="em">*</text>
         头像：
       </text>
       <button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="handleUpload">
@@ -60,6 +60,11 @@ export default {
       value: '',
       avatar: '',
       imgUrl: ''
+    }
+  },
+  computed: {
+    isNeedUpdate() {
+      return this.userInfo.is_need_update
     }
   },
   methods: {
@@ -110,7 +115,7 @@ export default {
     },
     // 提交
     async handleConfirm({ detail }) {
-      if (!this.imgUrl) {
+      if (this.isNeedUpdate) {
         this.$toast('请先上传头像！')
         detail.dialog.stopLoading()
         return false
