@@ -63,8 +63,6 @@ const commonUtils = {
           desc: '获取您的昵称、头像、地区及性別',
           success: (res) => {
             const params = {
-              nickname: res.userInfo.nickName,
-              headimgurl: res.userInfo.avatarUrl,
               sex: res.userInfo.gender,
               province: res.userInfo.province,
               city: res.userInfo.city,
