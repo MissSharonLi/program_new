@@ -115,7 +115,7 @@ export default {
     },
     // 提交
     async handleConfirm({ detail }) {
-      if (this.isNeedUpdate) {
+      if (this.isNeedUpdate && !this.imgUrl) {
         this.$toast('请先上传头像！')
         detail.dialog.stopLoading()
         return false
