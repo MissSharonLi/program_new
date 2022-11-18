@@ -4,7 +4,7 @@
     :show="show"
     use-slot
     title="修改昵称"
-    show-cancel-button
+    :show-cancel-button="!isNeedUpdate"
     :asyncClose="true"
     theme="round-button"
     custom-style="border: 2px solid #29abe2;border-radius:20px"
